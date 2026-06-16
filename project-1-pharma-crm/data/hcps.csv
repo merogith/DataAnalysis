@@ -1,0 +1,601 @@
+hcp_id,hcp_name,specialty,region_id,potential_score,decile
+HCP0001,Dr. Khan,General Practitioner,R05,60.1,10
+HCP0002,Dr. Khan,General Practitioner,R02,18.7,6
+HCP0003,Dr. Kim,Endocrinologist,R05,7.9,2
+HCP0004,Dr. Haas,Pulmonologist,R05,16.2,6
+HCP0005,Dr. Brown,General Practitioner,R01,8.0,3
+HCP0006,Dr. Yilmaz,Neurologist,R01,1.7,9
+HCP0007,Dr. Ivanov,Dermatologist,R03,11.4,7
+HCP0008,Dr. Smith,Endocrinologist,R01,55.9,4
+HCP0009,Dr. Rossi,General Practitioner,R02,7.0,7
+HCP0010,Dr. Khan,Pulmonologist,R03,11.9,7
+HCP0011,Dr. Nguyen,Dermatologist,R05,19.1,7
+HCP0012,Dr. Yilmaz,Cardiologist,R05,12.6,4
+HCP0013,Dr. Haas,Dermatologist,R01,5.8,6
+HCP0014,Dr. Nguyen,Cardiologist,R05,77.3,1
+HCP0015,Dr. Smith,Endocrinologist,R01,42.6,5
+HCP0016,Dr. Smith,Neurologist,R04,25.2,4
+HCP0017,Dr. Adeyemi,General Practitioner,R05,14.5,6
+HCP0018,Dr. Lopez,Dermatologist,R05,22.7,10
+HCP0019,Dr. Rossi,Cardiologist,R02,26.7,10
+HCP0020,Dr. Brown,General Practitioner,R05,21.7,5
+HCP0021,Dr. Khan,Neurologist,R01,23.1,7
+HCP0022,Dr. Okafor,Endocrinologist,R03,31.7,2
+HCP0023,Dr. Adeyemi,Cardiologist,R03,12.6,5
+HCP0024,Dr. Costa,Cardiologist,R02,3.8,7
+HCP0025,Dr. Kim,Neurologist,R01,30.9,7
+HCP0026,Dr. Ivanov,Endocrinologist,R04,3.8,10
+HCP0027,Dr. Patel,Endocrinologist,R02,10.5,5
+HCP0028,Dr. Lopez,General Practitioner,R04,22.8,10
+HCP0029,Dr. Garcia,Cardiologist,R03,23.3,10
+HCP0030,Dr. Adeyemi,Dermatologist,R02,13.0,6
+HCP0031,Dr. Dubois,Cardiologist,R05,15.5,1
+HCP0032,Dr. Adeyemi,Neurologist,R01,21.4,4
+HCP0033,Dr. Müller,Neurologist,R04,9.2,8
+HCP0034,Dr. Müller,Cardiologist,R04,47.5,6
+HCP0035,Dr. Rossi,Endocrinologist,R02,7.6,10
+HCP0036,Dr. Müller,General Practitioner,R02,14.2,9
+HCP0037,Dr. Costa,Dermatologist,R01,11.5,1
+HCP0038,Dr. Haas,General Practitioner,R05,130.0,9
+HCP0039,Dr. Nguyen,Endocrinologist,R05,45.8,4
+HCP0040,Dr. Patel,Cardiologist,R02,7.2,9
+HCP0041,Dr. Chen,Pulmonologist,R01,23.1,6
+HCP0042,Dr. Haas,Dermatologist,R01,26.2,5
+HCP0043,Dr. Rossi,Cardiologist,R01,36.1,1
+HCP0044,Dr. Khan,Cardiologist,R05,8.4,2
+HCP0045,Dr. Dubois,General Practitioner,R05,8.1,6
+HCP0046,Dr. Costa,Cardiologist,R01,14.4,6
+HCP0047,Dr. Silva,General Practitioner,R04,14.6,6
+HCP0048,Dr. Garcia,Dermatologist,R01,6.7,2
+HCP0049,Dr. Garcia,Endocrinologist,R02,26.6,6
+HCP0050,Dr. Okafor,Endocrinologist,R03,24.8,1
+HCP0051,Dr. Costa,Cardiologist,R04,58.8,2
+HCP0052,Dr. Silva,Pulmonologist,R05,12.9,5
+HCP0053,Dr. Chen,Dermatologist,R01,6.5,7
+HCP0054,Dr. Costa,General Practitioner,R01,7.6,7
+HCP0055,Dr. Smith,Pulmonologist,R02,21.2,10
+HCP0056,Dr. Smith,General Practitioner,R02,8.6,9
+HCP0057,Dr. Yilmaz,Dermatologist,R05,28.0,4
+HCP0058,Dr. Khan,Cardiologist,R04,9.5,8
+HCP0059,Dr. Chen,Endocrinologist,R02,19.1,1
+HCP0060,Dr. Kim,Endocrinologist,R05,15.7,9
+HCP0061,Dr. Novak,Endocrinologist,R03,7.5,4
+HCP0062,Dr. Rossi,Dermatologist,R03,4.0,8
+HCP0063,Dr. Garcia,General Practitioner,R03,38.3,10
+HCP0064,Dr. Yilmaz,Endocrinologist,R01,21.7,8
+HCP0065,Dr. Haas,Neurologist,R05,5.7,10
+HCP0066,Dr. Müller,General Practitioner,R01,6.3,1
+HCP0067,Dr. Okafor,General Practitioner,R01,57.7,2
+HCP0068,Dr. Smith,Dermatologist,R02,8.0,7
+HCP0069,Dr. Silva,Endocrinologist,R02,20.0,6
+HCP0070,Dr. Silva,Cardiologist,R01,3.1,2
+HCP0071,Dr. Rossi,Pulmonologist,R01,11.7,8
+HCP0072,Dr. Lopez,Neurologist,R04,29.3,1
+HCP0073,Dr. Müller,Endocrinologist,R05,2.6,10
+HCP0074,Dr. Patel,Dermatologist,R01,10.2,2
+HCP0075,Dr. Garcia,Neurologist,R02,9.7,5
+HCP0076,Dr. Ivanov,General Practitioner,R03,24.5,9
+HCP0077,Dr. Lopez,Cardiologist,R05,23.0,6
+HCP0078,Dr. Garcia,Cardiologist,R04,24.5,8
+HCP0079,Dr. Patel,General Practitioner,R04,19.8,8
+HCP0080,Dr. Costa,Cardiologist,R03,23.0,10
+HCP0081,Dr. Ivanov,Dermatologist,R03,5.0,5
+HCP0082,Dr. Costa,Dermatologist,R01,19.9,10
+HCP0083,Dr. Ivanov,Neurologist,R05,43.0,6
+HCP0084,Dr. Lopez,Cardiologist,R05,17.0,9
+HCP0085,Dr. Yilmaz,Neurologist,R01,9.8,8
+HCP0086,Dr. Yilmaz,Cardiologist,R04,10.6,2
+HCP0087,Dr. Patel,Dermatologist,R01,40.9,7
+HCP0088,Dr. Patel,General Practitioner,R04,0.9,9
+HCP0089,Dr. Brown,General Practitioner,R05,75.5,2
+HCP0090,Dr. Brown,Dermatologist,R01,2.1,9
+HCP0091,Dr. Garcia,Dermatologist,R03,13.2,2
+HCP0092,Dr. Dubois,General Practitioner,R01,,9
+HCP0093,Dr. Brown,Dermatologist,R03,24.2,8
+HCP0094,Dr. Ivanov,Endocrinologist,R05,27.3,2
+HCP0095,Dr. Rossi,General Practitioner,R01,18.9,8
+HCP0096,Dr. Kim,Neurologist,R02,14.8,2
+HCP0097,Dr. Dubois,Pulmonologist,R05,2.8,6
+HCP0098,Dr. Brown,General Practitioner,R02,12.0,10
+HCP0099,Dr. Garcia,Neurologist,R01,14.4,3
+HCP0100,Dr. Dubois,Neurologist,R03,6.1,2
+HCP0101,Dr. Patel,Cardiologist,R03,21.0,5
+HCP0102,Dr. Costa,Neurologist,R04,18.9,4
+HCP0103,Dr. Patel,Endocrinologist,R02,12.7,1
+HCP0104,Dr. Adeyemi,General Practitioner,R05,16.3,5
+HCP0105,Dr. Kim,Cardiologist,R03,12.6,3
+HCP0106,Dr. Haas,Dermatologist,R02,2.9,2
+HCP0107,Dr. Müller,Dermatologist,R05,23.6,3
+HCP0108,Dr. Adeyemi,General Practitioner,R05,20.3,1
+HCP0109,Dr. Costa,Dermatologist,R03,4.8,10
+HCP0110,Dr. Silva,Cardiologist,R01,21.5,10
+HCP0111,Dr. Rossi,Pulmonologist,R03,22.0,4
+HCP0112,Dr. Nguyen,General Practitioner,R03,22.1,9
+HCP0113,Dr. Chen,General Practitioner,R01,29.4,5
+HCP0114,Dr. Kim,Endocrinologist,R04,38.4,10
+HCP0115,Dr. Lopez,General Practitioner,R05,11.6,2
+HCP0116,Dr. Khan,Dermatologist,R01,28.9,3
+HCP0117,Dr. Patel,Cardiologist,R04,11.3,8
+HCP0118,Dr. Brown,General Practitioner,R01,20.9,3
+HCP0119,Dr. Yilmaz,Neurologist,R04,32.0,9
+HCP0120,Dr. Smith,Pulmonologist,R03,8.1,5
+HCP0121,Dr. Nguyen,Neurologist,R01,1.1,5
+HCP0122,Dr. Garcia,Dermatologist,R05,7.4,5
+HCP0123,Dr. Costa,Cardiologist,R01,,8
+HCP0124,Dr. Kim,Endocrinologist,R03,6.5,1
+HCP0125,Dr. Smith,General Practitioner,R01,34.0,8
+HCP0126,Dr. Kim,Dermatologist,R05,7.4,8
+HCP0127,Dr. Patel,Neurologist,R04,13.9,9
+HCP0128,Dr. Silva,General Practitioner,R05,16.4,10
+HCP0129,Dr. Rossi,Pulmonologist,R03,6.5,8
+HCP0130,Dr. Ivanov,Dermatologist,R03,14.0,6
+HCP0131,Dr. Lopez,Endocrinologist,R04,,5
+HCP0132,Dr. Rossi,Cardiologist,R04,12.5,4
+HCP0133,Dr. Khan,Cardiologist,R05,15.4,9
+HCP0134,Dr. Kim,Neurologist,R01,1.2,4
+HCP0135,Dr. Adeyemi,General Practitioner,R04,7.3,6
+HCP0136,Dr. Costa,General Practitioner,R01,20.5,1
+HCP0137,Dr. Silva,Pulmonologist,R02,5.8,4
+HCP0138,Dr. Chen,General Practitioner,R05,23.0,3
+HCP0139,Dr. Haas,Cardiologist,R02,24.7,5
+HCP0140,Dr. Adeyemi,General Practitioner,R04,20.4,6
+HCP0141,Dr. Nguyen,Neurologist,R03,28.7,8
+HCP0142,Dr. Patel,Cardiologist,R02,3.3,5
+HCP0143,Dr. Patel,Dermatologist,R02,33.0,2
+HCP0144,Dr. Okafor,Pulmonologist,R03,6.6,6
+HCP0145,Dr. Chen,Neurologist,R04,17.9,1
+HCP0146,Dr. Silva,Dermatologist,R04,,9
+HCP0147,Dr. Novak,Neurologist,R05,12.2,8
+HCP0148,Dr. Smith,Dermatologist,R05,16.7,3
+HCP0149,Dr. Ivanov,Neurologist,R04,6.7,3
+HCP0150,Dr. Brown,Cardiologist,R04,51.7,1
+HCP0151,Dr. Dubois,Neurologist,R02,7.3,4
+HCP0152,Dr. Chen,Endocrinologist,R03,26.2,1
+HCP0153,Dr. Smith,Neurologist,R01,38.3,10
+HCP0154,Dr. Smith,Cardiologist,R02,28.0,2
+HCP0155,Dr. Patel,Dermatologist,R05,21.3,7
+HCP0156,Dr. Dubois,Pulmonologist,R03,17.7,6
+HCP0157,Dr. Adeyemi,Pulmonologist,R01,5.0,3
+HCP0158,Dr. Smith,Neurologist,R04,50.1,9
+HCP0159,Dr. Garcia,Cardiologist,R05,20.1,2
+HCP0160,Dr. Nguyen,Cardiologist,R05,16.7,9
+HCP0161,Dr. Dubois,Dermatologist,R02,6.1,8
+HCP0162,Dr. Haas,Cardiologist,R03,17.4,7
+HCP0163,Dr. Dubois,Neurologist,R03,15.9,9
+HCP0164,Dr. Garcia,General Practitioner,R02,52.0,5
+HCP0165,Dr. Patel,Pulmonologist,R02,16.7,3
+HCP0166,Dr. Garcia,Dermatologist,R02,17.1,2
+HCP0167,Dr. Yilmaz,Pulmonologist,R05,6.2,10
+HCP0168,Dr. Silva,General Practitioner,R04,8.7,5
+HCP0169,Dr. Rossi,Dermatologist,R05,24.0,9
+HCP0170,Dr. Nguyen,Pulmonologist,R05,2.6,4
+HCP0171,Dr. Müller,Dermatologist,R05,32.9,10
+HCP0172,Dr. Kim,Pulmonologist,R01,33.5,9
+HCP0173,Dr. Garcia,General Practitioner,R05,7.9,4
+HCP0174,Dr. Yilmaz,Pulmonologist,R01,21.4,5
+HCP0175,Dr. Lopez,General Practitioner,R03,39.2,8
+HCP0176,Dr. Garcia,Endocrinologist,R03,14.9,3
+HCP0177,Dr. Brown,Endocrinologist,R02,12.8,1
+HCP0178,Dr. Chen,Pulmonologist,R01,14.1,3
+HCP0179,Dr. Haas,Dermatologist,R01,20.0,6
+HCP0180,Dr. Nguyen,Dermatologist,R05,9.7,2
+HCP0181,Dr. Costa,Dermatologist,R02,11.9,4
+HCP0182,Dr. Dubois,Dermatologist,R02,20.3,10
+HCP0183,Dr. Dubois,Cardiologist,R05,11.1,1
+HCP0184,Dr. Nguyen,General Practitioner,R01,5.7,1
+HCP0185,Dr. Dubois,General Practitioner,R05,2.3,5
+HCP0186,Dr. Brown,Neurologist,R05,17.0,1
+HCP0187,Dr. Yilmaz,General Practitioner,R03,37.5,1
+HCP0188,Dr. Khan,Endocrinologist,R01,22.2,2
+HCP0189,Dr. Brown,Neurologist,R01,5.9,2
+HCP0190,Dr. Haas,Neurologist,R02,8.7,9
+HCP0191,Dr. Nguyen,Pulmonologist,R03,12.7,2
+HCP0192,Dr. Garcia,Cardiologist,R01,53.1,6
+HCP0193,Dr. Brown,Dermatologist,R03,55.0,8
+HCP0194,Dr. Khan,Dermatologist,R01,50.8,7
+HCP0195,Dr. Nguyen,Dermatologist,R03,18.3,7
+HCP0196,Dr. Lopez,Endocrinologist,R01,,4
+HCP0197,Dr. Chen,Pulmonologist,R04,9.0,9
+HCP0198,Dr. Okafor,Dermatologist,R01,12.3,1
+HCP0199,Dr. Haas,General Practitioner,R01,31.2,2
+HCP0200,Dr. Ivanov,Cardiologist,R01,20.4,9
+HCP0201,Dr. Yilmaz,Pulmonologist,R05,21.3,1
+HCP0202,Dr. Patel,General Practitioner,R01,6.9,2
+HCP0203,Dr. Nguyen,General Practitioner,R03,15.8,2
+HCP0204,Dr. Patel,General Practitioner,R03,9.2,1
+HCP0205,Dr. Costa,Neurologist,R03,4.6,2
+HCP0206,Dr. Costa,Pulmonologist,R04,10.1,6
+HCP0207,Dr. Brown,Cardiologist,R05,20.4,7
+HCP0208,Dr. Costa,General Practitioner,R02,27.7,1
+HCP0209,Dr. Patel,Endocrinologist,R05,,10
+HCP0210,Dr. Novak,Neurologist,R02,16.4,1
+HCP0211,Dr. Rossi,Cardiologist,R05,15.3,7
+HCP0212,Dr. Brown,Dermatologist,R03,19.6,9
+HCP0213,Dr. Yilmaz,Dermatologist,R04,6.0,6
+HCP0214,Dr. Novak,General Practitioner,R05,6.1,5
+HCP0215,Dr. Kim,General Practitioner,R04,38.2,2
+HCP0216,Dr. Garcia,Dermatologist,R05,,3
+HCP0217,Dr. Dubois,Dermatologist,R03,11.9,9
+HCP0218,Dr. Adeyemi,Dermatologist,R01,12.9,4
+HCP0219,Dr. Dubois,General Practitioner,R03,9.3,1
+HCP0220,Dr. Silva,Pulmonologist,R01,23.5,8
+HCP0221,Dr. Chen,Dermatologist,R05,22.1,7
+HCP0222,Dr. Müller,Dermatologist,R02,14.7,1
+HCP0223,Dr. Brown,Cardiologist,R02,9.8,1
+HCP0224,Dr. Haas,Dermatologist,R02,13.8,2
+HCP0225,Dr. Novak,Pulmonologist,R04,17.5,1
+HCP0226,Dr. Khan,Cardiologist,R03,,7
+HCP0227,Dr. Kim,Neurologist,R05,24.8,2
+HCP0228,Dr. Müller,Cardiologist,R03,,7
+HCP0229,Dr. Lopez,General Practitioner,R02,42.7,2
+HCP0230,Dr. Novak,Dermatologist,R01,40.9,10
+HCP0231,Dr. Costa,Cardiologist,R01,12.8,8
+HCP0232,Dr. Rossi,Endocrinologist,R02,18.1,4
+HCP0233,Dr. Brown,Endocrinologist,R05,14.5,5
+HCP0234,Dr. Ivanov,Endocrinologist,R03,14.5,1
+HCP0235,Dr. Müller,Endocrinologist,R05,13.8,1
+HCP0236,Dr. Müller,General Practitioner,R01,16.6,6
+HCP0237,Dr. Khan,Endocrinologist,R01,36.5,1
+HCP0238,Dr. Patel,Endocrinologist,R05,20.9,7
+HCP0239,Dr. Okafor,Endocrinologist,R01,5.8,4
+HCP0240,Dr. Rossi,Pulmonologist,R01,31.8,2
+HCP0241,Dr. Kim,General Practitioner,R03,19.4,6
+HCP0242,Dr. Smith,Pulmonologist,R05,23.7,6
+HCP0243,Dr. Dubois,Dermatologist,R04,,8
+HCP0244,Dr. Chen,Endocrinologist,R01,21.3,2
+HCP0245,Dr. Dubois,Dermatologist,R05,22.0,6
+HCP0246,Dr. Garcia,Dermatologist,R05,2.8,9
+HCP0247,Dr. Lopez,Dermatologist,R05,23.5,3
+HCP0248,Dr. Dubois,Endocrinologist,R05,,9
+HCP0249,Dr. Müller,Endocrinologist,R02,11.1,8
+HCP0250,Dr. Novak,Endocrinologist,R05,16.5,5
+HCP0251,Dr. Chen,Pulmonologist,R02,47.2,9
+HCP0252,Dr. Costa,Dermatologist,R05,6.7,10
+HCP0253,Dr. Patel,General Practitioner,R03,16.1,3
+HCP0254,Dr. Smith,Dermatologist,R04,,10
+HCP0255,Dr. Lopez,Dermatologist,R04,31.5,1
+HCP0256,Dr. Adeyemi,Dermatologist,R04,13.2,2
+HCP0257,Dr. Novak,Pulmonologist,R04,19.6,1
+HCP0258,Dr. Yilmaz,Cardiologist,R04,6.8,4
+HCP0259,Dr. Smith,Pulmonologist,R04,35.2,10
+HCP0260,Dr. Okafor,Dermatologist,R01,4.2,7
+HCP0261,Dr. Lopez,Dermatologist,R05,23.3,7
+HCP0262,Dr. Garcia,Endocrinologist,R03,19.7,1
+HCP0263,Dr. Haas,Dermatologist,R02,21.9,6
+HCP0264,Dr. Chen,Cardiologist,R03,4.3,4
+HCP0265,Dr. Nguyen,Endocrinologist,R05,13.0,5
+HCP0266,Dr. Lopez,Dermatologist,R05,30.4,3
+HCP0267,Dr. Silva,Endocrinologist,R05,,3
+HCP0268,Dr. Müller,Dermatologist,R03,15.2,10
+HCP0269,Dr. Costa,Pulmonologist,R04,28.5,6
+HCP0270,Dr. Garcia,Endocrinologist,R02,18.3,5
+HCP0271,Dr. Khan,Endocrinologist,R04,15.8,1
+HCP0272,Dr. Ivanov,Dermatologist,R04,11.8,8
+HCP0273,Dr. Dubois,Neurologist,R02,16.6,5
+HCP0274,Dr. Smith,Neurologist,R02,26.7,4
+HCP0275,Dr. Lopez,Pulmonologist,R01,28.3,7
+HCP0276,Dr. Smith,Neurologist,R01,5.2,2
+HCP0277,Dr. Adeyemi,Pulmonologist,R03,10.9,6
+HCP0278,Dr. Garcia,Pulmonologist,R03,6.4,9
+HCP0279,Dr. Dubois,Neurologist,R01,17.2,5
+HCP0280,Dr. Okafor,Pulmonologist,R03,12.6,1
+HCP0281,Dr. Dubois,Endocrinologist,R04,21.3,3
+HCP0282,Dr. Adeyemi,Dermatologist,R02,22.4,1
+HCP0283,Dr. Rossi,Neurologist,R02,1.4,6
+HCP0284,Dr. Khan,General Practitioner,R02,16.5,4
+HCP0285,Dr. Khan,Pulmonologist,R03,37.0,2
+HCP0286,Dr. Adeyemi,Dermatologist,R02,10.9,7
+HCP0287,Dr. Lopez,Cardiologist,R04,10.7,2
+HCP0288,Dr. Haas,Neurologist,R02,32.7,4
+HCP0289,Dr. Nguyen,Pulmonologist,R03,29.2,10
+HCP0290,Dr. Rossi,Pulmonologist,R02,7.1,1
+HCP0291,Dr. Novak,Pulmonologist,R01,27.2,3
+HCP0292,Dr. Brown,Cardiologist,R04,8.6,4
+HCP0293,Dr. Brown,Pulmonologist,R02,10.6,6
+HCP0294,Dr. Müller,Dermatologist,R02,7.1,3
+HCP0295,Dr. Garcia,Dermatologist,R04,5.2,10
+HCP0296,Dr. Smith,Neurologist,R05,18.0,1
+HCP0297,Dr. Garcia,Pulmonologist,R04,4.4,10
+HCP0298,Dr. Ivanov,Endocrinologist,R05,18.6,6
+HCP0299,Dr. Novak,Endocrinologist,R05,18.1,1
+HCP0300,Dr. Kim,Dermatologist,R03,14.7,2
+HCP0301,Dr. Silva,Pulmonologist,R04,11.4,2
+HCP0302,Dr. Müller,Dermatologist,R02,9.6,3
+HCP0303,Dr. Lopez,General Practitioner,R03,6.3,4
+HCP0304,Dr. Kim,Neurologist,R03,42.9,7
+HCP0305,Dr. Kim,Dermatologist,R05,14.2,4
+HCP0306,Dr. Chen,Neurologist,R05,13.8,8
+HCP0307,Dr. Kim,Pulmonologist,R03,,3
+HCP0308,Dr. Müller,Endocrinologist,R04,39.9,3
+HCP0309,Dr. Adeyemi,Endocrinologist,R02,10.1,3
+HCP0310,Dr. Kim,Endocrinologist,R05,19.9,4
+HCP0311,Dr. Costa,Neurologist,R03,22.8,9
+HCP0312,Dr. Yilmaz,Cardiologist,R03,18.0,3
+HCP0313,Dr. Lopez,General Practitioner,R04,4.3,3
+HCP0314,Dr. Rossi,General Practitioner,R04,26.4,10
+HCP0315,Dr. Khan,General Practitioner,R01,10.0,7
+HCP0316,Dr. Dubois,Endocrinologist,R02,29.0,2
+HCP0317,Dr. Lopez,General Practitioner,R01,15.7,9
+HCP0318,Dr. Costa,Pulmonologist,R04,23.8,2
+HCP0319,Dr. Silva,Cardiologist,R01,38.2,2
+HCP0320,Dr. Patel,Neurologist,R02,25.8,5
+HCP0321,Dr. Nguyen,Neurologist,R03,,7
+HCP0322,Dr. Ivanov,Pulmonologist,R04,27.3,2
+HCP0323,Dr. Haas,General Practitioner,R03,8.3,8
+HCP0324,Dr. Chen,Neurologist,R05,29.9,2
+HCP0325,Dr. Patel,Endocrinologist,R05,13.3,8
+HCP0326,Dr. Okafor,Neurologist,R01,13.7,1
+HCP0327,Dr. Adeyemi,Endocrinologist,R05,17.6,5
+HCP0328,Dr. Okafor,Endocrinologist,R04,12.3,7
+HCP0329,Dr. Patel,Cardiologist,R04,6.8,3
+HCP0330,Dr. Okafor,Pulmonologist,R01,,7
+HCP0331,Dr. Okafor,Cardiologist,R04,13.7,7
+HCP0332,Dr. Rossi,General Practitioner,R04,13.3,7
+HCP0333,Dr. Nguyen,Dermatologist,R03,15.3,4
+HCP0334,Dr. Ivanov,General Practitioner,R01,1.6,8
+HCP0335,Dr. Silva,General Practitioner,R03,13.4,8
+HCP0336,Dr. Dubois,Neurologist,R05,41.4,4
+HCP0337,Dr. Yilmaz,Dermatologist,R04,39.2,8
+HCP0338,Dr. Haas,Cardiologist,R01,17.0,10
+HCP0339,Dr. Garcia,General Practitioner,R05,16.6,9
+HCP0340,Dr. Lopez,Dermatologist,R05,1.1,8
+HCP0341,Dr. Novak,Dermatologist,R01,10.5,8
+HCP0342,Dr. Rossi,General Practitioner,R05,27.1,9
+HCP0343,Dr. Ivanov,General Practitioner,R03,,3
+HCP0344,Dr. Nguyen,General Practitioner,R03,33.6,8
+HCP0345,Dr. Müller,Cardiologist,R03,,2
+HCP0346,Dr. Costa,Cardiologist,R04,10.4,4
+HCP0347,Dr. Dubois,General Practitioner,R05,18.0,10
+HCP0348,Dr. Smith,Neurologist,R04,43.6,3
+HCP0349,Dr. Khan,Pulmonologist,R05,4.2,9
+HCP0350,Dr. Haas,Cardiologist,R05,12.3,5
+HCP0351,Dr. Rossi,Endocrinologist,R01,3.8,3
+HCP0352,Dr. Novak,Dermatologist,R02,7.8,1
+HCP0353,Dr. Novak,General Practitioner,R04,52.1,6
+HCP0354,Dr. Müller,Endocrinologist,R03,12.3,5
+HCP0355,Dr. Okafor,Endocrinologist,R01,2.2,6
+HCP0356,Dr. Müller,Endocrinologist,R01,6.8,1
+HCP0357,Dr. Müller,Pulmonologist,R03,3.3,3
+HCP0358,Dr. Haas,Endocrinologist,R04,18.5,1
+HCP0359,Dr. Rossi,General Practitioner,R01,22.5,4
+HCP0360,Dr. Garcia,Neurologist,R01,30.1,10
+HCP0361,Dr. Rossi,Pulmonologist,R01,,2
+HCP0362,Dr. Brown,Endocrinologist,R03,4.4,7
+HCP0363,Dr. Rossi,Endocrinologist,R01,21.7,1
+HCP0364,Dr. Costa,Cardiologist,R03,14.8,6
+HCP0365,Dr. Dubois,Neurologist,R03,33.2,10
+HCP0366,Dr. Garcia,Endocrinologist,R03,28.2,4
+HCP0367,Dr. Rossi,Dermatologist,R04,56.6,2
+HCP0368,Dr. Smith,Dermatologist,R03,,6
+HCP0369,Dr. Brown,General Practitioner,R04,6.4,3
+HCP0370,Dr. Brown,Dermatologist,R04,11.1,9
+HCP0371,Dr. Yilmaz,Endocrinologist,R05,15.3,9
+HCP0372,Dr. Khan,Neurologist,R04,9.3,7
+HCP0373,Dr. Dubois,Pulmonologist,R03,7.6,7
+HCP0374,Dr. Haas,Dermatologist,R03,20.7,7
+HCP0375,Dr. Novak,Pulmonologist,R02,11.0,8
+HCP0376,Dr. Smith,Dermatologist,R03,9.0,5
+HCP0377,Dr. Silva,Cardiologist,R01,4.4,10
+HCP0378,Dr. Smith,Cardiologist,R05,1.2,4
+HCP0379,Dr. Okafor,Neurologist,R05,40.0,1
+HCP0380,Dr. Novak,Neurologist,R01,39.3,7
+HCP0381,Dr. Nguyen,Endocrinologist,R04,28.8,7
+HCP0382,Dr. Garcia,Endocrinologist,R01,24.2,10
+HCP0383,Dr. Kim,Endocrinologist,R04,10.2,4
+HCP0384,Dr. Patel,Neurologist,R01,24.9,5
+HCP0385,Dr. Haas,Endocrinologist,R03,5.9,6
+HCP0386,Dr. Chen,Cardiologist,R04,17.7,4
+HCP0387,Dr. Müller,Pulmonologist,R04,8.3,8
+HCP0388,Dr. Novak,Cardiologist,R03,25.0,5
+HCP0389,Dr. Kim,Cardiologist,R05,45.5,8
+HCP0390,Dr. Müller,Cardiologist,R04,6.8,5
+HCP0391,Dr. Patel,Cardiologist,R02,10.6,3
+HCP0392,Dr. Garcia,Pulmonologist,R04,17.5,10
+HCP0393,Dr. Garcia,Endocrinologist,R04,2.5,6
+HCP0394,Dr. Ivanov,Endocrinologist,R02,3.5,8
+HCP0395,Dr. Okafor,Pulmonologist,R04,44.6,6
+HCP0396,Dr. Haas,Neurologist,R05,20.8,4
+HCP0397,Dr. Khan,Cardiologist,R05,9.7,10
+HCP0398,Dr. Novak,Dermatologist,R04,16.1,4
+HCP0399,Dr. Silva,General Practitioner,R04,,10
+HCP0400,Dr. Yilmaz,Neurologist,R02,17.8,5
+HCP0401,Dr. Lopez,Neurologist,R04,11.5,1
+HCP0402,Dr. Haas,Neurologist,R02,15.1,1
+HCP0403,Dr. Chen,Neurologist,R03,26.6,10
+HCP0404,Dr. Costa,Neurologist,R02,25.4,6
+HCP0405,Dr. Okafor,Pulmonologist,R02,43.0,4
+HCP0406,Dr. Müller,Dermatologist,R01,21.8,9
+HCP0407,Dr. Ivanov,Dermatologist,R05,16.9,7
+HCP0408,Dr. Silva,General Practitioner,R01,47.3,7
+HCP0409,Dr. Silva,Pulmonologist,R01,13.9,7
+HCP0410,Dr. Silva,Pulmonologist,R05,1.4,2
+HCP0411,Dr. Adeyemi,Pulmonologist,R03,29.0,1
+HCP0412,Dr. Ivanov,Cardiologist,R03,,8
+HCP0413,Dr. Khan,Pulmonologist,R04,16.3,1
+HCP0414,Dr. Okafor,Neurologist,R02,29.6,8
+HCP0415,Dr. Nguyen,Pulmonologist,R01,11.5,2
+HCP0416,Dr. Rossi,Cardiologist,R04,1.5,3
+HCP0417,Dr. Okafor,Dermatologist,R01,30.0,8
+HCP0418,Dr. Lopez,General Practitioner,R03,9.4,7
+HCP0419,Dr. Brown,General Practitioner,R05,7.0,8
+HCP0420,Dr. Dubois,Cardiologist,R05,1.6,7
+HCP0421,Dr. Adeyemi,Cardiologist,R02,28.2,1
+HCP0422,Dr. Adeyemi,General Practitioner,R04,0.8,9
+HCP0423,Dr. Dubois,General Practitioner,R04,38.0,3
+HCP0424,Dr. Yilmaz,Endocrinologist,R03,12.5,2
+HCP0425,Dr. Rossi,Neurologist,R01,29.2,9
+HCP0426,Dr. Okafor,Endocrinologist,R02,22.3,2
+HCP0427,Dr. Okafor,Endocrinologist,R04,53.1,6
+HCP0428,Dr. Patel,General Practitioner,R05,21.9,5
+HCP0429,Dr. Brown,Endocrinologist,R01,37.0,8
+HCP0430,Dr. Okafor,Cardiologist,R04,10.4,1
+HCP0431,Dr. Khan,Dermatologist,R05,3.5,2
+HCP0432,Dr. Dubois,Dermatologist,R05,32.3,5
+HCP0433,Dr. Haas,Neurologist,R03,3.4,5
+HCP0434,Dr. Brown,Cardiologist,R01,28.0,8
+HCP0435,Dr. Patel,Cardiologist,R02,6.2,7
+HCP0436,Dr. Adeyemi,General Practitioner,R05,20.3,2
+HCP0437,Dr. Smith,Pulmonologist,R05,53.7,10
+HCP0438,Dr. Okafor,Endocrinologist,R04,26.5,5
+HCP0439,Dr. Chen,General Practitioner,R01,14.0,10
+HCP0440,Dr. Lopez,Cardiologist,R01,22.7,10
+HCP0441,Dr. Ivanov,Neurologist,R03,10.7,1
+HCP0442,Dr. Chen,Dermatologist,R03,67.4,6
+HCP0443,Dr. Adeyemi,Endocrinologist,R01,8.8,5
+HCP0444,Dr. Nguyen,Cardiologist,R04,15.2,5
+HCP0445,Dr. Rossi,Dermatologist,R03,24.9,4
+HCP0446,Dr. Novak,Cardiologist,R01,21.5,6
+HCP0447,Dr. Lopez,Dermatologist,R01,,5
+HCP0448,Dr. Brown,Dermatologist,R03,10.9,2
+HCP0449,Dr. Chen,Dermatologist,R04,13.5,3
+HCP0450,Dr. Chen,Pulmonologist,R05,31.3,2
+HCP0451,Dr. Adeyemi,Neurologist,R03,30.3,9
+HCP0452,Dr. Okafor,General Practitioner,R02,21.9,7
+HCP0453,Dr. Nguyen,Endocrinologist,R05,40.1,4
+HCP0454,Dr. Nguyen,Endocrinologist,R03,32.2,4
+HCP0455,Dr. Lopez,Cardiologist,R02,29.6,1
+HCP0456,Dr. Okafor,Endocrinologist,R03,3.3,3
+HCP0457,Dr. Okafor,Endocrinologist,R01,,10
+HCP0458,Dr. Adeyemi,Neurologist,R02,18.9,1
+HCP0459,Dr. Rossi,Dermatologist,R03,43.6,2
+HCP0460,Dr. Silva,Cardiologist,R05,14.5,9
+HCP0461,Dr. Dubois,Dermatologist,R04,17.8,6
+HCP0462,Dr. Patel,General Practitioner,R04,6.2,1
+HCP0463,Dr. Lopez,Endocrinologist,R03,7.4,5
+HCP0464,Dr. Silva,Cardiologist,R01,,8
+HCP0465,Dr. Yilmaz,Endocrinologist,R02,23.2,4
+HCP0466,Dr. Rossi,Endocrinologist,R05,53.8,4
+HCP0467,Dr. Brown,Endocrinologist,R01,14.3,7
+HCP0468,Dr. Haas,Neurologist,R05,4.3,6
+HCP0469,Dr. Adeyemi,Endocrinologist,R04,12.7,10
+HCP0470,Dr. Dubois,Neurologist,R02,11.0,3
+HCP0471,Dr. Novak,Endocrinologist,R04,,3
+HCP0472,Dr. Khan,Endocrinologist,R05,26.4,2
+HCP0473,Dr. Smith,Endocrinologist,R01,24.1,7
+HCP0474,Dr. Adeyemi,Dermatologist,R01,64.8,6
+HCP0475,Dr. Nguyen,General Practitioner,R04,38.6,4
+HCP0476,Dr. Kim,Dermatologist,R05,7.9,7
+HCP0477,Dr. Ivanov,Dermatologist,R01,32.9,4
+HCP0478,Dr. Dubois,General Practitioner,R04,16.9,2
+HCP0479,Dr. Ivanov,Neurologist,R01,14.0,6
+HCP0480,Dr. Nguyen,Neurologist,R04,41.8,5
+HCP0481,Dr. Dubois,Endocrinologist,R04,,5
+HCP0482,Dr. Adeyemi,Pulmonologist,R01,31.4,5
+HCP0483,Dr. Rossi,Dermatologist,R04,28.1,10
+HCP0484,Dr. Müller,Cardiologist,R05,7.3,3
+HCP0485,Dr. Chen,Cardiologist,R05,3.2,3
+HCP0486,Dr. Dubois,Dermatologist,R01,15.5,6
+HCP0487,Dr. Smith,Dermatologist,R02,35.5,1
+HCP0488,Dr. Dubois,Neurologist,R02,21.6,2
+HCP0489,Dr. Brown,Neurologist,R03,42.7,6
+HCP0490,Dr. Patel,Endocrinologist,R01,20.6,6
+HCP0491,Dr. Novak,Pulmonologist,R05,44.6,7
+HCP0492,Dr. Dubois,Neurologist,R04,10.1,2
+HCP0493,Dr. Müller,Endocrinologist,R05,24.0,9
+HCP0494,Dr. Silva,Dermatologist,R01,12.0,5
+HCP0495,Dr. Dubois,Dermatologist,R01,15.1,2
+HCP0496,Dr. Yilmaz,Dermatologist,R05,17.8,4
+HCP0497,Dr. Nguyen,Endocrinologist,R02,21.6,3
+HCP0498,Dr. Nguyen,General Practitioner,R04,8.9,5
+HCP0499,Dr. Dubois,Neurologist,R05,23.2,5
+HCP0500,Dr. Müller,Cardiologist,R01,17.1,5
+HCP0501,Dr. Khan,Cardiologist,R01,4.5,5
+HCP0502,Dr. Adeyemi,General Practitioner,R01,2.7,10
+HCP0503,Dr. Silva,Endocrinologist,R01,35.6,10
+HCP0504,Dr. Smith,Neurologist,R01,14.6,5
+HCP0505,Dr. Ivanov,General Practitioner,R05,4.0,10
+HCP0506,Dr. Adeyemi,Neurologist,R04,49.5,9
+HCP0507,Dr. Smith,Endocrinologist,R05,24.9,9
+HCP0508,Dr. Nguyen,Neurologist,R05,21.2,3
+HCP0509,Dr. Novak,Cardiologist,R05,8.2,5
+HCP0510,Dr. Garcia,Neurologist,R02,4.5,4
+HCP0511,Dr. Adeyemi,Neurologist,R02,19.0,1
+HCP0512,Dr. Haas,Endocrinologist,R05,16.3,1
+HCP0513,Dr. Chen,Cardiologist,R02,6.3,7
+HCP0514,Dr. Rossi,Neurologist,R01,6.1,5
+HCP0515,Dr. Garcia,Endocrinologist,R04,5.8,9
+HCP0516,Dr. Silva,Pulmonologist,R05,5.6,7
+HCP0517,Dr. Lopez,Endocrinologist,R05,9.8,1
+HCP0518,Dr. Patel,Endocrinologist,R05,21.2,9
+HCP0519,Dr. Smith,General Practitioner,R01,23.8,5
+HCP0520,Dr. Okafor,General Practitioner,R04,16.0,6
+HCP0521,Dr. Smith,Neurologist,R05,18.3,10
+HCP0522,Dr. Costa,Dermatologist,R04,24.6,7
+HCP0523,Dr. Garcia,Endocrinologist,R05,1.9,1
+HCP0524,Dr. Yilmaz,Endocrinologist,R05,19.4,2
+HCP0525,Dr. Dubois,Dermatologist,R03,39.8,5
+HCP0526,Dr. Yilmaz,Cardiologist,R01,14.3,1
+HCP0527,Dr. Nguyen,Pulmonologist,R03,145.0,2
+HCP0528,Dr. Costa,Dermatologist,R02,14.5,8
+HCP0529,Dr. Rossi,General Practitioner,R01,25.8,2
+HCP0530,Dr. Dubois,Cardiologist,R01,20.9,2
+HCP0531,Dr. Kim,Pulmonologist,R04,5.7,6
+HCP0532,Dr. Khan,Neurologist,R03,7.1,1
+HCP0533,Dr. Yilmaz,Neurologist,R03,44.6,3
+HCP0534,Dr. Okafor,Cardiologist,R04,29.9,10
+HCP0535,Dr. Kim,Endocrinologist,R03,15.3,7
+HCP0536,Dr. Nguyen,Dermatologist,R04,13.7,10
+HCP0537,Dr. Ivanov,Endocrinologist,R01,8.2,4
+HCP0538,Dr. Adeyemi,Pulmonologist,R05,22.2,7
+HCP0539,Dr. Rossi,Dermatologist,R03,8.9,3
+HCP0540,Dr. Smith,Endocrinologist,R01,12.3,4
+HCP0541,Dr. Ivanov,General Practitioner,R05,9.7,2
+HCP0542,Dr. Novak,Pulmonologist,R04,28.6,9
+HCP0543,Dr. Garcia,Neurologist,R01,14.8,2
+HCP0544,Dr. Adeyemi,Pulmonologist,R01,,3
+HCP0545,Dr. Silva,Endocrinologist,R01,5.8,5
+HCP0546,Dr. Okafor,Pulmonologist,R02,9.7,5
+HCP0547,Dr. Smith,Dermatologist,R01,,4
+HCP0548,Dr. Costa,Cardiologist,R04,3.4,4
+HCP0549,Dr. Costa,Endocrinologist,R03,13.9,3
+HCP0550,Dr. Rossi,Pulmonologist,R05,16.4,10
+HCP0551,Dr. Ivanov,Neurologist,R04,5.1,6
+HCP0552,Dr. Khan,Endocrinologist,R04,33.6,10
+HCP0553,Dr. Silva,Dermatologist,R03,21.4,10
+HCP0554,Dr. Brown,Endocrinologist,R01,14.7,7
+HCP0555,Dr. Yilmaz,Cardiologist,R01,9.1,9
+HCP0556,Dr. Yilmaz,Cardiologist,R04,3.3,2
+HCP0557,Dr. Smith,Pulmonologist,R01,,10
+HCP0558,Dr. Garcia,Dermatologist,R01,11.4,5
+HCP0559,Dr. Yilmaz,Neurologist,R02,4.3,8
+HCP0560,Dr. Silva,Neurologist,R05,8.9,3
+HCP0561,Dr. Silva,General Practitioner,R03,23.1,1
+HCP0562,Dr. Adeyemi,Cardiologist,R04,19.8,9
+HCP0563,Dr. Chen,Cardiologist,R03,6.3,5
+HCP0564,Dr. Patel,Cardiologist,R01,35.8,2
+HCP0565,Dr. Rossi,General Practitioner,R02,4.2,7
+HCP0566,Dr. Chen,Pulmonologist,R01,40.8,1
+HCP0567,Dr. Garcia,Cardiologist,R04,19.2,5
+HCP0568,Dr. Garcia,Neurologist,R01,12.1,8
+HCP0569,Dr. Patel,General Practitioner,R02,13.5,8
+HCP0570,Dr. Khan,Dermatologist,R05,17.6,5
+HCP0571,Dr. Ivanov,Neurologist,R03,24.4,4
+HCP0572,Dr. Haas,Neurologist,R03,2.6,9
+HCP0573,Dr. Brown,Cardiologist,R03,8.6,2
+HCP0574,Dr. Rossi,Dermatologist,R04,17.2,1
+HCP0575,Dr. Okafor,Cardiologist,R02,36.7,2
+HCP0576,Dr. Novak,Neurologist,R04,35.8,9
+HCP0577,Dr. Costa,Pulmonologist,R05,46.5,5
+HCP0578,Dr. Haas,Endocrinologist,R03,34.6,1
+HCP0579,Dr. Haas,Endocrinologist,R03,220.0,2
+HCP0580,Dr. Kim,Dermatologist,R01,16.3,1
+HCP0581,Dr. Ivanov,Neurologist,R02,34.7,9
+HCP0582,Dr. Dubois,Pulmonologist,R05,32.5,5
+HCP0583,Dr. Okafor,Pulmonologist,R03,14.1,1
+HCP0584,Dr. Novak,Cardiologist,R02,23.9,3
+HCP0585,Dr. Haas,Dermatologist,R03,11.3,7
+HCP0586,Dr. Costa,Endocrinologist,R03,3.8,6
+HCP0587,Dr. Dubois,Pulmonologist,R03,15.1,9
+HCP0588,Dr. Chen,General Practitioner,R04,,1
+HCP0589,Dr. Khan,Neurologist,R02,10.9,1
+HCP0590,Dr. Chen,General Practitioner,R04,24.4,1
+HCP0591,Dr. Dubois,Dermatologist,R03,13.7,4
+HCP0592,Dr. Brown,Neurologist,R05,22.1,8
+HCP0593,Dr. Okafor,Dermatologist,R01,28.2,7
+HCP0594,Dr. Smith,Dermatologist,R01,70.0,3
+HCP0595,Dr. Ivanov,Pulmonologist,R03,15.3,7
+HCP0596,Dr. Okafor,Pulmonologist,R03,37.0,7
+HCP0597,Dr. Rossi,General Practitioner,R04,,2
+HCP0598,Dr. Yilmaz,Cardiologist,R03,20.5,8
+HCP0599,Dr. Costa,Cardiologist,R05,15.4,5
+HCP0600,Dr. Costa,Endocrinologist,R03,18.4,1

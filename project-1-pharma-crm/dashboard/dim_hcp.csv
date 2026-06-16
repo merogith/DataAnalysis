@@ -1,0 +1,601 @@
+hcp_id,specialty,region,potential_score,decile,segment,segment_name,hcp_total_scripts,hcp_total_calls
+HCP0001,General Practitioner,West,60.1,10,0,Steady mid-tier (nurture),169,4
+HCP0002,General Practitioner,Southeast,18.7,6,1,Low priority (maintain),163,22
+HCP0003,Endocrinologist,West,7.9,2,1,Low priority (maintain),168,14
+HCP0004,Pulmonologist,West,16.2,6,1,Low priority (maintain),148,10
+HCP0005,General Practitioner,Northeast,8.0,3,1,Low priority (maintain),73,9
+HCP0006,Neurologist,Northeast,1.7,9,1,Low priority (maintain),51,9
+HCP0007,Dermatologist,Midwest,11.4,7,0,Steady mid-tier (nurture),144,5
+HCP0008,Endocrinologist,Northeast,55.9,4,3,High-potential growth (TARGET),140,9
+HCP0009,General Practitioner,Southeast,7.0,7,2,Champions (protect),322,23
+HCP0010,Pulmonologist,Midwest,11.9,7,1,Low priority (maintain),107,14
+HCP0011,Dermatologist,West,19.1,7,0,Steady mid-tier (nurture),152,7
+HCP0012,Cardiologist,West,12.6,4,0,Steady mid-tier (nurture),200,7
+HCP0013,Dermatologist,Northeast,5.8,6,1,Low priority (maintain),26,10
+HCP0014,Cardiologist,West,77.3,1,0,Steady mid-tier (nurture),282,6
+HCP0015,Endocrinologist,Northeast,42.6,5,3,High-potential growth (TARGET),226,18
+HCP0016,Neurologist,Southwest,25.2,4,3,High-potential growth (TARGET),161,16
+HCP0017,General Practitioner,West,14.5,6,2,Champions (protect),203,12
+HCP0018,Dermatologist,West,22.7,10,1,Low priority (maintain),142,15
+HCP0019,Cardiologist,Southeast,26.7,10,3,High-potential growth (TARGET),168,30
+HCP0020,General Practitioner,West,21.7,5,1,Low priority (maintain),162,11
+HCP0021,Neurologist,Northeast,23.1,7,1,Low priority (maintain),170,13
+HCP0022,Endocrinologist,Midwest,31.7,2,2,Champions (protect),245,13
+HCP0023,Cardiologist,Midwest,12.6,5,1,Low priority (maintain),167,16
+HCP0024,Cardiologist,Southeast,3.8,7,1,Low priority (maintain),135,31
+HCP0025,Neurologist,Northeast,30.9,7,0,Steady mid-tier (nurture),279,11
+HCP0026,Endocrinologist,Southwest,3.8,10,1,Low priority (maintain),105,15
+HCP0027,Endocrinologist,Southeast,10.5,5,1,Low priority (maintain),178,25
+HCP0028,General Practitioner,Southwest,22.8,10,1,Low priority (maintain),0,10
+HCP0029,Cardiologist,Midwest,23.3,10,2,Champions (protect),216,21
+HCP0030,Dermatologist,Southeast,13.0,6,1,Low priority (maintain),161,24
+HCP0031,Cardiologist,West,15.5,1,1,Low priority (maintain),85,10
+HCP0032,Neurologist,Northeast,21.4,4,0,Steady mid-tier (nurture),212,8
+HCP0033,Neurologist,Southwest,9.2,8,1,Low priority (maintain),160,20
+HCP0034,Cardiologist,Southwest,47.5,6,3,High-potential growth (TARGET),131,19
+HCP0035,Endocrinologist,Southeast,7.6,10,2,Champions (protect),363,30
+HCP0036,General Practitioner,Southeast,14.2,9,1,Low priority (maintain),208,31
+HCP0037,Dermatologist,Northeast,11.5,1,1,Low priority (maintain),128,11
+HCP0038,General Practitioner,West,16.3,9,1,Low priority (maintain),111,6
+HCP0039,Endocrinologist,West,45.8,4,0,Steady mid-tier (nurture),134,5
+HCP0040,Cardiologist,Southeast,7.2,9,1,Low priority (maintain),102,22
+HCP0041,Pulmonologist,Northeast,23.1,6,2,Champions (protect),208,11
+HCP0042,Dermatologist,Northeast,26.2,5,3,High-potential growth (TARGET),132,8
+HCP0043,Cardiologist,Northeast,36.1,1,0,Steady mid-tier (nurture),352,10
+HCP0044,Cardiologist,West,8.4,2,1,Low priority (maintain),108,9
+HCP0045,General Practitioner,West,8.1,6,1,Low priority (maintain),58,10
+HCP0046,Cardiologist,Northeast,14.4,6,1,Low priority (maintain),124,11
+HCP0047,General Practitioner,Southwest,14.6,6,2,Champions (protect),237,16
+HCP0048,Dermatologist,Northeast,6.7,2,1,Low priority (maintain),61,7
+HCP0049,Endocrinologist,Southeast,26.6,6,3,High-potential growth (TARGET),148,28
+HCP0050,Endocrinologist,Midwest,24.8,1,2,Champions (protect),363,21
+HCP0051,Cardiologist,Southwest,58.8,2,3,High-potential growth (TARGET),103,13
+HCP0052,Pulmonologist,West,12.9,5,2,Champions (protect),198,9
+HCP0053,Dermatologist,Northeast,6.5,7,1,Low priority (maintain),151,7
+HCP0054,General Practitioner,Northeast,7.6,7,1,Low priority (maintain),59,7
+HCP0055,Pulmonologist,Southeast,21.2,10,2,Champions (protect),275,31
+HCP0056,General Practitioner,Southeast,8.6,9,1,Low priority (maintain),106,26
+HCP0057,Dermatologist,West,28.0,4,0,Steady mid-tier (nurture),132,5
+HCP0058,Cardiologist,Southwest,9.5,8,2,Champions (protect),298,27
+HCP0059,Endocrinologist,Southeast,19.1,1,2,Champions (protect),467,34
+HCP0060,Endocrinologist,West,15.7,9,2,Champions (protect),215,11
+HCP0061,Endocrinologist,Midwest,7.5,4,1,Low priority (maintain),138,13
+HCP0062,Dermatologist,Midwest,4.0,8,0,Steady mid-tier (nurture),354,8
+HCP0063,General Practitioner,Midwest,38.3,10,3,High-potential growth (TARGET),207,12
+HCP0064,Endocrinologist,Northeast,21.7,8,1,Low priority (maintain),115,8
+HCP0065,Neurologist,West,5.7,10,1,Low priority (maintain),143,11
+HCP0066,General Practitioner,Northeast,6.3,1,1,Low priority (maintain),62,12
+HCP0067,General Practitioner,Northeast,57.7,2,3,High-potential growth (TARGET),222,11
+HCP0068,Dermatologist,Southeast,8.0,7,1,Low priority (maintain),157,27
+HCP0069,Endocrinologist,Southeast,20.0,6,2,Champions (protect),227,38
+HCP0070,Cardiologist,Northeast,3.1,2,1,Low priority (maintain),63,7
+HCP0071,Pulmonologist,Northeast,11.7,8,0,Steady mid-tier (nurture),233,9
+HCP0072,Neurologist,Southwest,29.3,1,3,High-potential growth (TARGET),167,14
+HCP0073,Endocrinologist,West,2.6,10,1,Low priority (maintain),99,10
+HCP0074,Dermatologist,Northeast,10.2,2,2,Champions (protect),189,14
+HCP0075,Neurologist,Southeast,9.7,5,1,Low priority (maintain),164,27
+HCP0076,General Practitioner,Midwest,24.5,9,2,Champions (protect),190,14
+HCP0077,Cardiologist,West,23.0,6,2,Champions (protect),371,16
+HCP0078,Cardiologist,Southwest,24.5,8,1,Low priority (maintain),157,26
+HCP0079,General Practitioner,Southwest,19.8,8,0,Steady mid-tier (nurture),419,12
+HCP0080,Cardiologist,Midwest,23.0,10,1,Low priority (maintain),62,11
+HCP0081,Dermatologist,Midwest,5.0,5,1,Low priority (maintain),105,10
+HCP0082,Dermatologist,Northeast,19.9,10,1,Low priority (maintain),111,11
+HCP0083,Neurologist,West,43.0,6,3,High-potential growth (TARGET),162,11
+HCP0084,Cardiologist,West,17.0,9,1,Low priority (maintain),96,14
+HCP0085,Neurologist,Northeast,9.8,8,2,Champions (protect),231,12
+HCP0086,Cardiologist,Southwest,10.6,2,1,Low priority (maintain),0,28
+HCP0087,Dermatologist,Northeast,40.9,7,0,Steady mid-tier (nurture),150,6
+HCP0088,General Practitioner,Southwest,0.9,9,1,Low priority (maintain),108,16
+HCP0089,General Practitioner,West,75.5,2,3,High-potential growth (TARGET),217,8
+HCP0090,Dermatologist,Northeast,2.1,9,1,Low priority (maintain),131,11
+HCP0091,Dermatologist,Midwest,13.2,2,1,Low priority (maintain),142,10
+HCP0092,General Practitioner,Northeast,16.3,9,1,Low priority (maintain),130,11
+HCP0093,Dermatologist,Midwest,24.2,8,2,Champions (protect),186,12
+HCP0094,Endocrinologist,West,27.3,2,3,High-potential growth (TARGET),93,6
+HCP0095,General Practitioner,Northeast,18.9,8,2,Champions (protect),280,16
+HCP0096,Neurologist,Southeast,14.8,2,1,Low priority (maintain),154,26
+HCP0097,Pulmonologist,West,2.8,6,1,Low priority (maintain),87,8
+HCP0098,General Practitioner,Southeast,12.0,10,1,Low priority (maintain),187,24
+HCP0099,Neurologist,Northeast,14.4,3,1,Low priority (maintain),119,14
+HCP0100,Neurologist,Midwest,6.1,2,1,Low priority (maintain),94,10
+HCP0101,Cardiologist,Midwest,21.0,5,1,Low priority (maintain),115,15
+HCP0102,Neurologist,Southwest,18.9,4,2,Champions (protect),287,20
+HCP0103,Endocrinologist,Southeast,12.7,1,2,Champions (protect),312,26
+HCP0104,General Practitioner,West,16.3,5,1,Low priority (maintain),92,8
+HCP0105,Cardiologist,Midwest,12.6,3,1,Low priority (maintain),36,13
+HCP0106,Dermatologist,Southeast,2.9,2,2,Champions (protect),361,30
+HCP0107,Dermatologist,West,23.6,3,1,Low priority (maintain),86,6
+HCP0108,General Practitioner,West,20.3,1,1,Low priority (maintain),116,9
+HCP0109,Dermatologist,Midwest,4.8,10,1,Low priority (maintain),180,12
+HCP0110,Cardiologist,Northeast,21.5,10,1,Low priority (maintain),130,9
+HCP0111,Pulmonologist,Midwest,22.0,4,2,Champions (protect),190,17
+HCP0112,General Practitioner,Midwest,22.1,9,1,Low priority (maintain),87,11
+HCP0113,General Practitioner,Northeast,29.4,5,3,High-potential growth (TARGET),96,7
+HCP0114,Endocrinologist,Southwest,38.4,10,3,High-potential growth (TARGET),237,17
+HCP0115,General Practitioner,West,11.6,2,1,Low priority (maintain),43,9
+HCP0116,Dermatologist,Northeast,28.9,3,0,Steady mid-tier (nurture),141,5
+HCP0117,Cardiologist,Southwest,11.3,8,2,Champions (protect),282,21
+HCP0118,General Practitioner,Northeast,20.9,3,0,Steady mid-tier (nurture),282,8
+HCP0119,Neurologist,Southwest,32.0,9,3,High-potential growth (TARGET),219,19
+HCP0120,Pulmonologist,Midwest,8.1,5,1,Low priority (maintain),189,18
+HCP0121,Neurologist,Northeast,1.1,5,1,Low priority (maintain),78,16
+HCP0122,Dermatologist,West,7.4,5,1,Low priority (maintain),102,16
+HCP0123,Cardiologist,Northeast,16.3,8,2,Champions (protect),188,11
+HCP0124,Endocrinologist,Midwest,6.5,1,1,Low priority (maintain),100,7
+HCP0125,General Practitioner,Northeast,34.0,8,3,High-potential growth (TARGET),174,9
+HCP0126,Dermatologist,West,7.4,8,1,Low priority (maintain),114,14
+HCP0127,Neurologist,Southwest,13.9,9,2,Champions (protect),221,19
+HCP0128,General Practitioner,West,16.4,10,1,Low priority (maintain),60,11
+HCP0129,Pulmonologist,Midwest,6.5,8,1,Low priority (maintain),171,17
+HCP0130,Dermatologist,Midwest,14.0,6,1,Low priority (maintain),104,9
+HCP0131,Endocrinologist,Southwest,16.3,5,1,Low priority (maintain),127,21
+HCP0132,Cardiologist,Southwest,12.5,4,1,Low priority (maintain),161,14
+HCP0133,Cardiologist,West,15.4,9,2,Champions (protect),197,18
+HCP0134,Neurologist,Northeast,1.2,4,2,Champions (protect),221,18
+HCP0135,General Practitioner,Southwest,7.3,6,1,Low priority (maintain),62,15
+HCP0136,General Practitioner,Northeast,20.5,1,1,Low priority (maintain),64,15
+HCP0137,Pulmonologist,Southeast,5.8,4,2,Champions (protect),264,30
+HCP0138,General Practitioner,West,23.0,3,1,Low priority (maintain),101,5
+HCP0139,Cardiologist,Southeast,24.7,5,2,Champions (protect),402,35
+HCP0140,General Practitioner,Southwest,20.4,6,2,Champions (protect),218,18
+HCP0141,Neurologist,Midwest,28.7,8,3,High-potential growth (TARGET),109,10
+HCP0142,Cardiologist,Southeast,3.3,5,2,Champions (protect),427,34
+HCP0143,Dermatologist,Southeast,33.0,2,2,Champions (protect),403,27
+HCP0144,Pulmonologist,Midwest,6.6,6,1,Low priority (maintain),119,10
+HCP0145,Neurologist,Southwest,17.9,1,1,Low priority (maintain),83,15
+HCP0146,Dermatologist,Southwest,16.3,9,2,Champions (protect),301,25
+HCP0147,Neurologist,West,12.2,8,1,Low priority (maintain),61,10
+HCP0148,Dermatologist,West,16.7,3,1,Low priority (maintain),151,13
+HCP0149,Neurologist,Southwest,6.7,3,1,Low priority (maintain),76,19
+HCP0150,Cardiologist,Southwest,51.7,1,3,High-potential growth (TARGET),189,29
+HCP0151,Neurologist,Southeast,7.3,4,2,Champions (protect),261,34
+HCP0152,Endocrinologist,Midwest,26.2,1,3,High-potential growth (TARGET),183,19
+HCP0153,Neurologist,Northeast,38.3,10,3,High-potential growth (TARGET),153,16
+HCP0154,Cardiologist,Southeast,28.0,2,3,High-potential growth (TARGET),153,29
+HCP0155,Dermatologist,West,21.3,7,1,Low priority (maintain),89,7
+HCP0156,Pulmonologist,Midwest,17.7,6,2,Champions (protect),284,14
+HCP0157,Pulmonologist,Northeast,5.0,3,2,Champions (protect),165,8
+HCP0158,Neurologist,Southwest,50.1,9,3,High-potential growth (TARGET),214,16
+HCP0159,Cardiologist,West,20.1,2,1,Low priority (maintain),152,8
+HCP0160,Cardiologist,West,16.7,9,0,Steady mid-tier (nurture),216,8
+HCP0161,Dermatologist,Southeast,6.1,8,1,Low priority (maintain),171,37
+HCP0162,Cardiologist,Midwest,17.4,7,1,Low priority (maintain),133,9
+HCP0163,Neurologist,Midwest,15.9,9,1,Low priority (maintain),64,14
+HCP0164,General Practitioner,Southeast,52.0,5,3,High-potential growth (TARGET),157,31
+HCP0165,Pulmonologist,Southeast,16.7,3,2,Champions (protect),318,28
+HCP0166,Dermatologist,Southeast,17.1,2,2,Champions (protect),326,22
+HCP0167,Pulmonologist,West,6.2,10,2,Champions (protect),201,9
+HCP0168,General Practitioner,Southwest,8.7,5,2,Champions (protect),354,25
+HCP0169,Dermatologist,West,24.0,9,3,High-potential growth (TARGET),144,8
+HCP0170,Pulmonologist,West,2.6,4,1,Low priority (maintain),78,5
+HCP0171,Dermatologist,West,32.9,10,3,High-potential growth (TARGET),86,9
+HCP0172,Pulmonologist,Northeast,33.5,9,0,Steady mid-tier (nurture),246,10
+HCP0173,General Practitioner,West,7.9,4,1,Low priority (maintain),124,14
+HCP0174,Pulmonologist,Northeast,21.4,5,0,Steady mid-tier (nurture),314,9
+HCP0175,General Practitioner,Midwest,39.2,8,3,High-potential growth (TARGET),111,13
+HCP0176,Endocrinologist,Midwest,14.9,3,1,Low priority (maintain),151,18
+HCP0177,Endocrinologist,Southeast,12.8,1,1,Low priority (maintain),204,29
+HCP0178,Pulmonologist,Northeast,14.1,3,0,Steady mid-tier (nurture),119,5
+HCP0179,Dermatologist,Northeast,20.0,6,2,Champions (protect),254,13
+HCP0180,Dermatologist,West,9.7,2,1,Low priority (maintain),76,13
+HCP0181,Dermatologist,Southeast,11.9,4,2,Champions (protect),250,25
+HCP0182,Dermatologist,Southeast,20.3,10,1,Low priority (maintain),146,32
+HCP0183,Cardiologist,West,11.1,1,1,Low priority (maintain),76,11
+HCP0184,General Practitioner,Northeast,5.7,1,1,Low priority (maintain),58,8
+HCP0185,General Practitioner,West,2.3,5,1,Low priority (maintain),92,8
+HCP0186,Neurologist,West,17.0,1,1,Low priority (maintain),156,9
+HCP0187,General Practitioner,Midwest,37.5,1,3,High-potential growth (TARGET),169,15
+HCP0188,Endocrinologist,Northeast,22.2,2,1,Low priority (maintain),147,8
+HCP0189,Neurologist,Northeast,5.9,2,1,Low priority (maintain),97,9
+HCP0190,Neurologist,Southeast,8.7,9,1,Low priority (maintain),98,21
+HCP0191,Pulmonologist,Midwest,12.7,2,1,Low priority (maintain),52,7
+HCP0192,Cardiologist,Northeast,53.1,6,3,High-potential growth (TARGET),184,11
+HCP0193,Dermatologist,Midwest,55.0,8,3,High-potential growth (TARGET),109,11
+HCP0194,Dermatologist,Northeast,50.8,7,3,High-potential growth (TARGET),83,8
+HCP0195,Dermatologist,Midwest,18.3,7,1,Low priority (maintain),126,11
+HCP0196,Endocrinologist,Northeast,16.3,4,0,Steady mid-tier (nurture),386,11
+HCP0197,Pulmonologist,Southwest,9.0,9,2,Champions (protect),282,19
+HCP0198,Dermatologist,Northeast,12.3,1,1,Low priority (maintain),44,8
+HCP0199,General Practitioner,Northeast,31.2,2,3,High-potential growth (TARGET),82,8
+HCP0200,Cardiologist,Northeast,20.4,9,0,Steady mid-tier (nurture),124,5
+HCP0201,Pulmonologist,West,21.3,1,1,Low priority (maintain),69,6
+HCP0202,General Practitioner,Northeast,6.9,2,1,Low priority (maintain),112,14
+HCP0203,General Practitioner,Midwest,15.8,2,1,Low priority (maintain),136,11
+HCP0204,General Practitioner,Midwest,9.2,1,1,Low priority (maintain),57,10
+HCP0205,Neurologist,Midwest,4.6,2,1,Low priority (maintain),98,16
+HCP0206,Pulmonologist,Southwest,10.1,6,1,Low priority (maintain),175,18
+HCP0207,Cardiologist,West,20.4,7,2,Champions (protect),199,12
+HCP0208,General Practitioner,Southeast,27.7,1,2,Champions (protect),307,31
+HCP0209,Endocrinologist,West,16.3,10,1,Low priority (maintain),148,8
+HCP0210,Neurologist,Southeast,16.4,1,1,Low priority (maintain),183,35
+HCP0211,Cardiologist,West,15.3,7,2,Champions (protect),193,9
+HCP0212,Dermatologist,Midwest,19.6,9,1,Low priority (maintain),124,9
+HCP0213,Dermatologist,Southwest,6.0,6,1,Low priority (maintain),53,18
+HCP0214,General Practitioner,West,6.1,5,1,Low priority (maintain),94,9
+HCP0215,General Practitioner,Southwest,38.2,2,3,High-potential growth (TARGET),147,16
+HCP0216,Dermatologist,West,16.3,3,1,Low priority (maintain),109,14
+HCP0217,Dermatologist,Midwest,11.9,9,1,Low priority (maintain),29,14
+HCP0218,Dermatologist,Northeast,12.9,4,1,Low priority (maintain),75,11
+HCP0219,General Practitioner,Midwest,9.3,1,1,Low priority (maintain),82,10
+HCP0220,Pulmonologist,Northeast,23.5,8,0,Steady mid-tier (nurture),151,3
+HCP0221,Dermatologist,West,22.1,7,1,Low priority (maintain),72,14
+HCP0222,Dermatologist,Southeast,14.7,1,2,Champions (protect),416,35
+HCP0223,Cardiologist,Southeast,9.8,1,1,Low priority (maintain),141,37
+HCP0224,Dermatologist,Southeast,13.8,2,2,Champions (protect),244,29
+HCP0225,Pulmonologist,Southwest,17.5,1,2,Champions (protect),319,26
+HCP0226,Cardiologist,Midwest,16.3,7,1,Low priority (maintain),92,16
+HCP0227,Neurologist,West,24.8,2,2,Champions (protect),218,12
+HCP0228,Cardiologist,Midwest,16.3,7,1,Low priority (maintain),154,14
+HCP0229,General Practitioner,Southeast,42.7,2,3,High-potential growth (TARGET),169,37
+HCP0230,Dermatologist,Northeast,40.9,10,0,Steady mid-tier (nurture),205,9
+HCP0231,Cardiologist,Northeast,12.8,8,1,Low priority (maintain),106,6
+HCP0232,Endocrinologist,Southeast,18.1,4,1,Low priority (maintain),135,32
+HCP0233,Endocrinologist,West,14.5,5,1,Low priority (maintain),49,7
+HCP0234,Endocrinologist,Midwest,14.5,1,2,Champions (protect),194,11
+HCP0235,Endocrinologist,West,13.8,1,0,Steady mid-tier (nurture),137,4
+HCP0236,General Practitioner,Northeast,16.6,6,1,Low priority (maintain),141,12
+HCP0237,Endocrinologist,Northeast,36.5,1,3,High-potential growth (TARGET),127,9
+HCP0238,Endocrinologist,West,20.9,7,0,Steady mid-tier (nurture),156,4
+HCP0239,Endocrinologist,Northeast,5.8,4,1,Low priority (maintain),86,8
+HCP0240,Pulmonologist,Northeast,31.8,2,0,Steady mid-tier (nurture),248,7
+HCP0241,General Practitioner,Midwest,19.4,6,1,Low priority (maintain),136,16
+HCP0242,Pulmonologist,West,23.7,6,1,Low priority (maintain),98,7
+HCP0243,Dermatologist,Southwest,16.3,8,2,Champions (protect),237,20
+HCP0244,Endocrinologist,Northeast,21.3,2,1,Low priority (maintain),69,9
+HCP0245,Dermatologist,West,22.0,6,1,Low priority (maintain),82,9
+HCP0246,Dermatologist,West,2.8,9,0,Steady mid-tier (nurture),130,5
+HCP0247,Dermatologist,West,23.5,3,1,Low priority (maintain),66,9
+HCP0248,Endocrinologist,West,16.3,9,1,Low priority (maintain),37,9
+HCP0249,Endocrinologist,Southeast,11.1,8,2,Champions (protect),287,28
+HCP0250,Endocrinologist,West,16.5,5,1,Low priority (maintain),130,8
+HCP0251,Pulmonologist,Southeast,47.2,9,3,High-potential growth (TARGET),143,27
+HCP0252,Dermatologist,West,6.7,10,1,Low priority (maintain),173,14
+HCP0253,General Practitioner,Midwest,16.1,3,1,Low priority (maintain),138,13
+HCP0254,Dermatologist,Southwest,16.3,10,1,Low priority (maintain),187,18
+HCP0255,Dermatologist,Southwest,31.5,1,3,High-potential growth (TARGET),203,20
+HCP0256,Dermatologist,Southwest,13.2,2,1,Low priority (maintain),145,21
+HCP0257,Pulmonologist,Southwest,19.6,1,2,Champions (protect),205,18
+HCP0258,Cardiologist,Southwest,6.8,4,1,Low priority (maintain),123,14
+HCP0259,Pulmonologist,Southwest,35.2,10,2,Champions (protect),469,21
+HCP0260,Dermatologist,Northeast,4.2,7,1,Low priority (maintain),28,11
+HCP0261,Dermatologist,West,23.3,7,1,Low priority (maintain),115,9
+HCP0262,Endocrinologist,Midwest,19.7,1,1,Low priority (maintain),135,11
+HCP0263,Dermatologist,Southeast,21.9,6,2,Champions (protect),276,29
+HCP0264,Cardiologist,Midwest,4.3,4,1,Low priority (maintain),111,18
+HCP0265,Endocrinologist,West,13.0,5,1,Low priority (maintain),161,11
+HCP0266,Dermatologist,West,30.4,3,3,High-potential growth (TARGET),81,10
+HCP0267,Endocrinologist,West,16.3,3,2,Champions (protect),226,12
+HCP0268,Dermatologist,Midwest,15.2,10,2,Champions (protect),309,16
+HCP0269,Pulmonologist,Southwest,28.5,6,2,Champions (protect),248,23
+HCP0270,Endocrinologist,Southeast,18.3,5,1,Low priority (maintain),164,19
+HCP0271,Endocrinologist,Southwest,15.8,1,2,Champions (protect),218,21
+HCP0272,Dermatologist,Southwest,11.8,8,1,Low priority (maintain),26,16
+HCP0273,Neurologist,Southeast,16.6,5,1,Low priority (maintain),101,29
+HCP0274,Neurologist,Southeast,26.7,4,3,High-potential growth (TARGET),171,24
+HCP0275,Pulmonologist,Northeast,28.3,7,3,High-potential growth (TARGET),162,11
+HCP0276,Neurologist,Northeast,5.2,2,1,Low priority (maintain),90,5
+HCP0277,Pulmonologist,Midwest,10.9,6,2,Champions (protect),288,15
+HCP0278,Pulmonologist,Midwest,6.4,9,1,Low priority (maintain),36,10
+HCP0279,Neurologist,Northeast,17.2,5,0,Steady mid-tier (nurture),286,8
+HCP0280,Pulmonologist,Midwest,12.6,1,1,Low priority (maintain),60,18
+HCP0281,Endocrinologist,Southwest,21.3,3,2,Champions (protect),258,14
+HCP0282,Dermatologist,Southeast,22.4,1,2,Champions (protect),280,32
+HCP0283,Neurologist,Southeast,1.4,6,2,Champions (protect),284,21
+HCP0284,General Practitioner,Southeast,16.5,4,2,Champions (protect),341,22
+HCP0285,Pulmonologist,Midwest,37.0,2,3,High-potential growth (TARGET),266,14
+HCP0286,Dermatologist,Southeast,10.9,7,1,Low priority (maintain),187,24
+HCP0287,Cardiologist,Southwest,10.7,2,1,Low priority (maintain),170,16
+HCP0288,Neurologist,Southeast,32.7,4,3,High-potential growth (TARGET),176,32
+HCP0289,Pulmonologist,Midwest,29.2,10,3,High-potential growth (TARGET),114,14
+HCP0290,Pulmonologist,Southeast,7.1,1,1,Low priority (maintain),199,22
+HCP0291,Pulmonologist,Northeast,27.2,3,3,High-potential growth (TARGET),99,6
+HCP0292,Cardiologist,Southwest,8.6,4,1,Low priority (maintain),104,13
+HCP0293,Pulmonologist,Southeast,10.6,6,2,Champions (protect),261,23
+HCP0294,Dermatologist,Southeast,7.1,3,1,Low priority (maintain),192,29
+HCP0295,Dermatologist,Southwest,5.2,10,1,Low priority (maintain),107,19
+HCP0296,Neurologist,West,18.0,1,1,Low priority (maintain),104,8
+HCP0297,Pulmonologist,Southwest,4.4,10,1,Low priority (maintain),95,25
+HCP0298,Endocrinologist,West,18.6,6,1,Low priority (maintain),77,10
+HCP0299,Endocrinologist,West,18.1,1,1,Low priority (maintain),135,7
+HCP0300,Dermatologist,Midwest,14.7,2,2,Champions (protect),248,16
+HCP0301,Pulmonologist,Southwest,11.4,2,2,Champions (protect),225,18
+HCP0302,Dermatologist,Southeast,9.6,3,1,Low priority (maintain),175,26
+HCP0303,General Practitioner,Midwest,6.3,4,1,Low priority (maintain),162,13
+HCP0304,Neurologist,Midwest,42.9,7,3,High-potential growth (TARGET),185,18
+HCP0305,Dermatologist,West,14.2,4,1,Low priority (maintain),88,10
+HCP0306,Neurologist,West,13.8,8,0,Steady mid-tier (nurture),184,8
+HCP0307,Pulmonologist,Midwest,16.3,3,2,Champions (protect),245,16
+HCP0308,Endocrinologist,Southwest,39.9,3,3,High-potential growth (TARGET),179,16
+HCP0309,Endocrinologist,Southeast,10.1,3,1,Low priority (maintain),184,28
+HCP0310,Endocrinologist,West,19.9,4,1,Low priority (maintain),148,9
+HCP0311,Neurologist,Midwest,22.8,9,1,Low priority (maintain),137,17
+HCP0312,Cardiologist,Midwest,18.0,3,2,Champions (protect),167,10
+HCP0313,General Practitioner,Southwest,4.3,3,1,Low priority (maintain),81,15
+HCP0314,General Practitioner,Southwest,26.4,10,3,High-potential growth (TARGET),155,13
+HCP0315,General Practitioner,Northeast,10.0,7,1,Low priority (maintain),113,13
+HCP0316,Endocrinologist,Southeast,29.0,2,2,Champions (protect),324,33
+HCP0317,General Practitioner,Northeast,15.7,9,1,Low priority (maintain),128,8
+HCP0318,Pulmonologist,Southwest,23.8,2,2,Champions (protect),313,19
+HCP0319,Cardiologist,Northeast,38.2,2,0,Steady mid-tier (nurture),246,9
+HCP0320,Neurologist,Southeast,25.8,5,2,Champions (protect),338,32
+HCP0321,Neurologist,Midwest,16.3,7,1,Low priority (maintain),121,10
+HCP0322,Pulmonologist,Southwest,27.3,2,2,Champions (protect),236,23
+HCP0323,General Practitioner,Midwest,8.3,8,1,Low priority (maintain),100,11
+HCP0324,Neurologist,West,29.9,2,3,High-potential growth (TARGET),127,6
+HCP0325,Endocrinologist,West,13.3,8,1,Low priority (maintain),116,7
+HCP0326,Neurologist,Northeast,13.7,1,1,Low priority (maintain),160,10
+HCP0327,Endocrinologist,West,17.6,5,1,Low priority (maintain),90,9
+HCP0328,Endocrinologist,Southwest,12.3,7,1,Low priority (maintain),191,18
+HCP0329,Cardiologist,Southwest,6.8,3,1,Low priority (maintain),88,20
+HCP0330,Pulmonologist,Northeast,16.3,7,1,Low priority (maintain),147,15
+HCP0331,Cardiologist,Southwest,13.7,7,1,Low priority (maintain),192,25
+HCP0332,General Practitioner,Southwest,13.3,7,1,Low priority (maintain),129,20
+HCP0333,Dermatologist,Midwest,15.3,4,1,Low priority (maintain),102,7
+HCP0334,General Practitioner,Northeast,1.6,8,1,Low priority (maintain),45,10
+HCP0335,General Practitioner,Midwest,13.4,8,1,Low priority (maintain),188,20
+HCP0336,Neurologist,West,41.4,4,3,High-potential growth (TARGET),87,4
+HCP0337,Dermatologist,Southwest,39.2,8,3,High-potential growth (TARGET),122,9
+HCP0338,Cardiologist,Northeast,17.0,10,0,Steady mid-tier (nurture),241,9
+HCP0339,General Practitioner,West,16.6,9,2,Champions (protect),163,8
+HCP0340,Dermatologist,West,1.1,8,1,Low priority (maintain),157,10
+HCP0341,Dermatologist,Northeast,10.5,8,1,Low priority (maintain),125,12
+HCP0342,General Practitioner,West,27.1,9,3,High-potential growth (TARGET),181,10
+HCP0343,General Practitioner,Midwest,16.3,3,1,Low priority (maintain),138,13
+HCP0344,General Practitioner,Midwest,33.6,8,3,High-potential growth (TARGET),72,10
+HCP0345,Cardiologist,Midwest,16.3,2,2,Champions (protect),190,15
+HCP0346,Cardiologist,Southwest,10.4,4,2,Champions (protect),256,18
+HCP0347,General Practitioner,West,18.0,10,1,Low priority (maintain),122,12
+HCP0348,Neurologist,Southwest,43.6,3,3,High-potential growth (TARGET),181,23
+HCP0349,Pulmonologist,West,4.2,9,1,Low priority (maintain),134,7
+HCP0350,Cardiologist,West,12.3,5,1,Low priority (maintain),111,11
+HCP0351,Endocrinologist,Northeast,3.8,3,2,Champions (protect),289,12
+HCP0352,Dermatologist,Southeast,7.8,1,1,Low priority (maintain),88,22
+HCP0353,General Practitioner,Southwest,52.1,6,3,High-potential growth (TARGET),219,25
+HCP0354,Endocrinologist,Midwest,12.3,5,2,Champions (protect),205,11
+HCP0355,Endocrinologist,Northeast,2.2,6,1,Low priority (maintain),60,9
+HCP0356,Endocrinologist,Northeast,6.8,1,1,Low priority (maintain),160,12
+HCP0357,Pulmonologist,Midwest,3.3,3,1,Low priority (maintain),82,12
+HCP0358,Endocrinologist,Southwest,18.5,1,1,Low priority (maintain),62,13
+HCP0359,General Practitioner,Northeast,22.5,4,1,Low priority (maintain),84,12
+HCP0360,Neurologist,Northeast,30.1,10,0,Steady mid-tier (nurture),278,9
+HCP0361,Pulmonologist,Northeast,16.3,2,1,Low priority (maintain),126,9
+HCP0362,Endocrinologist,Midwest,4.4,7,2,Champions (protect),217,15
+HCP0363,Endocrinologist,Northeast,21.7,1,1,Low priority (maintain),122,19
+HCP0364,Cardiologist,Midwest,14.8,6,1,Low priority (maintain),185,16
+HCP0365,Neurologist,Midwest,33.2,10,3,High-potential growth (TARGET),238,13
+HCP0366,Endocrinologist,Midwest,28.2,4,1,Low priority (maintain),46,19
+HCP0367,Dermatologist,Southwest,56.6,2,3,High-potential growth (TARGET),109,12
+HCP0368,Dermatologist,Midwest,16.3,6,1,Low priority (maintain),101,14
+HCP0369,General Practitioner,Southwest,6.4,3,1,Low priority (maintain),122,12
+HCP0370,Dermatologist,Southwest,11.1,9,2,Champions (protect),237,13
+HCP0371,Endocrinologist,West,15.3,9,1,Low priority (maintain),107,5
+HCP0372,Neurologist,Southwest,9.3,7,2,Champions (protect),272,18
+HCP0373,Pulmonologist,Midwest,7.6,7,1,Low priority (maintain),81,13
+HCP0374,Dermatologist,Midwest,20.7,7,1,Low priority (maintain),84,9
+HCP0375,Pulmonologist,Southeast,11.0,8,1,Low priority (maintain),143,28
+HCP0376,Dermatologist,Midwest,9.0,5,1,Low priority (maintain),149,14
+HCP0377,Cardiologist,Northeast,4.4,10,2,Champions (protect),185,10
+HCP0378,Cardiologist,West,1.2,4,1,Low priority (maintain),22,6
+HCP0379,Neurologist,West,40.0,1,3,High-potential growth (TARGET),30,9
+HCP0380,Neurologist,Northeast,39.3,7,3,High-potential growth (TARGET),152,15
+HCP0381,Endocrinologist,Southwest,28.8,7,3,High-potential growth (TARGET),125,20
+HCP0382,Endocrinologist,Northeast,24.2,10,2,Champions (protect),173,9
+HCP0383,Endocrinologist,Southwest,10.2,4,1,Low priority (maintain),25,13
+HCP0384,Neurologist,Northeast,24.9,5,0,Steady mid-tier (nurture),110,5
+HCP0385,Endocrinologist,Midwest,5.9,6,1,Low priority (maintain),142,15
+HCP0386,Cardiologist,Southwest,17.7,4,1,Low priority (maintain),99,12
+HCP0387,Pulmonologist,Southwest,8.3,8,1,Low priority (maintain),159,19
+HCP0388,Cardiologist,Midwest,25.0,5,2,Champions (protect),249,14
+HCP0389,Cardiologist,West,45.5,8,3,High-potential growth (TARGET),176,11
+HCP0390,Cardiologist,Southwest,6.8,5,1,Low priority (maintain),100,20
+HCP0391,Cardiologist,Southeast,10.6,3,1,Low priority (maintain),98,17
+HCP0392,Pulmonologist,Southwest,17.5,10,1,Low priority (maintain),123,17
+HCP0393,Endocrinologist,Southwest,2.5,6,2,Champions (protect),221,17
+HCP0394,Endocrinologist,Southeast,3.5,8,2,Champions (protect),286,33
+HCP0395,Pulmonologist,Southwest,44.6,6,3,High-potential growth (TARGET),133,17
+HCP0396,Neurologist,West,20.8,4,1,Low priority (maintain),25,13
+HCP0397,Cardiologist,West,9.7,10,1,Low priority (maintain),43,3
+HCP0398,Dermatologist,Southwest,16.1,4,1,Low priority (maintain),140,19
+HCP0399,General Practitioner,Southwest,16.3,10,1,Low priority (maintain),160,22
+HCP0400,Neurologist,Southeast,17.8,5,2,Champions (protect),275,25
+HCP0401,Neurologist,Southwest,11.5,1,1,Low priority (maintain),151,15
+HCP0402,Neurologist,Southeast,15.1,1,1,Low priority (maintain),91,28
+HCP0403,Neurologist,Midwest,26.6,10,3,High-potential growth (TARGET),159,16
+HCP0404,Neurologist,Southeast,25.4,6,2,Champions (protect),223,28
+HCP0405,Pulmonologist,Southeast,43.0,4,2,Champions (protect),470,24
+HCP0406,Dermatologist,Northeast,21.8,9,1,Low priority (maintain),83,7
+HCP0407,Dermatologist,West,16.9,7,1,Low priority (maintain),92,7
+HCP0408,General Practitioner,Northeast,47.3,7,0,Steady mid-tier (nurture),337,7
+HCP0409,Pulmonologist,Northeast,13.9,7,1,Low priority (maintain),102,12
+HCP0410,Pulmonologist,West,1.4,2,1,Low priority (maintain),74,5
+HCP0411,Pulmonologist,Midwest,29.0,1,3,High-potential growth (TARGET),190,12
+HCP0412,Cardiologist,Midwest,16.3,8,0,Steady mid-tier (nurture),191,8
+HCP0413,Pulmonologist,Southwest,16.3,1,1,Low priority (maintain),155,15
+HCP0414,Neurologist,Southeast,29.6,8,2,Champions (protect),387,33
+HCP0415,Pulmonologist,Northeast,11.5,2,1,Low priority (maintain),44,8
+HCP0416,Cardiologist,Southwest,1.5,3,2,Champions (protect),219,18
+HCP0417,Dermatologist,Northeast,30.0,8,3,High-potential growth (TARGET),141,9
+HCP0418,General Practitioner,Midwest,9.4,7,1,Low priority (maintain),50,21
+HCP0419,General Practitioner,West,7.0,8,1,Low priority (maintain),83,7
+HCP0420,Cardiologist,West,1.6,7,1,Low priority (maintain),82,7
+HCP0421,Cardiologist,Southeast,28.2,1,2,Champions (protect),467,30
+HCP0422,General Practitioner,Southwest,0.8,9,1,Low priority (maintain),103,25
+HCP0423,General Practitioner,Southwest,38.0,3,3,High-potential growth (TARGET),191,13
+HCP0424,Endocrinologist,Midwest,12.5,2,1,Low priority (maintain),176,13
+HCP0425,Neurologist,Northeast,29.2,9,0,Steady mid-tier (nurture),402,13
+HCP0426,Endocrinologist,Southeast,22.3,2,2,Champions (protect),432,29
+HCP0427,Endocrinologist,Southwest,53.1,6,3,High-potential growth (TARGET),122,12
+HCP0428,General Practitioner,West,21.9,5,1,Low priority (maintain),70,5
+HCP0429,Endocrinologist,Northeast,37.0,8,3,High-potential growth (TARGET),160,8
+HCP0430,Cardiologist,Southwest,10.4,1,1,Low priority (maintain),168,23
+HCP0431,Dermatologist,West,3.5,2,1,Low priority (maintain),94,12
+HCP0432,Dermatologist,West,32.3,5,3,High-potential growth (TARGET),50,9
+HCP0433,Neurologist,Midwest,3.4,5,1,Low priority (maintain),66,12
+HCP0434,Cardiologist,Northeast,28.0,8,2,Champions (protect),299,14
+HCP0435,Cardiologist,Southeast,6.2,7,2,Champions (protect),225,30
+HCP0436,General Practitioner,West,20.3,2,1,Low priority (maintain),61,9
+HCP0437,Pulmonologist,West,53.7,10,0,Steady mid-tier (nurture),217,8
+HCP0438,Endocrinologist,Southwest,26.5,5,1,Low priority (maintain),113,14
+HCP0439,General Practitioner,Northeast,14.0,10,0,Steady mid-tier (nurture),257,8
+HCP0440,Cardiologist,Northeast,22.7,10,1,Low priority (maintain),95,5
+HCP0441,Neurologist,Midwest,10.7,1,1,Low priority (maintain),58,11
+HCP0442,Dermatologist,Midwest,67.4,6,3,High-potential growth (TARGET),190,16
+HCP0443,Endocrinologist,Northeast,8.8,5,1,Low priority (maintain),107,13
+HCP0444,Cardiologist,Southwest,15.2,5,1,Low priority (maintain),118,11
+HCP0445,Dermatologist,Midwest,24.9,4,1,Low priority (maintain),165,21
+HCP0446,Cardiologist,Northeast,21.5,6,1,Low priority (maintain),144,11
+HCP0447,Dermatologist,Northeast,16.3,5,1,Low priority (maintain),41,9
+HCP0448,Dermatologist,Midwest,10.9,2,2,Champions (protect),209,16
+HCP0449,Dermatologist,Southwest,13.5,3,1,Low priority (maintain),171,16
+HCP0450,Pulmonologist,West,31.3,2,0,Steady mid-tier (nurture),163,5
+HCP0451,Neurologist,Midwest,30.3,9,3,High-potential growth (TARGET),180,13
+HCP0452,General Practitioner,Southeast,21.9,7,1,Low priority (maintain),191,26
+HCP0453,Endocrinologist,West,40.1,4,0,Steady mid-tier (nurture),208,8
+HCP0454,Endocrinologist,Midwest,32.2,4,3,High-potential growth (TARGET),87,11
+HCP0455,Cardiologist,Southeast,29.6,1,2,Champions (protect),328,25
+HCP0456,Endocrinologist,Midwest,3.3,3,1,Low priority (maintain),134,15
+HCP0457,Endocrinologist,Northeast,16.3,10,1,Low priority (maintain),66,9
+HCP0458,Neurologist,Southeast,18.9,1,2,Champions (protect),317,43
+HCP0459,Dermatologist,Midwest,43.6,2,3,High-potential growth (TARGET),262,13
+HCP0460,Cardiologist,West,14.5,9,1,Low priority (maintain),46,8
+HCP0461,Dermatologist,Southwest,17.8,6,1,Low priority (maintain),153,16
+HCP0462,General Practitioner,Southwest,6.2,1,2,Champions (protect),206,16
+HCP0463,Endocrinologist,Midwest,7.4,5,2,Champions (protect),225,18
+HCP0464,Cardiologist,Northeast,16.3,8,2,Champions (protect),174,9
+HCP0465,Endocrinologist,Southeast,23.2,4,1,Low priority (maintain),186,24
+HCP0466,Endocrinologist,West,53.8,4,3,High-potential growth (TARGET),204,9
+HCP0467,Endocrinologist,Northeast,14.3,7,1,Low priority (maintain),64,9
+HCP0468,Neurologist,West,4.3,6,1,Low priority (maintain),91,12
+HCP0469,Endocrinologist,Southwest,12.7,10,2,Champions (protect),194,13
+HCP0470,Neurologist,Southeast,11.0,3,2,Champions (protect),262,24
+HCP0471,Endocrinologist,Southwest,16.3,3,2,Champions (protect),215,18
+HCP0472,Endocrinologist,West,26.4,2,1,Low priority (maintain),65,6
+HCP0473,Endocrinologist,Northeast,24.1,7,2,Champions (protect),221,18
+HCP0474,Dermatologist,Northeast,64.8,6,3,High-potential growth (TARGET),75,11
+HCP0475,General Practitioner,Southwest,38.6,4,3,High-potential growth (TARGET),137,17
+HCP0476,Dermatologist,West,7.9,7,1,Low priority (maintain),83,10
+HCP0477,Dermatologist,Northeast,32.9,4,3,High-potential growth (TARGET),110,8
+HCP0478,General Practitioner,Southwest,16.9,2,2,Champions (protect),311,19
+HCP0479,Neurologist,Northeast,14.0,6,1,Low priority (maintain),74,9
+HCP0480,Neurologist,Southwest,41.8,5,3,High-potential growth (TARGET),206,21
+HCP0481,Endocrinologist,Southwest,16.3,5,1,Low priority (maintain),141,18
+HCP0482,Pulmonologist,Northeast,31.4,5,3,High-potential growth (TARGET),129,13
+HCP0483,Dermatologist,Southwest,28.1,10,3,High-potential growth (TARGET),205,17
+HCP0484,Cardiologist,West,7.3,3,1,Low priority (maintain),112,5
+HCP0485,Cardiologist,West,3.2,3,1,Low priority (maintain),64,9
+HCP0486,Dermatologist,Northeast,15.5,6,1,Low priority (maintain),0,15
+HCP0487,Dermatologist,Southeast,35.5,1,3,High-potential growth (TARGET),81,22
+HCP0488,Neurologist,Southeast,21.6,2,2,Champions (protect),207,29
+HCP0489,Neurologist,Midwest,42.7,6,3,High-potential growth (TARGET),311,21
+HCP0490,Endocrinologist,Northeast,20.6,6,1,Low priority (maintain),107,11
+HCP0491,Pulmonologist,West,44.6,7,0,Steady mid-tier (nurture),213,8
+HCP0492,Neurologist,Southwest,10.1,2,1,Low priority (maintain),82,20
+HCP0493,Endocrinologist,West,24.0,9,1,Low priority (maintain),91,6
+HCP0494,Dermatologist,Northeast,12.0,5,1,Low priority (maintain),131,8
+HCP0495,Dermatologist,Northeast,15.1,2,1,Low priority (maintain),147,15
+HCP0496,Dermatologist,West,17.8,4,1,Low priority (maintain),93,12
+HCP0497,Endocrinologist,Southeast,21.6,3,2,Champions (protect),244,26
+HCP0498,General Practitioner,Southwest,8.9,5,2,Champions (protect),237,23
+HCP0499,Neurologist,West,23.2,5,0,Steady mid-tier (nurture),206,5
+HCP0500,Cardiologist,Northeast,17.1,5,2,Champions (protect),167,9
+HCP0501,Cardiologist,Northeast,4.5,5,1,Low priority (maintain),158,13
+HCP0502,General Practitioner,Northeast,2.7,10,1,Low priority (maintain),93,9
+HCP0503,Endocrinologist,Northeast,35.6,10,3,High-potential growth (TARGET),33,7
+HCP0504,Neurologist,Northeast,14.6,5,2,Champions (protect),190,15
+HCP0505,General Practitioner,West,4.0,10,1,Low priority (maintain),98,7
+HCP0506,Neurologist,Southwest,49.5,9,3,High-potential growth (TARGET),333,31
+HCP0507,Endocrinologist,West,24.9,9,2,Champions (protect),181,10
+HCP0508,Neurologist,West,21.2,3,1,Low priority (maintain),97,6
+HCP0509,Cardiologist,West,8.2,5,2,Champions (protect),255,17
+HCP0510,Neurologist,Southeast,4.5,4,2,Champions (protect),276,26
+HCP0511,Neurologist,Southeast,19.0,1,1,Low priority (maintain),168,24
+HCP0512,Endocrinologist,West,16.3,1,0,Steady mid-tier (nurture),131,6
+HCP0513,Cardiologist,Southeast,6.3,7,2,Champions (protect),258,35
+HCP0514,Neurologist,Northeast,6.1,5,1,Low priority (maintain),0,7
+HCP0515,Endocrinologist,Southwest,5.8,9,1,Low priority (maintain),154,13
+HCP0516,Pulmonologist,West,5.6,7,1,Low priority (maintain),18,7
+HCP0517,Endocrinologist,West,9.8,1,1,Low priority (maintain),40,5
+HCP0518,Endocrinologist,West,21.2,9,0,Steady mid-tier (nurture),145,4
+HCP0519,General Practitioner,Northeast,23.8,5,1,Low priority (maintain),156,19
+HCP0520,General Practitioner,Southwest,16.0,6,2,Champions (protect),252,22
+HCP0521,Neurologist,West,18.3,10,1,Low priority (maintain),153,10
+HCP0522,Dermatologist,Southwest,24.6,7,1,Low priority (maintain),149,18
+HCP0523,Endocrinologist,West,1.9,1,1,Low priority (maintain),135,13
+HCP0524,Endocrinologist,West,19.4,2,0,Steady mid-tier (nurture),164,7
+HCP0525,Dermatologist,Midwest,39.8,5,3,High-potential growth (TARGET),169,16
+HCP0526,Cardiologist,Northeast,14.3,1,1,Low priority (maintain),177,15
+HCP0527,Pulmonologist,Midwest,16.3,2,1,Low priority (maintain),151,12
+HCP0528,Dermatologist,Southeast,14.5,8,1,Low priority (maintain),150,24
+HCP0529,General Practitioner,Northeast,25.8,2,1,Low priority (maintain),88,7
+HCP0530,Cardiologist,Northeast,20.9,2,0,Steady mid-tier (nurture),153,5
+HCP0531,Pulmonologist,Southwest,5.7,6,1,Low priority (maintain),46,18
+HCP0532,Neurologist,Midwest,7.1,1,1,Low priority (maintain),107,14
+HCP0533,Neurologist,Midwest,44.6,3,3,High-potential growth (TARGET),148,12
+HCP0534,Cardiologist,Southwest,29.9,10,3,High-potential growth (TARGET),83,11
+HCP0535,Endocrinologist,Midwest,15.3,7,1,Low priority (maintain),106,15
+HCP0536,Dermatologist,Southwest,13.7,10,1,Low priority (maintain),79,20
+HCP0537,Endocrinologist,Northeast,8.2,4,1,Low priority (maintain),122,8
+HCP0538,Pulmonologist,West,22.2,7,1,Low priority (maintain),119,13
+HCP0539,Dermatologist,Midwest,8.9,3,1,Low priority (maintain),91,7
+HCP0540,Endocrinologist,Northeast,12.3,4,1,Low priority (maintain),108,7
+HCP0541,General Practitioner,West,9.7,2,1,Low priority (maintain),57,5
+HCP0542,Pulmonologist,Southwest,28.6,9,3,High-potential growth (TARGET),134,17
+HCP0543,Neurologist,Northeast,14.8,2,1,Low priority (maintain),93,5
+HCP0544,Pulmonologist,Northeast,16.3,3,1,Low priority (maintain),74,16
+HCP0545,Endocrinologist,Northeast,5.8,5,1,Low priority (maintain),83,13
+HCP0546,Pulmonologist,Southeast,9.7,5,2,Champions (protect),454,29
+HCP0547,Dermatologist,Northeast,16.3,4,2,Champions (protect),198,11
+HCP0548,Cardiologist,Southwest,3.4,4,1,Low priority (maintain),146,10
+HCP0549,Endocrinologist,Midwest,13.9,3,1,Low priority (maintain),111,18
+HCP0550,Pulmonologist,West,16.4,10,1,Low priority (maintain),101,9
+HCP0551,Neurologist,Southwest,5.1,6,1,Low priority (maintain),134,16
+HCP0552,Endocrinologist,Southwest,33.6,10,3,High-potential growth (TARGET),251,18
+HCP0553,Dermatologist,Midwest,21.4,10,1,Low priority (maintain),129,12
+HCP0554,Endocrinologist,Northeast,14.7,7,0,Steady mid-tier (nurture),121,4
+HCP0555,Cardiologist,Northeast,9.1,9,1,Low priority (maintain),60,7
+HCP0556,Cardiologist,Southwest,3.3,2,1,Low priority (maintain),48,12
+HCP0557,Pulmonologist,Northeast,16.3,10,2,Champions (protect),313,16
+HCP0558,Dermatologist,Northeast,11.4,5,1,Low priority (maintain),91,11
+HCP0559,Neurologist,Southeast,4.3,8,2,Champions (protect),356,35
+HCP0560,Neurologist,West,8.9,3,1,Low priority (maintain),71,11
+HCP0561,General Practitioner,Midwest,23.1,1,1,Low priority (maintain),175,18
+HCP0562,Cardiologist,Southwest,19.8,9,1,Low priority (maintain),168,17
+HCP0563,Cardiologist,Midwest,6.3,5,1,Low priority (maintain),110,8
+HCP0564,Cardiologist,Northeast,35.8,2,3,High-potential growth (TARGET),85,12
+HCP0565,General Practitioner,Southeast,4.2,7,2,Champions (protect),311,36
+HCP0566,Pulmonologist,Northeast,40.8,1,3,High-potential growth (TARGET),147,8
+HCP0567,Cardiologist,Southwest,19.2,5,2,Champions (protect),187,12
+HCP0568,Neurologist,Northeast,12.1,8,1,Low priority (maintain),49,11
+HCP0569,General Practitioner,Southeast,13.5,8,2,Champions (protect),349,27
+HCP0570,Dermatologist,West,17.6,5,1,Low priority (maintain),126,10
+HCP0571,Neurologist,Midwest,24.4,4,1,Low priority (maintain),132,14
+HCP0572,Neurologist,Midwest,2.6,9,1,Low priority (maintain),120,15
+HCP0573,Cardiologist,Midwest,8.6,2,1,Low priority (maintain),185,18
+HCP0574,Dermatologist,Southwest,17.2,1,2,Champions (protect),214,15
+HCP0575,Cardiologist,Southeast,36.7,2,3,High-potential growth (TARGET),139,37
+HCP0576,Neurologist,Southwest,35.8,9,3,High-potential growth (TARGET),220,18
+HCP0577,Pulmonologist,West,46.5,5,3,High-potential growth (TARGET),0,5
+HCP0578,Endocrinologist,Midwest,34.6,1,3,High-potential growth (TARGET),181,17
+HCP0579,Endocrinologist,Midwest,16.3,2,2,Champions (protect),285,23
+HCP0580,Dermatologist,Northeast,16.3,1,1,Low priority (maintain),87,11
+HCP0581,Neurologist,Southeast,34.7,9,3,High-potential growth (TARGET),181,24
+HCP0582,Pulmonologist,West,32.5,5,0,Steady mid-tier (nurture),167,7
+HCP0583,Pulmonologist,Midwest,14.1,1,1,Low priority (maintain),126,6
+HCP0584,Cardiologist,Southeast,23.9,3,1,Low priority (maintain),152,34
+HCP0585,Dermatologist,Midwest,11.3,7,1,Low priority (maintain),164,10
+HCP0586,Endocrinologist,Midwest,3.8,6,1,Low priority (maintain),74,10
+HCP0587,Pulmonologist,Midwest,15.1,9,2,Champions (protect),215,13
+HCP0588,General Practitioner,Southwest,16.3,1,2,Champions (protect),375,21
+HCP0589,Neurologist,Southeast,10.9,1,1,Low priority (maintain),121,23
+HCP0590,General Practitioner,Southwest,24.4,1,2,Champions (protect),292,19
+HCP0591,Dermatologist,Midwest,13.7,4,1,Low priority (maintain),109,9
+HCP0592,Neurologist,West,22.1,8,0,Steady mid-tier (nurture),82,3
+HCP0593,Dermatologist,Northeast,28.2,7,3,High-potential growth (TARGET),205,16
+HCP0594,Dermatologist,Northeast,70.0,3,3,High-potential growth (TARGET),181,10
+HCP0595,Pulmonologist,Midwest,15.3,7,1,Low priority (maintain),150,14
+HCP0596,Pulmonologist,Midwest,37.0,7,3,High-potential growth (TARGET),174,9
+HCP0597,General Practitioner,Southwest,16.3,2,2,Champions (protect),286,20
+HCP0598,Cardiologist,Midwest,20.5,8,1,Low priority (maintain),100,17
+HCP0599,Cardiologist,West,15.4,5,0,Steady mid-tier (nurture),140,6
+HCP0600,Endocrinologist,Midwest,18.4,1,2,Champions (protect),280,14
