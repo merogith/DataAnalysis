@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+data/_SYNTHETIC_FALLBACK_USED

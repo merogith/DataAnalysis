@@ -1,0 +1,12 @@
+sector,company_count,weight_pct
+Industrials,80,15.9
+Financials,76,15.1
+Information Technology,72,14.3
+Health Care,59,11.7
+Consumer Discretionary,48,9.5
+Consumer Staples,36,7.2
+Utilities,31,6.2
+Real Estate,31,6.2
+Materials,26,5.2
+Communication Services,23,4.6
+Energy,21,4.2
