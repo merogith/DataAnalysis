@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>US Stock Market: Trends, Risk & Valuation — Meric Erler</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <span class="crumb"><a href="index.html">← Portfolio</a></span>
+    <nav>
+      <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/analysis.ipynb">Notebook (nbviewer)</a>
+      <a href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/analysis.ipynb">View on GitHub</a>
+      <a href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/README.md">Write-up</a>
+    </nav>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="tag real" style="opacity:.9">★ Flagship · Real data</div>
+    <h1 style="font-size:2rem">US Stock Market: Trends, Risk &amp; Valuation</h1>
+    <p style="font-style:italic">“150 years of real market data — where are we, how risky is it, and what should we expect next?”</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>At a glance</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="n">~2.4%/yr</div><div class="l">Real long-run price growth</div></div>
+      <div class="kpi"><div class="n">Top 5%</div><div class="l">Valuation (CAPE) vs history</div></div>
+      <div class="kpi"><div class="n">−81%</div><div class="l">Worst real drawdown (1932)</div></div>
+      <div class="kpi"><div class="n">≈ 0</div><div class="l">Stocks–gold correlation</div></div>
+      <div class="kpi"><div class="n">p ≈ 1e-40</div><div class="l">CAPE → return significance</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Key findings</h2>
+    <ul class="find">
+      <li>After stripping out inflation, the market's <b>price</b> has grown only ~2.4%/year — the big headline numbers are mostly inflation plus reinvested dividends.</li>
+      <li>Valuation (CAPE) <b>statistically predicts</b> the next decade's real returns (R² ≈ 0.11, p ≈ 1e-40); today's CAPE is in the top 5% of all history, implying <b>below-average</b> returns ahead.</li>
+      <li>Deep drawdowns recur — the worst real loss reached <b>−81%</b> in the 1930s; the VIX spikes at every crisis.</li>
+      <li>Gold's correlation with stocks is ≈ 0, making it a <b>genuine diversifier</b>.</li>
+    </ul>
+    <div class="note"><b>Recommendation:</b> Set realistic return expectations, diversify with low-correlation assets, and automate discipline (dollar-cost-average + rebalance).</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Charts from the analysis</h2>
+    <div class="gallery">
+      <figure class="figure"><a href="../project-3-finance/charts/05_cape_vs_forward_return.png"><img src="../project-3-finance/charts/05_cape_vs_forward_return.png" alt=""></a><figcaption>The headline result: higher valuation → lower next-10-year returns.</figcaption></figure>
+      <figure class="figure"><a href="../project-3-finance/charts/01_real_trend.png"><img src="../project-3-finance/charts/01_real_trend.png" alt=""></a><figcaption>Nominal vs inflation-adjusted S&P 500 (log scale) — real growth is modest.</figcaption></figure>
+      <figure class="figure"><a href="../project-3-finance/charts/02_cape_history.png"><img src="../project-3-finance/charts/02_cape_history.png" alt=""></a><figcaption>CAPE valuation over time vs its long-run average; today sits near the top.</figcaption></figure>
+      <figure class="figure"><a href="../project-3-finance/charts/04_drawdowns.png"><img src="../project-3-finance/charts/04_drawdowns.png" alt=""></a><figcaption>Underwater plot — how far below the previous real peak (worst ≈ −81%).</figcaption></figure>
+      <figure class="figure"><a href="../project-3-finance/charts/03_returns_and_vix.png"><img src="../project-3-finance/charts/03_returns_and_vix.png" alt=""></a><figcaption>Monthly-return distribution and the VIX 'fear gauge' over time.</figcaption></figure>
+      <figure class="figure"><a href="../project-3-finance/charts/06_correlation.png"><img src="../project-3-finance/charts/06_correlation.png" alt=""></a><figcaption>Cross-asset correlation — gold ≈ 0 with stocks.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Explore this project</h2>
+    <div class="btnrow">
+      <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/analysis.ipynb">▶ Open the notebook</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/analysis.ipynb">View notebook on GitHub</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/README.md">Full write-up (README)</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/DASHBOARD_GUIDE.md">Dashboard guide</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/LEARN.md">Beginner guide (LEARN)</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/data">Data &amp; code</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><a href="index.html">← Back to all projects</a> · © 2026 Meric Erler</div>
+</footer>
+
+</body>
+</html>

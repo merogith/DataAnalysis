@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pharmaceutical CRM Sales Analytics — Meric Erler</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <span class="crumb"><a href="index.html">← Portfolio</a></span>
+    <nav>
+      <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/analysis.ipynb">Notebook (nbviewer)</a>
+      <a href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/analysis.ipynb">View on GitHub</a>
+      <a href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/README.md">Write-up</a>
+    </nav>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="tag " style="opacity:.9">Synthetic data</div>
+    <h1 style="font-size:2rem">Pharmaceutical CRM Sales Analytics</h1>
+    <p style="font-style:italic">“Which doctors should the sales team prioritise, and do sales calls actually drive prescriptions?”</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>At a glance</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="n">r = 0.49</div><div class="l">Calls ↔ scripts correlation</div></div>
+      <div class="kpi"><div class="n">+5.5</div><div class="l">Scripts per extra call / year</div></div>
+      <div class="kpi"><div class="n">4</div><div class="l">HCP segments (KMeans)</div></div>
+      <div class="kpi"><div class="n">99</div><div class="l">High-potential target doctors</div></div>
+      <div class="kpi"><div class="n">37%</div><div class="l">Volume from top 20% of doctors</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Key findings</h2>
+    <ul class="find">
+      <li>Sales calls and prescriptions are positively related (<b>r = 0.49, p = 1.5e-37</b>); each extra call per year is worth about <b>5.5 more scripts</b>.</li>
+      <li>Prescriptions are highly concentrated — the top 20% of doctors drive ~<b>37%</b> of all volume.</li>
+      <li>KMeans clustering split 600 doctors into 4 segments and surfaced a <b>99-doctor 'high-potential growth' group</b> with high potential but below-peak volume.</li>
+      <li>Top product was Cardiplex and top region the Southeast; the rep leaderboard shows a wide performance gap to coach.</li>
+    </ul>
+    <div class="note"><b>Recommendation:</b> Re-allocate call effort toward the 99 high-potential doctors and coach the lowest-performing reps using the top reps' playbook.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Charts from the analysis</h2>
+    <div class="gallery">
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/05_calls_vs_scripts.png"><img src="../project-1-pharma-crm/charts/05_calls_vs_scripts.png" alt=""></a><figcaption>Calls vs prescriptions with trend line (r = 0.49).</figcaption></figure>
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/06_hcp_segments.png"><img src="../project-1-pharma-crm/charts/06_hcp_segments.png" alt=""></a><figcaption>Four doctor (HCP) segments from KMeans clustering.</figcaption></figure>
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/07_segment_summary.png"><img src="../project-1-pharma-crm/charts/07_segment_summary.png" alt=""></a><figcaption>Segment profiles — who to prioritise.</figcaption></figure>
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/02_script_concentration.png"><img src="../project-1-pharma-crm/charts/02_script_concentration.png" alt=""></a><figcaption>Prescriptions are concentrated — top 20% of doctors ≈ 37% of scripts.</figcaption></figure>
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/04_rep_leaderboard.png"><img src="../project-1-pharma-crm/charts/04_rep_leaderboard.png" alt=""></a><figcaption>Rep leaderboard — a wide performance gap.</figcaption></figure>
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/01_scripts_by_product_region.png"><img src="../project-1-pharma-crm/charts/01_scripts_by_product_region.png" alt=""></a><figcaption>Prescription volume by product and region.</figcaption></figure>
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/03_call_activity.png"><img src="../project-1-pharma-crm/charts/03_call_activity.png" alt=""></a><figcaption>Sales-call activity across the team.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Explore this project</h2>
+    <div class="btnrow">
+      <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/analysis.ipynb">▶ Open the notebook</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/analysis.ipynb">View notebook on GitHub</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/README.md">Full write-up (README)</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/DASHBOARD_GUIDE.md">Dashboard guide</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/LEARN.md">Beginner guide (LEARN)</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/data">Data &amp; code</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><a href="index.html">← Back to all projects</a> · © 2026 Meric Erler</div>
+</footer>
+
+</body>
+</html>
