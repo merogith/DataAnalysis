@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meric Erler — Data Analyst Portfolio</title>
+<style>
+  :root{
+    --navy:#1f3b6f; --ink:#1d2430; --muted:#5b6675; --line:#e6e9ef;
+    --bg:#f7f9fc; --card:#ffffff; --accent:#c59b30; --teal:#0f766e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.6}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(135deg,#1f3b6f,#2b5298);color:#fff;padding:64px 0 56px}
+  header h1{margin:0 0 6px;font-size:2.3rem;letter-spacing:.3px}
+  header .role{font-size:1.15rem;opacity:.92;font-weight:500}
+  header p{margin:18px 0 0;max-width:680px;opacity:.95}
+  .contact{margin-top:22px;font-size:.95rem}
+  .contact a{color:#fff;border-bottom:1px solid rgba(255,255,255,.5)}
+  .chip{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+        padding:3px 10px;border-radius:999px;font-size:.8rem;margin:4px 6px 0 0}
+  section{padding:46px 0}
+  h2{font-size:1.45rem;color:var(--navy);margin:0 0 22px;border-bottom:2px solid var(--line);padding-bottom:10px}
+  .grid{display:grid;grid-template-columns:1fr;gap:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;
+        box-shadow:0 1px 3px rgba(20,30,50,.04)}
+  .card.flag{border-left:5px solid var(--accent)}
+  .card h3{margin:0 0 4px;font-size:1.2rem}
+  .card .tag{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  .card .tag.real{color:var(--teal)}
+  .hook{font-style:italic;color:var(--muted);margin:10px 0}
+  .result{margin:10px 0}
+  .result strong{color:var(--ink)}
+  .tech{font-size:.85rem;color:var(--muted);margin:12px 0 14px}
+  .links a{display:inline-block;margin:0 14px 0 0;font-weight:600;font-size:.92rem}
+  .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .skill{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .skill b{display:block;color:var(--navy);margin-bottom:2px}
+  .skill span{font-size:.88rem;color:var(--muted)}
+  footer{padding:30px 0 50px;color:var(--muted);font-size:.9rem;text-align:center}
+  .note{background:#fff8e8;border:1px solid #efdca8;border-radius:10px;padding:14px 18px;font-size:.92rem;color:#6b5a2a}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Meric Erler</h1>
+    <div class="role">Data Analyst</div>
+    <p>I turn raw, messy data into clear decisions. This portfolio holds three complete,
+       end-to-end projects — from data sourcing and cleaning through statistics, machine
+       learning, and BI dashboards — each ending in a recommendation a business could act on.</p>
+    <div>
+      <span class="chip">Python</span><span class="chip">pandas</span>
+      <span class="chip">SQL / SQLite</span><span class="chip">statsmodels</span>
+      <span class="chip">scikit-learn</span><span class="chip">Tableau &amp; Power BI</span>
+      <span class="chip">data storytelling</span>
+    </div>
+    <div class="contact">
+      📧 <a href="mailto:mericerler@gmail.com">mericerler@gmail.com</a> &nbsp;·&nbsp;
+      💻 <a href="../README.md">View the repository on GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Featured projects</h2>
+    <div class="grid">
+
+      <div class="card flag">
+        <div class="tag real">★ Flagship · Real data</div>
+        <h3>US Stock Market: Trends, Risk &amp; Valuation</h3>
+        <div class="hook">“150 years of real market data — where are we, how risky is it, and what should we expect next?”</div>
+        <div class="result"><strong>Key result:</strong> market valuation (CAPE) statistically
+          predicts the next decade's returns (p ≈ 1e-40); today's valuation is in the
+          <strong>top 5%</strong> of all history, pointing to below-average returns ahead.
+          Worst-ever real drawdown: <strong>−81%</strong>; gold's correlation with stocks ≈ 0.</div>
+        <div class="tech"><b>Tech:</b> Python · pandas · statsmodels (OLS regression) ·
+          matplotlib/seaborn · SQLite window functions · real Shiller / CBOE / LBMA data</div>
+        <div class="links">
+          <a href="../project-3-finance/README.md">Write-up</a>
+          <a href="../project-3-finance/analysis.ipynb">Notebook</a>
+          <a href="../project-3-finance/DASHBOARD_GUIDE.md">Dashboard guide</a>
+          <a href="../project-3-finance/LEARN.md">Learn</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tag">Synthetic data</div>
+        <h3>Pharmaceutical CRM Sales Analytics</h3>
+        <div class="hook">“Which doctors should the sales team prioritise, and do sales calls actually drive prescriptions?”</div>
+        <div class="result"><strong>Key result:</strong> calls correlate with prescriptions
+          (<strong>r = 0.49, p = 1.5e-37</strong>); each extra call/year ≈ <strong>5.5 more
+          scripts</strong>. KMeans grouped 600 doctors into 4 segments and surfaced a
+          <strong>99-doctor high-potential target list</strong>; top 20% of doctors drive 37% of volume.</div>
+        <div class="tech"><b>Tech:</b> Python · pandas · scikit-learn (KMeans) · statsmodels ·
+          matplotlib/seaborn · SQLite <code>RANK() OVER</code></div>
+        <div class="links">
+          <a href="../project-1-pharma-crm/README.md">Write-up</a>
+          <a href="../project-1-pharma-crm/analysis.ipynb">Notebook</a>
+          <a href="../project-1-pharma-crm/DASHBOARD_GUIDE.md">Dashboard guide</a>
+          <a href="../project-1-pharma-crm/LEARN.md">Learn</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="tag">Synthetic data</div>
+        <h3>Free-to-Play Game Economy &amp; Balance</h3>
+        <div class="hook">“Is the economy balanced, which items are overpowered, and what makes players stay and pay?”</div>
+        <div class="result"><strong>Key result:</strong> the economy runs a mild inflation
+          (sinks recover only <strong>63%</strong> of minted coins); <strong>Phoenix Blade (61% win
+          rate)</strong> is overpowered &amp; pay-to-win; retention shows a Day-1 cliff
+          (<strong>47% → 18% → 4%</strong> at D1/D7/D30); a logistic payer model scores <strong>AUC 0.80</strong>.</div>
+        <div class="tech"><b>Tech:</b> Python · pandas · scikit-learn (logistic regression) ·
+          proportion z-tests · matplotlib/seaborn · SQLite window functions</div>
+        <div class="links">
+          <a href="../project-2-game-economy/README.md">Write-up</a>
+          <a href="../project-2-game-economy/analysis.ipynb">Notebook</a>
+          <a href="../project-2-game-economy/DASHBOARD_GUIDE.md">Dashboard guide</a>
+          <a href="../project-2-game-economy/LEARN.md">Learn</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <h2>Skills demonstrated</h2>
+    <div class="skills">
+      <div class="skill"><b>Data cleaning</b><span>Dedupe, missing values, inconsistent formats — every decision documented</span></div>
+      <div class="skill"><b>SQL</b><span>SQLite window functions (ranking, running totals) in every project</span></div>
+      <div class="skill"><b>Exploratory analysis</b><span>Clear, labelled visual investigation of every dataset</span></div>
+      <div class="skill"><b>Statistics</b><span>OLS regression, p-values, R², proportion z-tests &amp; confidence intervals</span></div>
+      <div class="skill"><b>Machine learning</b><span>KMeans segmentation &amp; logistic-regression prediction</span></div>
+      <div class="skill"><b>Visualisation</b><span>20+ professional matplotlib/seaborn charts</span></div>
+      <div class="skill"><b>BI dashboards</b><span>Star-schema exports + Tableau &amp; Power BI build guides</span></div>
+      <div class="skill"><b>Business communication</b><span>Executive summaries and actionable recommendations</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How to explore</h2>
+    <p>Each project folder follows the same layout: a runnable <b>notebook</b>, a one-page
+       <b>README</b>, a beginner-friendly <b>LEARN</b> guide, honest build <b>NOTES</b>, a
+       <b>DASHBOARD_GUIDE</b>, and clean <b>data</b> / <b>dashboard</b> exports.</p>
+    <div class="note">
+      <b>Tip:</b> brand-new to this? Start with
+      <a href="../GETTING_STARTED.md">GETTING_STARTED.md</a> — it assumes zero experience and
+      explains the tools, folders, and the order to read things.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Built with Python, pandas, scikit-learn, statsmodels, matplotlib &amp; seaborn ·
+    Dashboards for Tableau &amp; Power BI · © 2026 Meric Erler
+  </div>
+</footer>
+
+</body>
+</html>
