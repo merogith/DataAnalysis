@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Free-to-Play Game Economy & Balance — Meric Erler</title>
+<title>Free-to-Play Game Economy and Balance — Meric Erler</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <header class="bar">
   <div class="wrap">
-    <span class="crumb"><a href="index.html">← Portfolio</a></span>
+    <span class="crumb"><a href="index.html">Back to portfolio</a></span>
     <nav>
       <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/analysis.ipynb">Notebook (nbviewer)</a>
       <a href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/analysis.ipynb">View on GitHub</a>
@@ -22,8 +22,8 @@
 <header class="hero">
   <div class="wrap">
     <div class="tag " style="opacity:.9">Synthetic data</div>
-    <h1 style="font-size:2rem">Free-to-Play Game Economy &amp; Balance</h1>
-    <p style="font-style:italic">“Is the economy balanced, which items are overpowered, and what makes players stay and pay?”</p>
+    <h1 style="font-size:2rem">Free-to-Play Game Economy and Balance</h1>
+    <p style="font-style:italic">Is the economy balanced, are any items overpowered, and what keeps players spending?</p>
   </div>
 </header>
 
@@ -32,7 +32,7 @@
     <h2>At a glance</h2>
     <div class="kpis">
       <div class="kpi"><div class="n">47 / 18 / 4%</div><div class="l">D1 / D7 / D30 retention</div></div>
-      <div class="kpi"><div class="n">61%</div><div class="l">Phoenix Blade win rate (OP)</div></div>
+      <div class="kpi"><div class="n">61%</div><div class="l">Phoenix Blade win rate</div></div>
       <div class="kpi"><div class="n">+6.8M</div><div class="l">Net coins minted (inflation)</div></div>
       <div class="kpi"><div class="n">AUC 0.80</div><div class="l">Payer-prediction model</div></div>
       <div class="kpi"><div class="n">5.8%</div><div class="l">Payer rate</div></div>
@@ -44,12 +44,12 @@
   <div class="wrap">
     <h2>Key findings</h2>
     <ul class="find">
-      <li>The economy runs a <b>mild inflation</b>: coin sinks recover only ~63% of coins minted, and 83% of players' wallets keep growing.</li>
-      <li>Two premium items — <b>Phoenix Blade (61% win rate)</b> and Aegis Shield (59%) — are statistically overpowered (CIs entirely above 50%), pointing to <b>pay-to-win</b>.</li>
-      <li>Retention shows a textbook <b>Day-1 cliff</b>: 47% return on day 1, falling to 18% by day 7 and 4% by day 30.</li>
-      <li>A logistic-regression model predicts which players become payers from their first-3-day behaviour with <b>AUC 0.80</b> (payer rate 5.8%, ARPPU $15.61).</li>
+      <li>The economy runs a mild inflation: coin sinks recover only about 63% of the coins minted, and most players' wallets keep growing.</li>
+      <li>Two premium items, Phoenix Blade (61% win rate) and Aegis Shield (59%), are statistically overpowered, with confidence intervals entirely above 50%.</li>
+      <li>Retention falls sharply after the first day: 47% return on day 1, 18% by day 7, and 4% by day 30.</li>
+      <li>A logistic-regression model predicts which players become payers from their first three days of behaviour, with an AUC of 0.80 (payer rate 5.8%, ARPPU $15.61).</li>
     </ul>
-    <div class="note"><b>Recommendation:</b> Add coin sinks to curb inflation, rebalance the two overpowered premium items, and invest in the Day-1 onboarding experience to flatten the retention cliff.</div>
+    <div class="note"><b>Recommendation:</b> Add coin sinks to curb the inflation, rebalance the two overpowered premium items, and invest in the first-day experience to slow the early drop in retention.</div>
   </div>
 </section>
 
@@ -57,12 +57,12 @@
   <div class="wrap">
     <h2>Charts from the analysis</h2>
     <div class="gallery">
-      <figure class="figure"><a href="../project-2-game-economy/charts/03_economy_flow.png"><img src="../project-2-game-economy/charts/03_economy_flow.png" alt=""></a><figcaption>Currency faucets vs sinks — a mild net inflation.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/04_item_balance.png"><img src="../project-2-game-economy/charts/04_item_balance.png" alt=""></a><figcaption>Item win rates with confidence intervals — overpowered flags.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/06_retention_curve.png"><img src="../project-2-game-economy/charts/06_retention_curve.png" alt=""></a><figcaption>Cohort retention — the Day-1 cliff (47% → 18% → 4%).</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/05_price_power_winrate.png"><img src="../project-2-game-economy/charts/05_price_power_winrate.png" alt=""></a><figcaption>Price vs power vs win rate — the pay-to-win check.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/08_payer_model.png"><img src="../project-2-game-economy/charts/08_payer_model.png" alt=""></a><figcaption>Logistic payer-model performance (AUC 0.80).</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/07_funnel.png"><img src="../project-2-game-economy/charts/07_funnel.png" alt=""></a><figcaption>Player progression funnel.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/03_economy_flow.png"><img src="../project-2-game-economy/charts/03_economy_flow.png" alt=""></a><figcaption>Currency faucets vs sinks, showing a mild net inflation.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/04_item_balance.png"><img src="../project-2-game-economy/charts/04_item_balance.png" alt=""></a><figcaption>Item win rates with confidence intervals, flagging the overpowered items.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/06_retention_curve.png"><img src="../project-2-game-economy/charts/06_retention_curve.png" alt=""></a><figcaption>Cohort retention falling from 47% to 18% to 4%.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/05_price_power_winrate.png"><img src="../project-2-game-economy/charts/05_price_power_winrate.png" alt=""></a><figcaption>Price against power and win rate, the pay-to-win check.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/08_payer_model.png"><img src="../project-2-game-economy/charts/08_payer_model.png" alt=""></a><figcaption>Performance of the logistic payer model (AUC 0.80).</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/07_funnel.png"><img src="../project-2-game-economy/charts/07_funnel.png" alt=""></a><figcaption>The player progression funnel.</figcaption></figure>
       <figure class="figure"><a href="../project-2-game-economy/charts/02_dau.png"><img src="../project-2-game-economy/charts/02_dau.png" alt=""></a><figcaption>Daily active users over time.</figcaption></figure>
       <figure class="figure"><a href="../project-2-game-economy/charts/01_player_mix.png"><img src="../project-2-game-economy/charts/01_player_mix.png" alt=""></a><figcaption>Player mix by platform and segment.</figcaption></figure>
     </div>
@@ -73,18 +73,18 @@
   <div class="wrap">
     <h2>Explore this project</h2>
     <div class="btnrow">
-      <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/analysis.ipynb">▶ Open the notebook</a>
+      <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/analysis.ipynb">Open the notebook</a>
       <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/analysis.ipynb">View notebook on GitHub</a>
       <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/README.md">Full write-up (README)</a>
       <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/DASHBOARD_GUIDE.md">Dashboard guide</a>
-      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/LEARN.md">Beginner guide (LEARN)</a>
-      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/data">Data &amp; code</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/LEARN.md">Plain-language walkthrough (LEARN)</a>
+      <a class="ghost" href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/data">Data and code</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap"><a href="index.html">← Back to all projects</a> · © 2026 Meric Erler</div>
+  <div class="wrap"><a href="index.html">Back to all projects</a> · © 2026 Meric Erler</div>
 </footer>
 
 </body>

@@ -12,9 +12,9 @@
   <div class="wrap">
     <h1>Meric Erler</h1>
     <div class="role">Data Analyst</div>
-    <p>I turn raw, messy data into clear decisions. This portfolio holds three complete,
-       end-to-end projects — from data sourcing and cleaning through statistics, machine
-       learning, and BI dashboards — each ending in a recommendation a business could act on.</p>
+    <p>Three end-to-end analytics projects. Each one takes a dataset from raw and messy through
+       cleaning, exploration, statistics or a model, and a clear recommendation, with BI-ready
+       exports for dashboards alongside.</p>
     <div>
       <span class="chip">Python</span><span class="chip">pandas</span>
       <span class="chip">SQL / SQLite</span><span class="chip">statsmodels</span>
@@ -22,8 +22,8 @@
       <span class="chip">data storytelling</span>
     </div>
     <div class="contact">
-      📧 <a href="mailto:mericerler@gmail.com">mericerler@gmail.com</a> &nbsp;·&nbsp;
-      💻 <a href="https://github.com/merogith/DataAnalysis">Repository on GitHub</a>
+      Email: <a href="mailto:mericerler@gmail.com">mericerler@gmail.com</a> &nbsp;·&nbsp;
+      GitHub: <a href="https://github.com/merogith/DataAnalysis">merogith/DataAnalysis</a>
     </div>
   </div>
 </header>
@@ -31,7 +31,7 @@
 <!-- ===================== PROJECTS ===================== -->
 <section>
   <div class="wrap">
-    <h2>Featured projects</h2>
+    <h2>Projects</h2>
     <div class="grid">
 
       <!-- Project 3 -->
@@ -40,15 +40,16 @@
           <img src="../project-3-finance/charts/05_cape_vs_forward_return.png" alt="CAPE vs forward 10-year return" />
         </a>
         <div class="body">
-          <div class="tag real">★ Flagship · Real data</div>
-          <h3><a href="project-3.html">US Stock Market: Trends, Risk &amp; Valuation</a></h3>
-          <div class="hook">“150 years of real market data — where are we, how risky is it, and what should we expect next?”</div>
-          <div class="result"><strong>Key result:</strong> market valuation (CAPE) statistically predicts
-            the next decade's returns (p ≈ 1e-40); today's valuation is in the <strong>top 5%</strong> of all
-            history. Worst-ever real drawdown: <strong>−81%</strong>; gold's correlation with stocks ≈ 0.</div>
+          <div class="tag real">Featured · Real data</div>
+          <h3><a href="project-3.html">US Stock Market: Trends, Risk and Valuation</a></h3>
+          <div class="hook">Where does the market stand, how risky has it been, and is it expensive today?</div>
+          <div class="result">Built on more than 150 years of real market data. Valuation has tracked
+            future returns: a higher CAPE has been followed by lower 10-year returns (p ≈ 1e-40), and
+            today's reading is in the top 5% of all history. Worst real drawdown on record: −81%; gold's
+            correlation with stocks is about 0.</div>
           <div class="tech"><b>Tech:</b> Python · pandas · statsmodels (OLS) · matplotlib/seaborn · SQLite window functions · real Shiller / CBOE / LBMA data</div>
           <div class="links">
-            <a href="project-3.html">→ Project page</a>
+            <a href="project-3.html">Project page</a>
             <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-3-finance/analysis.ipynb">Notebook</a>
             <a href="../project-3-finance/README.md">Write-up</a>
             <a href="../project-3-finance/DASHBOARD_GUIDE.md">Dashboard guide</a>
@@ -64,13 +65,13 @@
         <div class="body">
           <div class="tag">Synthetic data</div>
           <h3><a href="project-1.html">Pharmaceutical CRM Sales Analytics</a></h3>
-          <div class="hook">“Which doctors should the sales team prioritise, and do sales calls actually drive prescriptions?”</div>
-          <div class="result"><strong>Key result:</strong> calls correlate with prescriptions
-            (<strong>r = 0.49, p = 1.5e-37</strong>); each extra call/year ≈ <strong>5.5 more scripts</strong>.
-            KMeans grouped 600 doctors into 4 segments and surfaced a <strong>99-doctor target list</strong>.</div>
+          <div class="hook">Do sales calls drive prescriptions, and which doctors should the team prioritise?</div>
+          <div class="result">Calls and prescriptions are related (r = 0.49, p = 1.5e-37), with each
+            extra call per year worth about 5.5 more scripts. A KMeans segmentation splits 600 doctors
+            into four groups and isolates a 99-doctor high-potential list to focus on.</div>
           <div class="tech"><b>Tech:</b> Python · pandas · scikit-learn (KMeans) · statsmodels · matplotlib/seaborn · SQLite <code>RANK() OVER</code></div>
           <div class="links">
-            <a href="project-1.html">→ Project page</a>
+            <a href="project-1.html">Project page</a>
             <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-1-pharma-crm/analysis.ipynb">Notebook</a>
             <a href="../project-1-pharma-crm/README.md">Write-up</a>
             <a href="../project-1-pharma-crm/DASHBOARD_GUIDE.md">Dashboard guide</a>
@@ -85,14 +86,15 @@
         </a>
         <div class="body">
           <div class="tag">Synthetic data</div>
-          <h3><a href="project-2.html">Free-to-Play Game Economy &amp; Balance</a></h3>
-          <div class="hook">“Is the economy balanced, which items are overpowered, and what makes players stay and pay?”</div>
-          <div class="result"><strong>Key result:</strong> the economy runs a mild inflation (sinks recover only
-            <strong>63%</strong> of minted coins); <strong>Phoenix Blade (61% win rate)</strong> is overpowered
-            &amp; pay-to-win; retention shows a Day-1 cliff (<strong>47% → 18% → 4%</strong>); payer model AUC <strong>0.80</strong>.</div>
+          <h3><a href="project-2.html">Free-to-Play Game Economy and Balance</a></h3>
+          <div class="hook">Is the economy balanced, are any items overpowered, and what keeps players spending?</div>
+          <div class="result">The economy runs a mild inflation (coin sinks recover only 63% of what is
+            minted), two premium items are statistically overpowered (Phoenix Blade at a 61% win rate),
+            retention drops from 47% to 18% to 4% across D1/D7/D30, and a logistic model predicts paying
+            players with an AUC of 0.80.</div>
           <div class="tech"><b>Tech:</b> Python · pandas · scikit-learn (logistic regression) · proportion z-tests · matplotlib/seaborn · SQLite window functions</div>
           <div class="links">
-            <a href="project-2.html">→ Project page</a>
+            <a href="project-2.html">Project page</a>
             <a href="https://nbviewer.org/github/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/project-2-game-economy/analysis.ipynb">Notebook</a>
             <a href="../project-2-game-economy/README.md">Write-up</a>
             <a href="../project-2-game-economy/DASHBOARD_GUIDE.md">Dashboard guide</a>
@@ -108,30 +110,30 @@
 <section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <h2>Interactive dashboards</h2>
-    <p style="color:var(--muted);margin-top:-8px">Each project ships clean, BI-ready data plus a
-       step-by-step build guide for <b>Tableau Public</b> and <b>Power BI</b>. Publish to Tableau
-       Public (free) and paste the link below to make each one live.</p>
+    <p style="color:var(--muted);margin-top:-8px">Each project ships clean, BI-ready data and a
+       step-by-step build guide for Tableau Public and Power BI. Publishing to Tableau Public is free;
+       paste the resulting link below to make a dashboard live.</p>
     <div class="dash">
       <div class="item">
-        <h4>Market Risk &amp; Valuation</h4>
+        <h4>Market Risk and Valuation</h4>
         <span class="badge todo">Add Tableau link</span>
-        <p>Real S&amp;P 500, CAPE, VIX, drawdowns. Headline: valuation is near record highs.</p>
-        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">▶ Open live dashboard</a></p> -->
-        <p><a href="../project-3-finance/DASHBOARD_GUIDE.md">Build guide →</a></p>
+        <p>Real S&amp;P 500, CAPE, VIX, and drawdowns. Headline: valuation is near record highs.</p>
+        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">Open live dashboard</a></p> -->
+        <p><a href="../project-3-finance/DASHBOARD_GUIDE.md">Build guide</a></p>
       </div>
       <div class="item">
         <h4>Pharma Sales Performance</h4>
         <span class="badge todo">Add Tableau link</span>
-        <p>Scripts by region/product, rep leaderboard, calls-vs-scripts, HCP segments.</p>
-        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">▶ Open live dashboard</a></p> -->
-        <p><a href="../project-1-pharma-crm/DASHBOARD_GUIDE.md">Build guide →</a></p>
+        <p>Scripts by region and product, rep leaderboard, calls vs scripts, doctor segments.</p>
+        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">Open live dashboard</a></p> -->
+        <p><a href="../project-1-pharma-crm/DASHBOARD_GUIDE.md">Build guide</a></p>
       </div>
       <div class="item">
-        <h4>Game Economy &amp; Retention</h4>
+        <h4>Game Economy and Retention</h4>
         <span class="badge todo">Add Tableau link</span>
-        <p>Daily currency flow, item win rates, D1/D7/D30 retention and the funnel.</p>
-        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">▶ Open live dashboard</a></p> -->
-        <p><a href="../project-2-game-economy/DASHBOARD_GUIDE.md">Build guide →</a></p>
+        <p>Daily currency flow, item win rates, D1/D7/D30 retention, and the funnel.</p>
+        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">Open live dashboard</a></p> -->
+        <p><a href="../project-2-game-economy/DASHBOARD_GUIDE.md">Build guide</a></p>
       </div>
     </div>
   </div>
@@ -142,26 +144,26 @@
   <div class="wrap">
     <h2>Skills demonstrated</h2>
     <div class="skills">
-      <div class="skill"><b>Data cleaning</b><span>Dedupe, missing values, inconsistent formats — every decision documented</span></div>
+      <div class="skill"><b>Data cleaning</b><span>Duplicates, missing values, and inconsistent formats, with every decision documented</span></div>
       <div class="skill"><b>SQL</b><span>SQLite window functions (ranking, running totals) in every project</span></div>
-      <div class="skill"><b>Exploratory analysis</b><span>Clear, labelled visual investigation of every dataset</span></div>
-      <div class="skill"><b>Statistics</b><span>OLS regression, p-values, R², proportion z-tests &amp; confidence intervals</span></div>
-      <div class="skill"><b>Machine learning</b><span>KMeans segmentation &amp; logistic-regression prediction</span></div>
-      <div class="skill"><b>Visualisation</b><span>20+ professional matplotlib/seaborn charts</span></div>
-      <div class="skill"><b>BI dashboards</b><span>Star-schema exports + Tableau &amp; Power BI build guides</span></div>
-      <div class="skill"><b>Business communication</b><span>Executive summaries and actionable recommendations</span></div>
+      <div class="skill"><b>Exploratory analysis</b><span>Clear, labelled visual investigation of each dataset</span></div>
+      <div class="skill"><b>Statistics</b><span>OLS regression, p-values and R², proportion z-tests and confidence intervals</span></div>
+      <div class="skill"><b>Machine learning</b><span>KMeans segmentation and logistic-regression prediction</span></div>
+      <div class="skill"><b>Visualisation</b><span>More than 20 charts built with matplotlib and seaborn</span></div>
+      <div class="skill"><b>BI dashboards</b><span>Star-schema exports with Tableau and Power BI build guides</span></div>
+      <div class="skill"><b>Business communication</b><span>Each write-up opens with a summary and ends with a recommendation</span></div>
     </div>
     <div class="note" style="margin-top:22px">
-      <b>New here?</b> Start with <a href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/GETTING_STARTED.md">GETTING_STARTED.md</a>
-      — it assumes zero experience and explains the tools, folders, and the order to read things.
+      New to the repo? <a href="https://github.com/merogith/DataAnalysis/blob/claude/data-analyst-portfolio-72znxw/GETTING_STARTED.md">GETTING_STARTED.md</a>
+      covers the tools, the folder layout, and a sensible order to read things.
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    Built with Python, pandas, scikit-learn, statsmodels, matplotlib &amp; seaborn ·
-    Dashboards for Tableau &amp; Power BI · © 2026 Meric Erler
+    Built with Python, pandas, scikit-learn, statsmodels, matplotlib and seaborn ·
+    Dashboards for Tableau and Power BI · © 2026 Meric Erler
   </div>
 </footer>
 
