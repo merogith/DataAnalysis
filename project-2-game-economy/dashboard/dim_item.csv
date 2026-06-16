@@ -1,0 +1,11 @@
+item_name,slot,is_premium,base_price_soft,design_power,matches,pick_rate_pct,win_rate_pct,ci_low_pct,ci_high_pct,p_value,verdict
+Phoenix Blade,weapon,True,1800,92,10408,16.43,61.28,60.34,62.21,2.174727025313552e-123,OVERPOWERED
+Aegis Shield,armor,True,1500,88,9247,14.6,59.37,58.37,60.37,3.4961932340566287e-75,OVERPOWERED
+Plate Mail,armor,False,1000,70,3438,5.43,52.44,50.77,54.11,0.004122456146962298,OVERPOWERED
+Storm Bow,weapon,False,1200,74,5271,8.32,51.77,50.42,53.12,0.009956932471485007,OVERPOWERED
+Healing Charm,trinket,False,900,68,4651,7.34,51.54,50.1,52.97,0.035921041758045655,OVERPOWERED
+Lucky Coin,trinket,False,600,52,3955,6.24,51.25,49.69,52.81,0.11532551839838012,balanced
+Frost Wand,weapon,False,1100,71,4027,6.36,50.98,49.44,52.52,0.21307852639801472,balanced
+Iron Sword,weapon,False,400,55,8119,12.82,50.17,49.08,51.25,0.7644438185029927,balanced
+Leather Vest,armor,False,350,50,6657,10.51,48.81,47.61,50.01,0.05125796098741325,balanced
+Rusty Dagger,weapon,False,150,30,7582,11.97,41.84,40.73,42.95,4.407370643829426e-47,UNDERPOWERED

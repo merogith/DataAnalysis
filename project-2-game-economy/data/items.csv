@@ -1,0 +1,12 @@
+item_name,slot,base_price_soft,design_power,is_premium
+Phoenix Blade,weapon,1800,92,True
+Aegis Shield,armor,1500,88,True
+Storm Bow,weapon,1200,74,False
+Iron Sword,weapon,400,55,False
+Leather Vest,armor,350,50,False
+Healing Charm,trinket,900,68,False
+Lucky Coin,trinket,600,52,False
+Frost Wand,weapon,1100,71,False
+Plate Mail,armor,1000,70,False
+Rusty Dagger,weapon,150,30,False
+Phoenix Blade,weapon,1800,92,True
