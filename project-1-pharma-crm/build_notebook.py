@@ -8,7 +8,7 @@ def md(t): cells.append(nbf.v4.new_markdown_cell(t))
 def code(t): cells.append(nbf.v4.new_code_cell(t))
 
 md("""# Project 1 — Pharmaceutical CRM Sales Analytics (SYNTHETIC data)
-**Analyst:** portfolio project &nbsp;|&nbsp; **Stakeholder:** a non-technical sales leader / commercial team
+**Analyst:** Meric Erler &nbsp;|&nbsp; **Stakeholder:** a non-technical sales leader / commercial team
 
 > **DATA LABEL: SYNTHETIC.** Real pharma CRM data (rep calls, doctor prescribing) is
 > proprietary and privacy-sensitive, so every row here is **fabricated** by a seeded

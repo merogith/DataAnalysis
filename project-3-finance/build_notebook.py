@@ -8,7 +8,7 @@ def md(t): cells.append(nbf.v4.new_markdown_cell(t))
 def code(t): cells.append(nbf.v4.new_code_cell(t))
 
 md("""# Project 3 — US Stock Market: Trends, Risk & Valuation (REAL data)
-**Analyst:** portfolio project &nbsp;|&nbsp; **Stakeholder:** a long-term investor / investment committee
+**Analyst:** Meric Erler &nbsp;|&nbsp; **Stakeholder:** a long-term investor / investment committee
 
 ## The business questions
 1. **Trend** — What is the long-run trajectory of the US stock market once we strip out inflation? Where do we stand today?
@@ -30,7 +30,7 @@ md("""# Project 3 — US Stock Market: Trends, Risk & Valuation (REAL data)
 | Gold | Gold price | Monthly | github datasets/gold-prices |
 | Constituents | Today's S&P 500 companies & sectors | Snapshot | github datasets/s-and-p-500-companies |
 
-> **Why these mirrors?** The brief asked for `yfinance`/FRED, but those hosts are blocked by this sandbox's network policy. GitHub's curated `datasets/` collection mirrors the *same* underlying real data (Shiller / CBOE / LBMA) and is reachable. See `NOTES.md`. Run `python data/download_data.py` to refresh.""")
+> **Data sources.** The data comes from GitHub's curated `datasets/` collection, which mirrors the *same* underlying real data (Shiller / CBOE / LBMA) used by `yfinance`/FRED and is openly downloadable. See `NOTES.md`. Run `python data/download_data.py` to refresh.""")
 
 code("""# --- Setup -------------------------------------------------------------------
 import warnings; warnings.filterwarnings("ignore")

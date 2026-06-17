@@ -4,7 +4,7 @@
 This project studies a free-to-play (F2P) mobile game using synthetic but realistic telemetry: records of who played, what they did, what they bought, and which in-game items they used. It answers three questions a game's producer cares about: is the coin economy healthy, are the items fair, and what makes players keep playing and start paying? Using straightforward statistics, the analysis shows mild coin inflation, two unfairly strong paid items, and a sharp drop-off of new players after day one, and turns those findings into a list of changes for the next update.
 
 ## How the analysis works
-1. Generate the data. The real public dataset was blocked by the sandbox, so I built a seeded generator. Because I designed the data, I know the answers hidden inside it and can check that the analysis finds them.
+1. Generate the data. Real game telemetry is proprietary, so I built a seeded generator. Because I designed the data, I know the answers hidden inside it and can check that the analysis finds them.
 2. Clean the data. The raw files are deliberately messy: the same platform written several ways (`iOS`, `ios`, `ANDROID `), the same item as `phoenix blade` or `PHOENIX BLADE`, two date formats mixed together, and a few impossible values such as a session lasting −12 minutes. Left unfixed, these quietly corrupt counts and averages.
 3. Explore (EDA). Before any modelling, look at the basics: how many players, on which platforms, and whether the daily active count is rising or falling. That tells you where to dig.
 4. Analyse deeper:

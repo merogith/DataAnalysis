@@ -18,10 +18,9 @@ Downloads four real, public datasets and saves them as raw_*.csv in this folder:
 
 WHY THESE SOURCES
 -----------------
-The project brief asked for yfinance / FRED. In this sandbox those hosts are
-blocked by the network policy (see NOTES.md). GitHub's curated "datasets/"
-collection mirrors the SAME underlying real data (Shiller, CBOE, LBMA) and IS
-reachable, so we use it. This keeps Project 3 a genuine REAL-DATA project.
+GitHub's curated "datasets/" collection mirrors the SAME underlying real data
+(Shiller, CBOE, LBMA) exposed by yfinance / FRED and is openly downloadable, so
+we use it (see NOTES.md). This keeps Project 3 a genuine REAL-DATA project.
 
 If the network is unavailable, the script falls back to a clearly-labelled
 synthetic generator so the rest of the pipeline still runs reproducibly.

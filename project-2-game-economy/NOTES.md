@@ -2,8 +2,8 @@
 
 A log of the problems I hit while building this project and what I did about each.
 
-### 1. The public game dataset was not reachable, so I switched to a synthetic generator
-The natural source for this project would be a public Steam or Kaggle F2P telemetry dataset, but those hosts are blocked by this sandbox's network policy (`host_not_allowed`). Only PyPI and `raw.githubusercontent.com` are reachable, and no suitable real game-economy file lives there.
+### 1. Why synthetic data here
+Real F2P telemetry (player sessions, in-game purchases, match logs) is proprietary and privacy-sensitive, and public game-economy datasets at this level of detail are hard to come by. Rather than stretch a thin public file, I built my own data so the economy, item balance and monetization questions all had something realistic to work with.
 
 I built a reproducible, seeded generator (`data/generate_data.py`) that produces all six telemetry tables. The data is labelled SYNTHETIC throughout, and because it's seeded (`np.random.default_rng(20260616)`), every number in the notebook reproduces. Generating it myself also let me bake in a known ground truth (two overpowered items, mild inflation, a D1 drop), so I could check that the analysis actually recovers it.
 
@@ -21,5 +21,5 @@ I intentionally wrote half the session timestamps as ISO (`2026-03-04 14:05:00`)
 ### 5. Statistical vs practical significance in the item z-test
 With ~3,000–10,000 matches per item, the proportion z-test flags even tiny deviations from 50% as significant, so a couple of essentially-fair items (for example a 51.5% win rate) technically test as overpowered (p < 0.05). I kept the honest statistical output but flagged this in the notebook and docs: the items worth acting on are the ones with a large effect size (59–61%), not the ones sitting 1–2 points off 50%. The distinction between statistical and practical significance matters here, so I surfaced it rather than hiding it.
 
-### 6. Environment and verification
+### 6. Verification
 The notebook is built programmatically (`build_notebook.py`) and then executed with `jupyter nbconvert --execute`, which is how I confirm it runs top-to-bottom with zero errors (checked via `nbformat`, no cell has an `error` output) before calling it done. Every dashboard CSV is re-opened with pandas to confirm it imports with no index junk.

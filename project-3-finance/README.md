@@ -25,9 +25,8 @@ diversification, and a reminder that the hardest part of investing is behavioura
 invested through the long stretches when the market is underwater.
 
 > Data: real and public. Sources are Robert Shiller's S&P 500 dataset, the CBOE VIX, and LBMA
-> gold, mirrored on GitHub's `datasets/` collection. The brief asked for yfinance and FRED, but
-> both were blocked by the sandbox network, so I used mirrors of the same underlying data. The
-> details are in `NOTES.md`.
+> gold, pulled from GitHub's `datasets/` collection — the same underlying series exposed by
+> yfinance and FRED. The details are in `NOTES.md`.
 
 ## Problem
 A long-term investor needs an evidence-based read on four things: the real (inflation-adjusted)

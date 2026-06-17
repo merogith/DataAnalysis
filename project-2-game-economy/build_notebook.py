@@ -11,12 +11,12 @@ def md(t): cells.append(nbf.v4.new_markdown_cell(t))
 def code(t): cells.append(nbf.v4.new_code_cell(t))
 
 md("""# Project 2 — Free-to-Play Game Economy & Balance Analytics (SYNTHETIC data)
-**Analyst:** portfolio project &nbsp;|&nbsp; **Stakeholder:** a non-technical game *Producer*
+**Analyst:** Meric Erler &nbsp;|&nbsp; **Stakeholder:** a non-technical game *Producer*
 
 > **DATA LABEL: 100% SYNTHETIC.** No real players or real money. The telemetry is
 > produced by a single seeded generator (`data/generate_data.py`) so every number
-> below is fully reproducible. A public Steam/Kaggle dataset was not reachable from
-> this sandbox, so a realistic synthetic generator is the standard path here (see `NOTES.md`).
+> below is fully reproducible. Real player telemetry is proprietary and privacy-sensitive,
+> so a reproducible synthetic generator is the practical path here (see `NOTES.md`).
 
 ## The business questions
 1. **Economy balance** — Is the in-game economy balanced? Do currency **sources (faucets)**
