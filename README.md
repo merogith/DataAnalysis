@@ -16,28 +16,34 @@ and a sensible order to read things.
 ### Project 3 — US Stock Market: Trends, Risk and Valuation (real data)
 The largest of the three, built on more than 150 years of real market data. The central result is that
 valuation has historically tracked returns: months with a higher CAPE were generally followed by
-lower real returns over the next ten years (p ≈ 1e-40), and today's valuation sits in the top 5%
-of all readings. Along the way it quantifies the long-run real growth rate (~2.4% a year), the
-worst drawdown on record (−81%), and gold's near-zero correlation with stocks.
+lower real returns over the next ten years. The relationship is real and economically sensible but
+*moderate*, not a slam-dunk — the eye-catching p ≈ 1e-40 is an artefact of overlapping 10-year windows;
+corrected for that (Newey-West, and non-overlapping decades) it is suggestive rather than conclusive.
+The latest valid valuation (around 2023, as the series lags) sits near the most expensive ~5% of
+readings. Along the way it quantifies the long-run real price growth rate (~2.5% a year), the worst
+drawdown on record (−80.6%, price-only), and gold's near-zero average correlation with stocks.
 Tech: Python, pandas, statsmodels (OLS), matplotlib/seaborn, SQLite window functions, with real
 data from Shiller, CBOE, and LBMA.
 Links: [folder](project-3-finance/) · [notebook](project-3-finance/analysis.ipynb) · [write-up](project-3-finance/README.md) · [dashboard guide](project-3-finance/DASHBOARD_GUIDE.md)
 
 ### Project 1 — Pharmaceutical CRM Sales Analytics (synthetic data)
 A sales-performance analysis aimed at two questions: do sales calls actually drive prescriptions,
-and which doctors should the team prioritise. Calls and prescriptions turn out to be related
-(r = 0.49, p = 1.5e-37), with each additional call per year worth about 5.5 more scripts. A KMeans
-segmentation then splits 600 doctors into four groups and isolates a 99-doctor high-potential
-list to focus on.
+and which doctors should the team prioritise. Calls and prescriptions are associated (r = 0.49), and
+the link survives controlling for each doctor's potential (~5.6 scripts per extra call) — but this is
+an *association on observational, synthetic data*, not proof of causation (the relationship is, by
+design, built into the generator). A KMeans segmentation (k chosen by silhouette) then splits 600
+doctors into four value tiers and isolates a 99-doctor high-potential list to focus on.
 Tech: Python, pandas, scikit-learn (KMeans), statsmodels, matplotlib/seaborn, SQLite (`RANK() OVER`).
 Links: [folder](project-1-pharma-crm/) · [notebook](project-1-pharma-crm/analysis.ipynb) · [write-up](project-1-pharma-crm/README.md) · [dashboard guide](project-1-pharma-crm/DASHBOARD_GUIDE.md)
 
 ### Project 2 — Free-to-Play Game Economy and Balance (synthetic data)
 A look at whether a game's economy is balanced, whether any items are overpowered, and what keeps
 players engaged and spending. The economy runs a mild inflation (coin sinks recover only ~63% of
-what is minted), two premium items are statistically overpowered (Phoenix Blade at a 61% win rate),
+what is minted), two premium items are overpowered by a meaningful margin (Phoenix Blade at a 61% win
+rate — while items sitting 1–2 points off 50% are flagged as "skewed, small" rather than overpowered),
 retention drops sharply after the first day (47% to 18% to 4% at D1/D7/D30), and a logistic model
-predicts paying players with an AUC of 0.80.
+separates paying players with an AUC ≈0.79. Because the data is synthetic with designed-in ground
+truth, these numbers chiefly demonstrate that the pipeline recovers what was built in.
 Tech: Python, pandas, scikit-learn (logistic regression), proportion z-tests, matplotlib/seaborn, SQLite window functions.
 Links: [folder](project-2-game-economy/) · [notebook](project-2-game-economy/analysis.ipynb) · [write-up](project-2-game-economy/README.md) · [dashboard guide](project-2-game-economy/DASHBOARD_GUIDE.md)
 

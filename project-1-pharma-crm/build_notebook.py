@@ -51,6 +51,7 @@ import seaborn as sns
 import statsmodels.api as sm
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
 import sqlite3
 
 sns.set_theme(style="whitegrid")
@@ -309,12 +310,26 @@ code("""rel = hcp_tbl[["n_calls","total_scripts","potential_filled"]].copy()
 r = rel["n_calls"].corr(rel["total_scripts"])
 print(f"Correlation (calls vs scripts):  r = {r:.3f}")
 
+# Simple OLS: scripts ~ calls
 X = sm.add_constant(rel["n_calls"]); y = rel["total_scripts"]
 model = sm.OLS(y, X).fit()
 slope = model.params["n_calls"]; intercept = model.params["const"]
-print(f"OLS regression:  scripts = {intercept:.1f} + {slope:.2f} * calls")
+print(f"Simple OLS:  scripts = {intercept:.1f} + {slope:.2f} * calls")
 print(f"  R-squared = {model.rsquared:.3f}   slope p-value = {model.pvalues['n_calls']:.2e}")
-print(f"  -> each additional call is associated with ~{slope:.2f} more scripts per year.")""")
+
+# A doctor's prescribing also depends on their underlying POTENTIAL, and reps may
+# preferentially call high-potential doctors. If so, the simple slope above is
+# confounded (omitted-variable bias). We re-fit controlling for potential to see
+# how much of the call effect survives once potential is held constant.
+Xc = sm.add_constant(rel[["n_calls","potential_filled"]])
+model_c = sm.OLS(y, Xc).fit()
+slope_c = model_c.params["n_calls"]
+print(f"\\nControlled OLS (scripts ~ calls + potential):")
+print(f"  call slope = {slope_c:.2f} (vs {slope:.2f} uncontrolled)   "
+      f"R-squared = {model_c.rsquared:.3f}")
+print(f"  -> holding potential constant, each extra call is associated with "
+      f"~{slope_c:.2f} more scripts/yr. This is an ASSOCIATION on observational, "
+      f"synthetic data — not proof that calls cause scripts.")""")
 
 code("""# Chart 5 — the headline scatter with the best-fit line.
 fig, ax = plt.subplots(figsize=(9, 5.5))
@@ -324,10 +339,12 @@ ax.plot(xs, intercept + slope*xs, color=RED, lw=2,
         label=f"Best-fit line (slope={slope:.2f})")
 ax.set_xlabel("Calls received by the doctor (year)")
 ax.set_ylabel("Total prescriptions written (year)")
-ax.set_title(f"More calls -> more scripts  (r={r:.2f}, R²={model.rsquared:.2f}, p<0.001)")
+ax.set_title(f"More calls -> more scripts  (r={r:.2f}, R²={model.rsquared:.2f})")
 ax.legend()
 fig.savefig(CHARTS/"05_calls_vs_scripts.png"); plt.show()
-print("Direction and significance are clear: calling activity is a real driver of prescriptions.")""")
+print("Calls and scripts move together (and the link survives controlling for potential), but "
+      "this is an association on observational data: reps also tend to call busier prescribers, "
+      "so a call experiment (A/B) would be needed to claim causation.")""")
 
 md("""### 5c. Which doctors should the team prioritise? (segmentation)
 Not every doctor deserves the same attention. We use **KMeans** — an unsupervised machine-learning
@@ -337,7 +354,10 @@ method that groups doctors into clusters that are similar to each other — on t
 - **call responsiveness** (scripts per call received — do calls actually move them?).
 
 We standardise the features first (so no single feature dominates just because of its scale),
-pick a sensible number of clusters, then **profile** each segment and turn it into a targeting rule.""")
+choose the number of clusters with a **silhouette score** (cluster separation) rather than by eye,
+then **profile** each segment and turn it into a targeting rule. Note these features include current
+prescribing, so the segments are **current-value tiers** for prioritisation — not an independent
+re-discovery of the call effect tested above.""")
 
 code("""seg = hcp_tbl.copy()
 seg["scripts_per_call"] = seg["total_scripts"] / seg["n_calls"].replace(0, np.nan)
@@ -345,10 +365,19 @@ seg["scripts_per_call"] = seg["scripts_per_call"].fillna(0)
 features = ["total_scripts", "potential_filled", "scripts_per_call"]
 Xs = StandardScaler().fit_transform(seg[features])
 
-# choose k with a quick elbow (inertia) check, then settle on k=4 for actionable groups
-inertias = [KMeans(n_clusters=k, n_init=10, random_state=42).fit(Xs).inertia_
-            for k in range(2, 8)]
+# Choose k properly: compare the silhouette score (cluster separation, higher = better)
+# across k = 2..6 and actually USE the result, instead of hard-coding a number.
+sil = {k: silhouette_score(Xs, KMeans(n_clusters=k, n_init=10, random_state=42).fit_predict(Xs))
+       for k in range(2, 7)}
+best_k = max(sil, key=sil.get)
+print("Silhouette score by k:", {k: round(v, 3) for k, v in sil.items()})
+print(f"Best-separated k = {best_k} (silhouette {sil[best_k]:.3f}).")
+# We use k=4: it is close to the best silhouette and gives four business-actionable
+# tiers. NOTE: these features include current prescribing, so the segments describe
+# CURRENT VALUE tiers — they are a prioritisation tool, not an independent re-discovery
+# of the call effect tested above.
 K = 4
+print(f"Using k = {K} for actionable groups (silhouette {sil[K]:.3f}).")
 km = KMeans(n_clusters=K, n_init=10, random_state=42).fit(Xs)
 seg["segment"] = km.labels_
 
@@ -488,9 +517,12 @@ md("""## Step 8 — Key findings & recommendation
 1. **Prescribing is concentrated.** A relatively small group of high-volume doctors writes a
    disproportionate share of scripts (the top 20% of prescribers account for roughly a third of all
    prescriptions) — so *who* you call matters as much as *how often*.
-2. **Calling works — and it's statistically proven.** Across all doctors, more calls reliably means
-   more prescriptions: a clear positive correlation and a highly significant regression slope
-   (p ≪ 0.001). Each extra call is associated with a measurable lift in scripts.
+2. **Calling and prescribing move together — as an association, not proven causation.** Across all
+   doctors, more calls go with more prescriptions (r ≈ 0.49), and the link survives controlling for
+   each doctor's potential. But this is observational: reps also tend to call busier prescribers, so
+   the honest claim is a *measurable association*, not proof that calls cause scripts. (On this
+   synthetic dataset the relationship is real because it was designed in; a real engagement would
+   need an A/B call experiment to establish causation.)
 3. **Performance is uneven across reps and regions.** There is a wide gap between the top and bottom
    reps, and one region leads on total volume — both create obvious coaching and resourcing actions.
 4. **There is a clearly defined growth segment.** The doctor segmentation isolates a group with

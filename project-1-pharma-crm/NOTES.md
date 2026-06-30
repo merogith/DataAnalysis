@@ -11,8 +11,25 @@ responsiveness factor also varied too widely (a `beta(2,3)` with a long left tai
 
 I rebalanced the data-generating model so calls are the dominant lever: I raised the call coefficient,
 lowered the baseline term, and tightened the responsiveness distribution to `beta(4,4)`. That moved the
-correlation to r ≈ 0.49 (R² ≈ 0.24), which is moderate rather than a suspiciously perfect 0.95. I
-checked the number before building the notebook around it.
+correlation to r ≈ 0.49 (R² ≈ 0.24), which is moderate rather than a suspiciously perfect 0.95.
+
+**Being honest about what this means.** Because I set the call→script relationship in the generator, the
+notebook's r ≈ 0.49 is *recovering a number I chose*, not discovering a fact about the world. That is
+fine as a demonstration — it shows the pipeline (clean → correlate → regress → segment) recovers a known
+ground truth — but it is **not** evidence that calling drives prescriptions in any real organisation. So
+throughout the write-up I now describe the result as a *designed-in association* and frame the value of
+the project as the method, not the figure. On real CRM data the same code would tell you something
+genuine; here it tells you the code works.
+
+### 1b. Removing two methodological shortcuts
+After review I fixed two things that overstated the analysis. (a) The simple `scripts ~ calls` regression
+omits each doctor's potential, which is a confounder (reps call busier prescribers), so I added a
+**controlled regression** `scripts ~ calls + potential` and report both slopes side by side (5.52 vs
+5.61) — the association survives, but I no longer call it a "driver." (b) The k for KMeans was hard-coded
+to 4 with the elbow numbers computed but never used; I replaced that with an actual **silhouette-score**
+comparison across k = 2..6 (best separation is at k = 3, ≈0.35), and kept k = 4 transparently as a
+business choice close to the optimum, noting that the segments are current-value tiers rather than an
+independent re-discovery of the call effect.
 
 ### 2. `numpy` scalar `.clip()` crash in the generator
 `rng.normal(18, 7).clip(2, 60)` raised `AttributeError: 'float' object has no attribute 'clip'`. When

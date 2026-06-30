@@ -17,6 +17,12 @@ md("""# Project 2 — Free-to-Play Game Economy & Balance Analytics (SYNTHETIC d
 > produced by a single seeded generator (`data/generate_data.py`) so every number
 > below is fully reproducible. Real player telemetry is proprietary and privacy-sensitive,
 > so a reproducible synthetic generator is the practical path here (see `NOTES.md`).
+>
+> **What this does and does not show.** Because the generator builds in known ground truth
+> (item win rates, a D1 cliff, an engagement→pay link), the analysis below largely *recovers
+> values that were designed in*. That makes this a demonstration that the **pipeline** works —
+> clean → test → model → recommend — **not** evidence about any real game. Where a finding simply
+> echoes a generation parameter, the write-up says so.
 
 ## The business questions
 1. **Economy balance** — Is the in-game economy balanced? Do currency **sources (faucets)**
@@ -250,9 +256,17 @@ for item, g in matches.groupby("item_equipped"):
     stat, p = proportions_ztest(count=wins, nobs=n, value=0.5)
     lo, hi = proportion_confint(wins, n, alpha=0.05, method="wilson")
     pick = n/tot_matches
-    if lo > 0.5:   verdict = "OVERPOWERED"
-    elif hi < 0.5: verdict = "UNDERPOWERED"
-    else:          verdict = "balanced"
+    # A verdict needs BOTH statistical significance (CI clears 50%) AND a
+    # PRACTICAL effect size. With thousands of matches per item, a 51.5% win rate
+    # is "significant" yet meaningless for balance, so we require the win rate to
+    # be at least 5 percentage points off 50% before calling an item OP/UP.
+    EFFECT = 0.05
+    sig_high = lo > 0.5
+    sig_low  = hi < 0.5
+    if   sig_high and wr >= 0.5 + EFFECT: verdict = "OVERPOWERED"
+    elif sig_low  and wr <= 0.5 - EFFECT: verdict = "UNDERPOWERED"
+    elif sig_high or sig_low:             verdict = "skewed (sig., small)"
+    else:                                 verdict = "balanced"
     rows.append((item, n, pick, wr, lo, hi, p, verdict))
 
 balance = pd.DataFrame(rows, columns=["item","matches","pick_rate","win_rate",
@@ -272,7 +286,8 @@ print(balance.assign(pick_rate=lambda d:(d.pick_rate*100).round(1),
 
 code("""# Chart 4 — item win rates with 95% CIs vs the 50% fair line.
 b = balance.sort_values("win_rate")
-colors = b["verdict"].map({"OVERPOWERED":CORAL,"UNDERPOWERED":SLATE,"balanced":TEAL})
+colors = b["verdict"].map({"OVERPOWERED":CORAL,"UNDERPOWERED":SLATE,
+                           "skewed (sig., small)":AMBER,"balanced":TEAL}).fillna(TEAL)
 fig, ax = plt.subplots(figsize=(9,5.5))
 err = np.vstack([b["win_rate"]-b["ci_low"], b["ci_high"]-b["win_rate"]])*100
 ax.barh(b["item"], b["win_rate"]*100, color=colors, xerr=err, capsize=3, alpha=.9)
@@ -338,7 +353,13 @@ md("""### 4d. Monetization — funnel, spenders vs non-spenders, and a payer mod
 First a simple **funnel** (installed → played a match → returned on D1 → ever paid). Then we
 compare **spenders vs non-spenders**, and finally fit a **logistic regression** predicting whether a
 player *ever pays* from **early-behaviour** features only (first-3-days sessions/playtime/matches,
-platform, channel). Using only early signals makes the model useful for *live* targeting.""")
+platform, channel). Using only early signals makes the model useful for *live* targeting.
+
+> **Honest caveat on the AUC.** In this SYNTHETIC dataset, both early engagement and the decision to
+> pay are generated from the same hidden "engagement propensity", and early-session count is literally
+> a term in the payer formula. So the model's AUC (~0.8) partly reflects that built-in coupling — it
+> confirms the pipeline recovers a designed signal, **not** that this would predict payers in a real
+> game. On real telemetry the same approach is sound; here, read AUC as a sanity check, not a result.""")
 
 code("""# Build one player-level feature table.
 payers = set(purchases["player_id"].unique())
@@ -349,9 +370,12 @@ early_sess = ses[ses["day_since_install"]<=3]
 feat = pd.DataFrame({"player_id": players["player_id"]}).set_index("player_id")
 feat["early_sessions"]  = early_sess.groupby("player_id").size()
 feat["early_playmin"]   = early_sess.groupby("player_id")["duration_min"].sum()
-em = matches.merge(players[["player_id"]], on="player_id")  # ensure valid ids
-em = em.merge(ses[["player_id","day_since_install"]].drop_duplicates(), on="player_id", how="left")
-feat["early_matches"]   = matches.groupby("player_id").size()
+# early_matches: matches played in the first 3 days. Derive days-since-install per
+# match from install_date (previously this used ALL-TIME matches, mislabeled "early").
+mt = matches.merge(players[["player_id","install_date"]], on="player_id", how="left")
+mt["match_day"] = (pd.to_datetime(mt["match_time"]) -
+                   pd.to_datetime(mt["install_date"])).dt.days
+feat["early_matches"]   = mt[mt["match_day"]<=3].groupby("player_id").size()
 feat = feat.fillna(0)
 feat = feat.join(players.set_index("player_id")[["platform","acquisition_channel","is_payer"]])
 
@@ -536,17 +560,22 @@ md("""## Step 7 — Key findings & recommendation
    ran a large positive net surplus, with sinks recovering well under 100% of every coin created.
    The cumulative-surplus curve only ever rises. Left alone, soft currency slowly loses value and
    item prices feel "cheaper" over time — weakening the purchase incentive.
-2. **Two items are statistically OVERPOWERED; one is a trap.** *Phoenix Blade* and *Aegis Shield*
-   win well above 50% (95% CIs sit entirely above the fair line, p ≈ 0). Both are **premium** items,
-   so the game currently reads as mildly **pay-to-win**. *Rusty Dagger* is **underpowered** (win
-   rate in the low-40s) — a "trap" choice that quietly punishes new players. Everything else is balanced.
+2. **Two items are OVERPOWERED by a meaningful margin; one is a trap.** *Phoenix Blade* and *Aegis
+   Shield* win well above 50% (95% CIs above the fair line **and** ≥5 points off 50%). Both are
+   **premium** items, so the game reads as mildly **pay-to-win**. *Rusty Dagger* is **underpowered**
+   (low-40s) — a "trap" for new players. Note: several items are *statistically* above 50% but by only
+   a point or two; we label these "skewed (sig., small)" rather than overpowered, because with
+   thousands of matches even a trivial 51% edge is "significant" yet irrelevant for balance. Reporting
+   effect size, not just the p-value, is what separates a real balance problem from statistical noise.
 3. **There is a textbook Day-1 retention cliff.** Roughly half of installs never come back on day 1;
    the curve then flattens (the players who survive D1 are far stickier). D7 and D30 are healthy
    *given* the D1 loss — so the highest-leverage fix is the **first session**, not the late game.
-4. **Monetization is concentrated and predictable.** Only a small minority ever pay, but they are
-   strongly distinguished by **early engagement** — spenders log far more first-3-day sessions,
-   playtime and matches. A simple logistic model predicts payers from *early* behaviour with solid
-   AUC, and the standout driver is early activity, not platform or channel.
+4. **Monetization is concentrated and tracks early engagement.** Only a small minority ever pay, and
+   they log far more first-3-day sessions, playtime and matches. A logistic model separates payers from
+   early behaviour with solid AUC (~0.8). **Honest caveat:** in this synthetic data, paying and early
+   engagement are generated from the same hidden propensity, so the AUC partly measures that designed
+   coupling rather than a generalisable prediction — it shows the method works, not that these exact
+   numbers would hold on a real game.
 
 ### Recommendation (for the producer)
 - **Re-balance the economy:** add or deepen a **coin sink** (e.g. cosmetic upgrades, repair costs,

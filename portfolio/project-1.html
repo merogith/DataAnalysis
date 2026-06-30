@@ -44,9 +44,9 @@
   <div class="wrap">
     <h2>Key findings</h2>
     <ul class="find">
-      <li>Sales calls and prescriptions are positively related (r = 0.49, p = 1.5e-37). Each extra call per year is worth about 5.5 more scripts.</li>
+      <li>Sales calls and prescriptions are positively associated (r = 0.49), and the link survives controlling for doctor potential (~5.6 scripts per extra call vs 5.5 uncontrolled). This is association on observational, synthetic data — not proof of causation; a call A/B test would be needed for that.</li>
       <li>Prescriptions are concentrated: the top 20% of doctors account for roughly 37% of all volume.</li>
-      <li>A KMeans segmentation split 600 doctors into four groups and isolated a 99-doctor high-potential group with high potential but below-peak volume.</li>
+      <li>A KMeans segmentation (k chosen by silhouette score) split 600 doctors into four value tiers and isolated a 99-doctor high-potential group with headroom above its current volume.</li>
       <li>The top product was Cardiplex and the top region the Southeast, and the rep leaderboard shows a wide performance gap.</li>
     </ul>
     <div class="note"><b>Recommendation:</b> Reallocate call effort toward the 99 high-potential doctors, and coach the lowest-performing reps using the methods of the top performers.</div>

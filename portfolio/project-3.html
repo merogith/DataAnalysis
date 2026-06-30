@@ -31,11 +31,11 @@
   <div class="wrap">
     <h2>At a glance</h2>
     <div class="kpis">
-      <div class="kpi"><div class="n">~2.4%/yr</div><div class="l">Real long-run price growth</div></div>
-      <div class="kpi"><div class="n">Top 5%</div><div class="l">Valuation (CAPE) vs history</div></div>
-      <div class="kpi"><div class="n">−81%</div><div class="l">Worst real drawdown (1932)</div></div>
-      <div class="kpi"><div class="n">≈ 0</div><div class="l">Stocks–gold correlation</div></div>
-      <div class="kpi"><div class="n">p ≈ 1e-40</div><div class="l">CAPE → return significance</div></div>
+      <div class="kpi"><div class="n">~2.5%/yr</div><div class="l">Real long-run price growth</div></div>
+      <div class="kpi"><div class="n">~Top 5%</div><div class="l">Latest valid CAPE (≈2023) vs history</div></div>
+      <div class="kpi"><div class="n">−80.6%</div><div class="l">Worst real drawdown (1932, price-only)</div></div>
+      <div class="kpi"><div class="n">≈ 0</div><div class="l">Stocks–gold avg correlation</div></div>
+      <div class="kpi"><div class="n">moderate</div><div class="l">CAPE → return signal (see caveat)</div></div>
     </div>
   </div>
 </section>
@@ -44,12 +44,12 @@
   <div class="wrap">
     <h2>Key findings</h2>
     <ul class="find">
-      <li>After removing inflation, the market's price has grown about 2.4% a year. Most of the apparent growth comes from inflation and reinvested dividends.</li>
-      <li>Valuation has tracked the next decade's returns: a higher CAPE has generally been followed by lower 10-year real returns (R² ≈ 0.11, p ≈ 1e-40). Today's CAPE is in the top 5% of all readings since 1881.</li>
-      <li>Large losses recur throughout the record. The worst real drawdown reached 81%, and the VIX spikes during every crisis.</li>
-      <li>Gold's correlation with stocks is close to zero, so it has helped cushion the deepest drawdowns.</li>
+      <li>After removing inflation, the market's price has grown about 2.5% a year. Most of the apparent growth comes from inflation and reinvested dividends (neither in this price series).</li>
+      <li>Valuation has tracked the next decade's returns: a higher CAPE has generally been followed by lower 10-year real returns (R² ≈ 0.11). The signal is real but <em>moderate</em> — the headline p ≈ 1e-40 is inflated by overlapping 10-year windows; with Newey-West errors it is ≈0.003 and on non-overlapping decades (~13 in 150 years) it is not significant. The latest valid CAPE (≈2023, as the series lags) is near the most expensive ~5% of readings since 1881.</li>
+      <li>Large losses recur throughout the record. The worst real <em>price</em> drawdown reached −80.6%, and the VIX spikes during every crisis.</li>
+      <li>Gold's <em>average</em> correlation with stocks is close to zero, so it has historically helped cushion the deepest drawdowns — though a low average is no guarantee in any single crash.</li>
     </ul>
-    <div class="note"><b>Recommendation:</b> For a long-term investor, the data supports setting return expectations around the below-average real returns implied by today's high valuation, diversifying with low-correlation assets, and automating contributions and rebalancing.</div>
+    <div class="note"><b>Recommendation:</b> For a long-term investor, the data leans toward setting return expectations around below-average real returns given today's high valuation (a moderate signal, not a guarantee), diversifying with low-correlation assets, and automating contributions and rebalancing.</div>
   </div>
 </section>
 
@@ -60,7 +60,7 @@
       <figure class="figure"><a href="../project-3-finance/charts/05_cape_vs_forward_return.png"><img src="../project-3-finance/charts/05_cape_vs_forward_return.png" alt=""></a><figcaption>The main result: a higher valuation has been followed by lower returns over the next ten years.</figcaption></figure>
       <figure class="figure"><a href="../project-3-finance/charts/01_real_trend.png"><img src="../project-3-finance/charts/01_real_trend.png" alt=""></a><figcaption>Nominal vs inflation-adjusted S&P 500 on a log scale; real growth is modest.</figcaption></figure>
       <figure class="figure"><a href="../project-3-finance/charts/02_cape_history.png"><img src="../project-3-finance/charts/02_cape_history.png" alt=""></a><figcaption>Valuation (CAPE) over time against its long-run average; today sits near the top.</figcaption></figure>
-      <figure class="figure"><a href="../project-3-finance/charts/04_drawdowns.png"><img src="../project-3-finance/charts/04_drawdowns.png" alt=""></a><figcaption>How far the market has sat below its previous real peak; the worst was about −81%.</figcaption></figure>
+      <figure class="figure"><a href="../project-3-finance/charts/04_drawdowns.png"><img src="../project-3-finance/charts/04_drawdowns.png" alt=""></a><figcaption>How far the market has sat below its previous real peak; the worst was about −80.6% (price-only).</figcaption></figure>
       <figure class="figure"><a href="../project-3-finance/charts/03_returns_and_vix.png"><img src="../project-3-finance/charts/03_returns_and_vix.png" alt=""></a><figcaption>The distribution of monthly returns and the VIX over time.</figcaption></figure>
       <figure class="figure"><a href="../project-3-finance/charts/06_correlation.png"><img src="../project-3-finance/charts/06_correlation.png" alt=""></a><figcaption>Cross-asset correlation; gold is close to 0 with stocks.</figcaption></figure>
     </div>

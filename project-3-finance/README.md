@@ -8,17 +8,21 @@ is it expensive today, and does that tell us anything useful about the years ahe
 
 A few things stood out:
 
-- Once you remove inflation, the index's price has grown about 2.4% a year. Most of the large
+- Once you remove inflation, the index's price has grown about 2.5% a year. Most of the large
   headline numbers come from inflation and reinvested dividends rather than real price growth, so
   return expectations should be set with that in mind.
 - Large losses are a normal part of the record, not an exception. In real terms the market has
-  fallen as much as 81% from a previous peak (the early 1930s), and the VIX "fear gauge" jumps
-  during every crisis.
-- Starting valuation has tracked future returns. Months with a higher CAPE were generally
-  followed by lower real returns over the next ten years (p < 0.001). Today's CAPE is in the top
-  5% of readings since 1881, which historically has meant below-average returns from here.
-- Gold has had close to zero correlation with stocks, so it has helped cushion the deep
-  drawdowns that show up repeatedly in the data.
+  fallen as much as 81% from a previous peak (−80.6% in the early 1930s, price-only), and the VIX
+  "fear gauge" jumps during every crisis.
+- Starting valuation has tracked future returns, though the evidence is moderate rather than
+  decisive. Months with a higher CAPE were generally followed by lower real returns over the next
+  ten years. The naive p-value looks tiny (≈1e-40) but is inflated by overlapping windows; with
+  Newey-West errors it is ≈0.003, and across the ~13 genuinely independent decades in the record it
+  is not significant on its own. The latest valid CAPE (about 2023) is near the most expensive ~5%
+  of readings since 1881, which historically has leaned toward below-average returns from here.
+- Gold has had close to zero *average* correlation with stocks, so it has historically helped
+  cushion the deep drawdowns that show up repeatedly in the data — though a low average is not a
+  guarantee of protection in any single crash.
 
 Taken together, the data points to modest real returns over the next decade, a case for
 diversification, and a reminder that the hardest part of investing is behavioural: staying
@@ -53,23 +57,27 @@ The real trend is steady but modest; inflation accounts for most of the apparent
 
 ![Real vs nominal S&P 500](charts/01_real_trend.png)
 
-Valuation has historically predicted the next decade's returns. Each point is one month; the
-downward slope means a higher price paid was followed by a lower future return (R² = 0.11,
-p ≈ 1e-40). Today's CAPE, marked in gold, is near the top of its range.
+Valuation has historically tracked the next decade's returns. Each point is one month; the
+downward slope means a higher price paid was followed by a lower future return (R² = 0.11). Because
+the 10-year windows overlap month to month, the points are far from independent, so the honest test
+is on non-overlapping decades — where the signal is suggestive but not statistically conclusive (see
+the notebook for the naive, Newey-West, and non-overlapping p-values). Today's CAPE, marked in gold,
+is near the top of its range.
 
 ![CAPE vs forward 10-year return](charts/05_cape_vs_forward_return.png)
 
-Deep drawdowns recur throughout the record, with the worst real loss reaching 81%.
+Deep drawdowns recur throughout the record, with the worst real loss reaching −80.6% (price-only).
 
 ![Drawdowns](charts/04_drawdowns.png)
 
-| Metric (latest real data) | Value |
+| Metric (latest valid real data) | Value |
 |---|---|
-| Long-run real price growth | ~2.4% per year |
-| Current CAPE valuation | 30.8, higher than 95% of all months since 1881 |
-| Model-implied next-10y real return | Below the 2.3% historical average |
-| Worst real drawdown in history | −81% (trough June 1932) |
-| Stocks vs gold correlation | ≈ 0 |
+| Long-run real price growth | ~2.5% per year (price-only, excludes dividends) |
+| Latest valid CAPE valuation | 30.8 (as of Sep 2023), ~95th percentile since 1881 |
+| Valuation→returns significance | Naive p≈1e-40 (overlap-inflated); HAC p≈0.003; non-overlapping p≈0.27 |
+| Model-implied next-10y real return | Below the 2.3% historical average (out-of-range extrapolation) |
+| Worst real drawdown in history | −80.6% (trough June 1932, price-only) |
+| Stocks vs gold correlation | ≈ 0 on average |
 | Worst / best calendar years | 1931 (−46%) / 1933 (+46%) |
 
 ## Recommendation
@@ -80,11 +88,16 @@ the record shows are inevitable; and automate contributions and rebalancing, bec
 risk the data exposes is selling during the long underwater periods.
 
 ## Limitations and next steps
-The regression is a simple linear fit, so its point estimate at today's record valuation should
-be read as "below average" rather than a precise number. Useful extensions would be a
-total-return series that includes reinvested dividends for a truer long-run figure, an
-out-of-sample backtest with confidence bands around the valuation signal, and a check of whether
-the same relationship holds across sectors and international markets.
+Three honest caveats shape how far these results can be pushed. First, the CAPE→returns regression
+uses **overlapping** 10-year windows, so its observations are not independent; the headline ≈1e-40
+p-value is an artefact of that overlap, and the genuinely independent test (non-overlapping decades,
+≈13 of them) is not significant on its own — the signal is moderate, not proven. Second, the
+valuation series **lags by ~2-3 years**: every "today" figure is the most recent *valid* reading
+(around 2023), and today's CAPE sits outside the range the model was fit on, so the forward estimate
+is an extrapolation. Third, all return and drawdown figures are **price-only** (they exclude
+reinvested dividends). Useful extensions would be a total-return series, an out-of-sample backtest
+with block-bootstrap confidence bands that respect the overlap, and a check of whether the same
+relationship holds across sectors and international markets.
 
 ---
 
