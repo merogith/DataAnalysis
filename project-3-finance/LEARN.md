@@ -26,10 +26,13 @@ inflation shows that real growth is modest, and plotting the VIX shows a spike a
 These views point to where the deeper analysis should focus.
 
 Fourth, testing and conclusions. I measured the worst losses the market has put investors through
-(drawdowns), then tested whether today's valuation predicts the next decade's return. It does,
-and the relationship is statistically significant. I also checked whether gold and stocks move
-together; they mostly do not, which is what makes gold useful in a portfolio. The findings then
-turn into three concrete actions: expect lower returns, diversify, and automate discipline.
+(drawdowns), then tested whether valuation predicts the next decade's return. It points the right way
+— higher valuation, lower future return — but the evidence is moderate rather than decisive: the
+10-year windows overlap, so the naive significance is overstated, and the genuinely independent test
+(non-overlapping decades) is not conclusive on its own. I also checked whether gold and stocks move
+together; on average they mostly do not, which is what has made gold useful in a portfolio. The
+findings then turn into three measured actions: lean toward lower return expectations, diversify, and
+automate discipline.
 
 ## Glossary
 - Real (inflation-adjusted): a value after removing the effect of rising prices, expressed in
@@ -45,8 +48,12 @@ turn into three concrete actions: expect lower returns, diversify, and automate 
 - Regression (OLS): fitting the best straight line through a set of points to summarise a
   relationship and measure its strength.
 - R²: the share of the variation that the line explains, from 0 (none) to 1 (all).
-- p-value: the probability the pattern could appear by chance. A small value (below 0.05) suggests
-  it is real.
+- p-value: roughly, the probability of seeing a pattern this strong if nothing were really going on.
+  A small value (below 0.05) suggests the pattern is not just chance — but it can be badly misleading
+  when the observations are not independent. In this project the 10-year return windows overlap month
+  to month, which makes an ordinary p-value look far smaller (more "certain") than it should; the
+  notebook corrects for this with Newey-West errors and a non-overlapping test, and the honest read is
+  "moderate signal," not "proven."
 - Window function (SQL): a query that compares each row with other rows, here this year's price
   against last year's.
 

@@ -115,7 +115,10 @@ df["vol_12m"]  = df["sp_ret"].rolling(12).std() * np.sqrt(12)   # annualised rol
 df["drawdown"] = df["RealPrice"]/df["RealPrice"].cummax() - 1   # % below the prior real peak
 
 snapshot = {
-    "Latest date": df.index.max().date(),
+    "Price series runs to": df.index.max().date(),
+    # IMPORTANT: Shiller's real-price / CAPE columns lag the raw price index by
+    # ~2-3 years, so the latest *valid* valuation is older than the latest price.
+    "Latest VALID valuation dated": df["RealPrice"].dropna().index[-1].date(),
     "Latest real price (index)": round(df["RealPrice"].dropna().iloc[-1], 0),
     "Current annualised volatility": f'{df["vol_12m"].dropna().iloc[-1]*100:.1f}%',
     "Current drawdown vs real peak": f'{df["drawdown"].dropna().iloc[-1]*100:.1f}%',
@@ -147,8 +150,13 @@ ax.scatter(cape.index[-1], cape.iloc[-1], color=GOLD, zorder=5, s=40,
            label=f"Latest ({cape.iloc[-1]:.1f}, {cape.index[-1].date()})")
 ax.set_title("Market valuation over time — CAPE / PE10"); ax.set_ylabel("CAPE ratio"); ax.legend()
 fig.savefig(CHARTS/"02_cape_history.png"); plt.show()
+latest_cape_date = cape.index[-1].date()
 pct = (cape < cape.iloc[-1]).mean()*100
-print(f"Today's CAPE of {cape.iloc[-1]:.1f} is higher than {pct:.0f}% of all months since 1881.")""")
+print(f"Latest VALID CAPE is {cape.iloc[-1]:.1f}, dated {latest_cape_date} "
+      f"(Shiller's CAPE lags the price index by ~2-3 years, so this is the most recent "
+      f"*valid* reading, not literally this month).")
+print(f"It is at the {pct:.1f}th percentile — i.e. higher than ~{pct:.0f}% of all months "
+      f"since 1881, in the most expensive ~{100-pct:.0f}% of history.")""")
 
 code("""# Chart 3 — Distribution of monthly returns + the VIX 'fear gauge' over time.
 fig, axes = plt.subplots(1, 2, figsize=(12,4.2))
@@ -180,7 +188,8 @@ ax.set_title("Underwater plot — % below the previous inflation-adjusted peak")
 ax.set_ylabel("Drawdown (%)")
 fig.savefig(CHARTS/"04_drawdowns.png"); plt.show()
 worst = dd.idxmin()
-print(f"Worst real drawdown: {dd.min()*100:.0f}% (trough {worst.date()}).")
+print(f"Worst real drawdown: {dd.min()*100:.1f}% (trough {worst.date()}). Note this is a "
+      f"price-only drawdown — reinvested dividends would have made the lived loss less severe.")
 print(f"Current drawdown: {dd.iloc[-1]*100:.1f}% below the all-time real peak.")""")
 
 md("""### 4b. Valuation vs the future — a real statistical test
@@ -196,18 +205,42 @@ work["fwd_10y_annual"] = (work["fwd_real"]/work["RealPrice"])**(1/10) - 1
 reg = work.dropna(subset=["CAPE","fwd_10y_annual"])
 
 X = sm.add_constant(reg["CAPE"]); y = reg["fwd_10y_annual"]
-model = sm.OLS(y, X).fit()
-slope, intercept = model.params["CAPE"], model.params["const"]
-print(f"n = {int(model.nobs)} ten-year windows   R² = {model.rsquared:.2f}")
-print(f"slope = {slope:.5f}  (p = {model.pvalues['CAPE']:.1e})   intercept = {intercept:.4f}")
 
+# --- Naive OLS: the textbook mistake on OVERLAPPING windows ------------------
+naive = sm.OLS(y, X).fit()
+slope, intercept = naive.params["CAPE"], naive.params["const"]
+print(f"Fit spans start-points {reg.index.min().date()} -> {reg.index.max().date()} "
+      f"({int(naive.nobs)} monthly windows).")
+print(f"Note the last usable start-point is ~10 years before the data ends, because the "
+      f"outcome is the *following* decade.\\n")
+print(f"R^2 = {naive.rsquared:.2f}   slope = {slope:.5f}")
+print(f"  Naive OLS p-value:               {naive.pvalues['CAPE']:.1e}   <-- MISLEADING")
+
+# Why the naive p-value is wrong: these 1,500+ windows OVERLAP — each month's
+# 10-year window shares 119 of its 120 months with the next. Observations are
+# therefore heavily autocorrelated, the effective sample is only ~(years/10) ~ 13
+# INDEPENDENT decades, and ordinary OLS standard errors are far too small.
+# Two honest corrections:
+hac = sm.OLS(y, X).fit(cov_type="HAC", cov_kwds={"maxlags":120})   # (1) Newey-West
+nonov = reg.iloc[::120]                                            # (2) non-overlapping decades
+hac_nonov = sm.OLS(nonov["fwd_10y_annual"], sm.add_constant(nonov["CAPE"])).fit()
+print(f"  Newey-West (HAC) p-value:        {hac.pvalues['CAPE']:.2e}   <-- honest, still < 0.05")
+print(f"  Non-overlapping decades p-value: {hac_nonov.pvalues['CAPE']:.2f}   "
+      f"(n = {int(hac_nonov.nobs)} independent decades)   <-- NOT significant alone")
+print("\\nReading: the NEGATIVE relationship is real and economically sensible, but with only "
+      "~13 independent decades it is a MODERATE, suggestive signal — not the near-certainty the "
+      "naive 1e-40 p-value implies.")
+
+# --- Forward estimate (kept, but clearly caveated) --------------------------
 cur_cape = df["CAPE"].dropna().iloc[-1]
+cur_cape_date = df["CAPE"].dropna().index[-1].date()
 pred = intercept + slope*cur_cape
 hist_avg = reg["fwd_10y_annual"].mean()
-print(f"\\nAt today's CAPE ({cur_cape:.1f}) the model implies ~{pred*100:.1f}% real/yr over 10y.")
-print(f"Historical average across all windows: {hist_avg*100:.1f}% real/yr.")
-print("Caveat: a straight line extrapolates poorly at record-high CAPE — read this as "
-      "'well below average', not a precise number.")""")
+print(f"\\nAt the latest CAPE ({cur_cape:.1f}, as of {cur_cape_date}) the line implies "
+      f"~{pred*100:.1f}% real/yr over 10y vs a {hist_avg*100:.1f}% historical average.")
+print(f"Caveat: that CAPE is ABOVE the range the model was fit on (fit ends "
+      f"{reg.index.max().date()}), so this is an out-of-range extrapolation — read it as "
+      f"'below average', not a precise number.")""")
 
 code("""# Chart 5 — the headline relationship, colour-coded by era.
 fig, ax = plt.subplots(figsize=(9,5.5))
@@ -219,7 +252,8 @@ ax.axvline(cur_cape, color=GOLD, ls="--", lw=1.5, label=f"Today's CAPE ({cur_cap
 ax.axhline(0, color="grey", lw=.8)
 ax.set_xlabel("CAPE valuation at start of the 10 years")
 ax.set_ylabel("Actual real return over next 10y (%/yr)")
-ax.set_title(f"Higher valuation → lower future returns  (R²={model.rsquared:.2f}, p<0.001)")
+ax.set_title(f"Higher valuation → lower future returns  (R²={naive.rsquared:.2f}; "
+             f"overlapping windows — see HAC / non-overlap tests above)")
 ax.legend(); fig.colorbar(sc, label="Year")
 fig.savefig(CHARTS/"05_cape_vs_forward_return.png"); plt.show()""")
 
@@ -236,7 +270,9 @@ fig, ax = plt.subplots(figsize=(5.2,4.2))
 sns.heatmap(C, annot=True, fmt=".2f", cmap="RdBu_r", center=0, vmin=-1, vmax=1, ax=ax, square=True)
 ax.set_title("Cross-asset correlation (monthly, since 1990)")
 fig.savefig(CHARTS/"06_correlation.png"); plt.show()
-print(f"Stocks vs Gold correlation: {C.loc['Stocks','Gold']:.2f} — near zero ⇒ gold is a genuine diversifier.")
+print(f"Stocks vs Gold (avg monthly) correlation: {C.loc['Stocks','Gold']:.2f} — low on average, "
+      f"so gold has been a useful diversifier. Caveat: a near-zero *average* correlation does NOT "
+      f"guarantee protection in any specific crash — tail co-movement varies.")
 print(f"Stocks vs contemporaneous VIX level: {df['sp_ret'].corr(df['VIX']):.2f} — fear spikes coincide with losses.")""")
 
 md("""## Step 5 — SQL on the same data (SQLite)
@@ -306,19 +342,21 @@ fact.tail(3)""")
 md("""## Step 7 — Key findings & recommendation
 
 ### Key findings
-1. **The long climb is real, but slower than headlines suggest.** After stripping out inflation, the S&P 500's *price* has grown only a few percent per year for 150 years — the big numbers you see are mostly inflation plus reinvested dividends.
-2. **Risk is real and recurring.** The market has spent long stretches deep underwater (worst real drawdown ≈ **−80%** in the 1930s). The VIX shows fear spikes at *every* crisis.
-3. **Valuation matters — and it's statistically proven here.** Higher CAPE has been followed by **lower** 10-year real returns, with a highly significant negative slope (p ≪ 0.001). Today's CAPE sits near the top of its 140-year range, so the model points to **below-average** real returns ahead.
-4. **Gold genuinely diversifies.** Its correlation with stocks is ≈ 0 — it tends to zig when stocks zag, unlike most assets.
+1. **The long climb is real, but slower than headlines suggest.** After stripping out inflation, the S&P 500's *price* has grown only ~2.5% per year for 150 years — the big headline numbers are mostly inflation plus reinvested dividends, neither of which this price series includes.
+2. **Risk is real and recurring.** The market has spent long stretches deep underwater (worst real *price* drawdown ≈ **−81%** in the 1930s; reinvested dividends would soften that somewhat). The VIX shows fear spikes at *every* crisis.
+3. **Valuation matters — but the evidence is moderate, not a slam-dunk.** Higher CAPE has been followed by **lower** 10-year real returns (negative slope, R² ≈ 0.10). The naive p-value looks astronomically small (≈1e-40), but that is an **artefact of overlapping 10-year windows**: with Newey-West (HAC) errors it is ≈0.003, and on **non-overlapping** decades — of which 150 years holds only ~13 — it is **not** statistically significant on its own. We therefore treat valuation as a *suggestive* signal pointing to below-average returns, **not** as proof.
+4. **Gold has diversified on average.** Its *average* monthly correlation with stocks is ≈ 0 — historically useful, though an average near zero is not a guarantee of protection in any specific crash.
+
+> **A note on "today".** Shiller's CAPE and real-price columns lag the raw price index by ~2–3 years, so every "latest valuation" figure here is the most recent *valid* reading (around 2023), not literally this month. The regression can also only use start-points up to ~10 years before the data ends, so today's high-CAPE regime sits **outside** the fitted range — the forward estimate is an out-of-range extrapolation, not a calibrated forecast. Treat the most recent gold and nominal-price values (from the mirrored source) as indicative rather than authoritative.
 
 ### Recommendation (for a long-term investor)
-- **Set realistic expectations:** plan around *below-average* real returns over the next decade given today's high valuation — don't extrapolate the last bull market.
-- **Diversify deliberately:** pair equities with low-correlation assets (e.g. gold, bonds) to soften the deep drawdowns that history guarantees will recur.
+- **Set realistic expectations:** today's high valuation *leans* toward below-average real returns over the next decade — plan conservatively, but recognise the signal is moderate, not a guarantee.
+- **Diversify deliberately:** pair equities with low-correlation assets (e.g. gold, bonds) to soften the deep drawdowns that recur throughout history.
 - **Automate discipline:** dollar-cost-average and pre-commit to a rebalancing rule, because the data shows the danger is behavioural — selling during the long underwater stretches.
 
 ### What I'd do next
-- Add a **total-return** series (price **+** reinvested dividends) for a truer long-run number.
-- Extend the forecast with a proper **out-of-sample backtest** and confidence bands.
+- Add a **total-return** series (price **+** reinvested dividends) for a truer long-run number and drawdown.
+- Re-test the valuation signal with a proper **out-of-sample backtest** and **block-bootstrap** confidence bands that respect the overlap.
 - Bring in sector-level and international data to test whether the valuation signal travels.""")
 
 nb["cells"] = cells

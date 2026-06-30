@@ -44,8 +44,11 @@ evidence-based plan a sales leader could act on.
 - **Slope:** how much the outcome changes per one-unit change in the input; here, extra scripts per
   extra call.
 - **R²:** the fraction of the variation in scripts that the line explains (0 = none, 1 = all).
-- **p-value:** the chance the pattern is just luck; a tiny value (e.g. < 0.001) means it's almost
-  certainly real.
+- **p-value:** roughly, the chance of seeing a pattern this strong if there were really nothing going
+  on. A small value (e.g. < 0.05) means "probably not just luck" — but it says nothing about how *big*
+  or how *useful* the effect is, and a huge sample can make even a trivial effect "significant." Always
+  read it alongside the effect size (here, the slope and R²), and remember a correlation is not proof
+  of causation.
 - **KMeans:** a machine-learning method that groups data points into a chosen number of clusters of
   similar points.
 - **Standardise (scale):** put features on the same scale before clustering so one large-numbered

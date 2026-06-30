@@ -5,14 +5,18 @@ SYNTHETIC pharma sales data · Python, statistics, machine learning, SQL
 This project looks at the questions a pharma sales leader usually has: who is performing, what drives
 prescriptions, and which doctors to focus on next.
 
-More rep visits are associated with more prescriptions. The correlation is positive (r = 0.49) and the
-regression is highly significant (p ≈ 1.5e-37). On this data, each extra call per year is associated
-with about 5.5 more scripts. Prescribing is also concentrated: the top 20% of doctors write roughly a
-third of all scripts, so which doctors a rep visits matters as much as how many visits they make.
+More rep visits are associated with more prescriptions (r = 0.49), and the link survives controlling
+for each doctor's underlying potential (~5.6 scripts per extra call, vs 5.5 uncontrolled). This is an
+**association on observational data, not proof of causation** — reps also tend to call busier
+prescribers, so a call A/B experiment would be needed to claim a causal lift. (And because the data is
+synthetic, the relationship is real here by design; the value of the exercise is the method, not the
+number.) Prescribing is concentrated: the top 20% of doctors write roughly a third of all scripts, so
+which doctors a rep visits matters as much as how many visits they make.
 
-Performance varies a lot between reps. The top rep drove 6,007 scripts against 154 for the lowest,
-which points to a coaching and territory-balancing opportunity. Southeast leads on volume and Cardiplex
-is the top product.
+Performance varies a lot between reps. Attributing each doctor's scripts to their most-frequent rep,
+the top rep is linked to 6,007 scripts against 154 for the lowest — a coaching and territory-balancing
+flag, though much of that gap reflects which high-potential doctors fell in a rep's territory rather
+than rep skill alone. Southeast leads on volume and Cardiplex is the top product.
 
 A KMeans segmentation split the 600 doctors into four groups and isolated a 99-doctor "High-potential
 growth" segment: doctors with headroom who respond to calls but aren't prescribing at capacity. That is
@@ -63,11 +67,12 @@ responds to calls, so it's the best place to invest added effort.
 
 | Metric (SYNTHETIC) | Value |
 |---|---|
-| Calls ↔ scripts correlation | r = 0.49 (R² = 0.24, p ≈ 1.5e-37) |
-| Lift per additional call | ~5.5 scripts / year |
+| Calls ↔ scripts correlation | r = 0.49 (R² = 0.24); association, not proven causation |
+| Lift per additional call | ~5.5 scripts/yr (≈5.6 controlling for potential) |
 | Top product / region | Cardiplex / Southeast |
-| Top vs bottom rep (scripts driven) | 6,007 vs 154 |
-| Doctor segments found (KMeans, k=4) | Champions (133), Steady mid-tier (51), High-potential growth (99), Low priority (317) |
+| Top vs bottom rep (scripts attributed) | 6,007 vs 154 (territory-driven, not pure skill) |
+| k chosen for segmentation | k=4 (silhouette ≈0.35, near the k=3 optimum); business-actionable tiers |
+| Doctor segments found (KMeans) | Champions (133), Steady mid-tier (51), High-potential growth (99), Low priority (317) |
 | Prescribing concentration | top 20% of doctors ≈ 37% of all scripts |
 
 ## Recommendation
@@ -78,10 +83,15 @@ responds to calls, so it's the best place to invest added effort.
   territory load toward the higher-potential regions.
 
 ## Limitations and next steps
-This is correlation, not proof of causation, and it runs on synthetic data. To firm it up I'd add a
-call-to-script time lag to check whether this month's calls lift next month's scripts, and move toward
-causal evidence through a matched-control or A/B call experiment. I'd also bring in cost per call so the
-recommendation optimises ROI rather than raw script volume.
+Two honest caveats. First, this is **correlation, not proof of causation**: the call→script link is an
+association even after controlling for potential, and a matched-control or A/B call experiment would be
+needed before claiming calls *cause* prescriptions. Second, the data is **synthetic** — the generator
+deliberately builds in a call→script relationship, so the analysis recovers a signal that was designed
+in; the deliverable here is the *method* (clean → test → segment → recommend), not the specific number,
+which would only carry weight on real telemetry. The KMeans segments are also **current-value tiers**
+(they use current prescribing), so they are a prioritisation tool rather than an independent discovery
+of the call effect. To firm this up I'd add a call-to-script time lag, run a real call experiment, and
+bring in cost per call so the recommendation optimises ROI rather than raw script volume.
 
 ---
 
