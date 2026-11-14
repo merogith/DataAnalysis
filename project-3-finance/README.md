@@ -2,9 +2,8 @@
 Real public market data · Python, statistics, and SQL
 
 ## Summary
-This project uses more than 150 years of real market data to answer the questions a long-term
-investor actually asks: where does the market stand, how much risk has it historically carried,
-is it expensive today, and does that tell us anything useful about the years ahead.
+I used more than 150 years of real market data to measure price growth and drawdowns and test
+whether starting valuation was associated with the following decade's real price return.
 
 A few things stood out:
 
@@ -18,15 +17,14 @@ A few things stood out:
   decisive. Months with a higher CAPE were generally followed by lower real returns over the next
   ten years. The naive p-value looks tiny (≈1e-40) but is inflated by overlapping windows; with
   Newey-West errors it is ≈0.003, and across the ~13 genuinely independent decades in the record it
-  is not significant on its own. The latest valid CAPE (about 2023) is near the most expensive ~5%
-  of readings since 1881, which historically has leaned toward below-average returns from here.
+  is not significant on its own. The last valid CAPE in this extract, September 2023, is around
+  the 95th percentile of readings since 1881.
 - Gold has had close to zero *average* correlation with stocks, so it has historically helped
   cushion the deep drawdowns that show up repeatedly in the data — though a low average is not a
   guarantee of protection in any single crash.
 
-Taken together, the data points to modest real returns over the next decade, a case for
-diversification, and a reminder that the hardest part of investing is behavioural: staying
-invested through the long stretches when the market is underwater.
+The comparison shows why dependence between overlapping return windows matters when testing
+long-horizon relationships.
 
 > Data: real and public. Sources are Robert Shiller's S&P 500 dataset, the CBOE VIX, and LBMA
 > gold, pulled from GitHub's `datasets/` collection — the same underlying series exposed by
@@ -61,8 +59,8 @@ Valuation has historically tracked the next decade's returns. Each point is one 
 downward slope means a higher price paid was followed by a lower future return (R² = 0.11). Because
 the 10-year windows overlap month to month, the points are far from independent, so the honest test
 is on non-overlapping decades — where the signal is suggestive but not statistically conclusive (see
-the notebook for the naive, Newey-West, and non-overlapping p-values). Today's CAPE, marked in gold,
-is near the top of its range.
+the notebook for the naive, Newey-West, and non-overlapping p-values). The September 2023
+reading is marked in gold.
 
 ![CAPE vs forward 10-year return](charts/05_cape_vs_forward_return.png)
 
@@ -75,26 +73,17 @@ Deep drawdowns recur throughout the record, with the worst real loss reaching �
 | Long-run real price growth | ~2.5% per year (price-only, excludes dividends) |
 | Latest valid CAPE valuation | 30.8 (as of Sep 2023), ~95th percentile since 1881 |
 | Valuation→returns significance | Naive p≈1e-40 (overlap-inflated); HAC p≈0.003; non-overlapping p≈0.27 |
-| Model-implied next-10y real return | Below the 2.3% historical average (out-of-range extrapolation) |
 | Worst real drawdown in history | −80.6% (trough June 1932, price-only) |
 | Stocks vs gold correlation | ≈ 0 on average |
 | Worst / best calendar years | 1931 (−46%) / 1933 (+46%) |
-
-## Recommendation
-For a long-term investor, the data supports three practical steps: set return expectations
-around the below-average real returns implied by today's high valuation rather than the recent
-past; pair equities with low-correlation assets such as gold or bonds to soften the drawdowns
-the record shows are inevitable; and automate contributions and rebalancing, because the main
-risk the data exposes is selling during the long underwater periods.
 
 ## Limitations and next steps
 Three honest caveats shape how far these results can be pushed. First, the CAPE→returns regression
 uses **overlapping** 10-year windows, so its observations are not independent; the headline ≈1e-40
 p-value is an artefact of that overlap, and the genuinely independent test (non-overlapping decades,
 ≈13 of them) is not significant on its own — the signal is moderate, not proven. Second, the
-valuation series **lags by ~2-3 years**: every "today" figure is the most recent *valid* reading
-(around 2023), and today's CAPE sits outside the range the model was fit on, so the forward estimate
-is an extrapolation. Third, all return and drawdown figures are **price-only** (they exclude
+last valid valuation reading in the extract is from September 2023. The regression sample
+ends earlier because it needs a full decade of observed outcomes. Third, all return and drawdown figures are **price-only** (they exclude
 reinvested dividends). Useful extensions would be a total-return series, an out-of-sample backtest
 with block-bootstrap confidence bands that respect the overlap, and a check of whether the same
 relationship holds across sectors and international markets.
@@ -105,7 +94,7 @@ relationship holds across sectors and international markets.
 | Path | What it is |
 |---|---|
 | `analysis.ipynb` | The full analysis, run top to bottom with outputs included |
-| `data/download_data.py` | Reproducible data downloader, with a synthetic fallback |
+| `data/download_data.py` | Staged downloader for the four real data sources |
 | `data/raw_*.csv` | The downloaded datasets |
 | `charts/` | Generated figures |
 | `dashboard/` | BI-ready CSVs (`fact_market_monthly`, `dim_year`, `dim_sector`) |
@@ -116,7 +105,10 @@ relationship holds across sectors and international markets.
 ## How to run it
 ```bash
 cd project-3-finance
-python data/download_data.py                # refresh the data (optional)
+python data/download_data.py                # refresh all four real inputs (optional)
 python -m jupyter notebook analysis.ipynb   # open, then Restart & Run All
 ```
+A failed download preserves the existing inputs. The optional `--synthetic` mode writes marked
+fixtures for testing. The market notebook rejects synthetic or incomplete refreshes.
+
 `LEARN.md` has a step-by-step version for readers who are new to the tools.

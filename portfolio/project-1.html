@@ -23,7 +23,7 @@
   <div class="wrap">
     <div class="tag " style="opacity:.9">Synthetic data</div>
     <h1 style="font-size:2rem">Pharmaceutical CRM Sales Analytics</h1>
-    <p style="font-style:italic">Do sales calls drive prescriptions, and which doctors should the team prioritise?</p>
+    <p style="font-style:italic">How do recorded calls relate to prescriptions, and how can physicians be segmented?</p>
   </div>
 </header>
 
@@ -32,9 +32,9 @@
     <h2>At a glance</h2>
     <div class="kpis">
       <div class="kpi"><div class="n">r = 0.49</div><div class="l">Calls vs scripts correlation</div></div>
-      <div class="kpi"><div class="n">+5.5</div><div class="l">Scripts per extra call / year</div></div>
+      <div class="kpi"><div class="n">+5.5</div><div class="l">Associated scripts per extra recorded call</div></div>
       <div class="kpi"><div class="n">4</div><div class="l">Doctor segments (KMeans)</div></div>
-      <div class="kpi"><div class="n">99</div><div class="l">High-potential target doctors</div></div>
+      <div class="kpi"><div class="n">99</div><div class="l">Physicians in the screening tier</div></div>
       <div class="kpi"><div class="n">37%</div><div class="l">Volume from the top 20% of doctors</div></div>
     </div>
   </div>
@@ -46,10 +46,10 @@
     <ul class="find">
       <li>Sales calls and prescriptions are positively associated (r = 0.49), and the link survives controlling for doctor potential (~5.6 scripts per extra call vs 5.5 uncontrolled). This is association on observational, synthetic data — not proof of causation; a call A/B test would be needed for that.</li>
       <li>Prescriptions are concentrated: the top 20% of doctors account for roughly 37% of all volume.</li>
-      <li>A KMeans segmentation (k chosen by silhouette score) split 600 doctors into four value tiers and isolated a 99-doctor high-potential group with headroom above its current volume.</li>
+      <li>KMeans grouped 600 synthetic doctors into four current-value tiers. Three clusters had the best silhouette score. Four gave interpretable tiers, including a 99-doctor screening group.</li>
       <li>The top product was Cardiplex and the top region the Southeast, and the rep leaderboard shows a wide performance gap.</li>
     </ul>
-    <div class="note"><b>Recommendation:</b> Reallocate call effort toward the 99 high-potential doctors, and coach the lowest-performing reps using the methods of the top performers.</div>
+    <div class="note"><b>Follow-up:</b> Use the screening group to recruit a randomized outreach experiment. Compare rep totals within similar territories before acting on them.</div>
   </div>
 </section>
 
@@ -59,7 +59,7 @@
     <div class="gallery">
       <figure class="figure"><a href="../project-1-pharma-crm/charts/05_calls_vs_scripts.png"><img src="../project-1-pharma-crm/charts/05_calls_vs_scripts.png" alt=""></a><figcaption>Calls vs prescriptions with a trend line (r = 0.49).</figcaption></figure>
       <figure class="figure"><a href="../project-1-pharma-crm/charts/06_hcp_segments.png"><img src="../project-1-pharma-crm/charts/06_hcp_segments.png" alt=""></a><figcaption>Four doctor segments from KMeans clustering.</figcaption></figure>
-      <figure class="figure"><a href="../project-1-pharma-crm/charts/07_segment_summary.png"><img src="../project-1-pharma-crm/charts/07_segment_summary.png" alt=""></a><figcaption>Segment profiles, used to decide who to prioritise.</figcaption></figure>
+      <figure class="figure"><a href="../project-1-pharma-crm/charts/07_segment_summary.png"><img src="../project-1-pharma-crm/charts/07_segment_summary.png" alt=""></a><figcaption>Segment profiles for a proposed outreach test.</figcaption></figure>
       <figure class="figure"><a href="../project-1-pharma-crm/charts/02_script_concentration.png"><img src="../project-1-pharma-crm/charts/02_script_concentration.png" alt=""></a><figcaption>Prescriptions are concentrated; the top 20% of doctors write about 37%.</figcaption></figure>
       <figure class="figure"><a href="../project-1-pharma-crm/charts/04_rep_leaderboard.png"><img src="../project-1-pharma-crm/charts/04_rep_leaderboard.png" alt=""></a><figcaption>The rep leaderboard and its performance gap.</figcaption></figure>
       <figure class="figure"><a href="../project-1-pharma-crm/charts/01_scripts_by_product_region.png"><img src="../project-1-pharma-crm/charts/01_scripts_by_product_region.png" alt=""></a><figcaption>Prescription volume by product and region.</figcaption></figure>

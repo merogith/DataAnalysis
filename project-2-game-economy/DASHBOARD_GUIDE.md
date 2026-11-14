@@ -15,7 +15,7 @@ How they relate (the star):
 - `dim_item` and `dim_player` are standalone snapshots (item-level and player-level summaries). You don't need to join them to the fact table for this dashboard; each powers its own visuals. Drag them in as separate tables.
 
 ### Column dictionaries
-`fact_daily_economy.csv` — `date` · `faucet_coins` (coins minted that day) · `sink_coins` (coins drained, negative) · `dau` (daily active players) · `matches` · `revenue_usd` · `net_coins` (faucet+sink) · `cum_net_coins` (running surplus = the inflation curve) · `sink_recovery_pct` (sinks as % of faucets; ~90–100% is healthy).
+`fact_daily_economy.csv` — `date` · `faucet_coins` (coins minted that day) · `sink_coins` (coins drained, negative) · `dau` (daily active players) · `matches` · `revenue_usd` · `net_coins` (faucet+sink) · `cum_net_coins` (running net coin supply) · `sink_recovery_pct` (sinks as % of faucets; ~90–100% is healthy).
 
 `dim_item.csv` — `item_name` · `slot` · `is_premium` · `base_price_soft` · `design_power` · `matches` · `pick_rate_pct` · `win_rate_pct` · `ci_low_pct` / `ci_high_pct` (95% CI) · `p_value` · `verdict` (OVERPOWERED / UNDERPOWERED / balanced).
 
@@ -24,7 +24,7 @@ How they relate (the star):
 ---
 
 ## The dashboard's headline insight
-> The economy is mildly inflationary and two paid items are overpowered, so the game is drifting toward pay-to-win while half of new players quit on Day 1. Every chart should support that story.
+> The synthetic data shows a coin surplus, two paid items above the balance threshold, and a large drop in Day 1 retention.
 
 ---
 
@@ -52,7 +52,7 @@ How they relate (the star):
    - Scatter — price vs win rate (pay-to-win). Use `dim_item`: `base_price_soft` to Columns, `win_rate_pct` to Rows, `is_premium` to Colour, `item_name` to Label.
 5. Assemble a dashboard: click the New Dashboard icon (bottom). Put the three KPI cards along the top, the net-flow line and item-balance bar across the middle, and the scatter bottom-right.
 6. Add a slicer/filter: drag `platform` (from `dim_player`) onto the dashboard as a filter so the viewer can focus on iOS / Android / Web. You can also add `acquisition_channel`.
-7. Useful calculated field — Net flow direction: `IF [cum_net_coins] > 0 THEN "Inflation" ELSE "Deflation" END` — drop on a KPI's colour.
+7. Useful calculated field — Net flow direction: `IF [cum_net_coins] > 0 THEN "Surplus" ELSEIF [cum_net_coins] < 0 THEN "Deficit" ELSE "Balanced" END` — drop on a KPI's colour.
 8. Publish: File → Save to Tableau Public As…, sign in, and you get a public link.
 
 ## Build it in Power BI Desktop

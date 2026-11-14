@@ -26,7 +26,7 @@ md("""# Project 2 — Free-to-Play Game Economy & Balance Analytics (SYNTHETIC d
 
 ## The business questions
 1. **Economy balance** — Is the in-game economy balanced? Do currency **sources (faucets)**
-   roughly match **sinks (drains)**, or is there **inflation / deflation**? *(net currency flow
+   roughly match **sinks (drains)**, or does the supply of coins grow? *(net currency flow
    over time and per player)*
 2. **Item balance** — Are any items **over- or under-powered**? We build an item-balance table
    (pick rate, win rate when used, price vs power) and **flag** items whose win rate deviates
@@ -36,9 +36,9 @@ md("""# Project 2 — Free-to-Play Game Economy & Balance Analytics (SYNTHETIC d
    and fit a **logistic regression** that predicts who becomes a payer from *early* behaviour.
 
 ## How we'll know we succeeded (success metrics)
-- A quantified **net currency flow** (per day and per player) with an explicit inflation/deflation verdict.
+- A quantified **net currency flow** (per day and per player) with an explicit surplus or deficit.
 - An **item-balance table** that statistically flags every item whose win rate is off 50% (with a z-test & 95% CI), naming the over/under-powered items.
-- **D1/D7/D30 retention** numbers, a payer **funnel**, and a payer-prediction model reported with **accuracy + AUC** and interpretable **odds ratios**.
+- **D1/D7/D30 retention** numbers, a payer **funnel**, and a payer-prediction model reported with **ROC AUC and average precision**, with a threshold baseline and interpretable **odds ratios**.
 - A clear, concrete **balancing + monetization recommendation** a producer could action next sprint.
 
 ## The data (all SYNTHETIC)
@@ -67,7 +67,7 @@ import statsmodels.api as sm
 from statsmodels.stats.proportion import proportions_ztest, proportion_confint
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix
+from sklearn.metrics import accuracy_score, average_precision_score, roc_auc_score, confusion_matrix
 import sqlite3
 
 sns.set_theme(style="whitegrid")
@@ -201,11 +201,10 @@ print(f"Peak DAU: {dau.max():,} on {dau.idxmax().date()} | mean DAU: {dau.mean()
 
 md("""## Step 4 — Deeper analysis
 
-### 4a. Economy balance — faucets vs sinks (is there inflation?)
+### 4a. Economy balance — faucets vs sinks
 **Faucet (source)** = currency flowing *into* the economy (quest rewards, daily logins, match
 rewards). **Sink (drain)** = currency flowing *out* (item purchases, upgrades, gacha, repairs).
-If faucets persistently out-pace sinks, the average wallet swells and soft currency loses value —
-**inflation**. We measure the **net flow** per day and per player.""")
+If faucets outpace sinks, net currency supply grows. This analysis measures coin flows rather than changes in purchasing power.""")
 
 code("""# Net daily currency flow = sources + sinks (sinks are stored negative).
 cur = currency.dropna(subset=["txn_time"]).copy()
@@ -216,11 +215,11 @@ net_total = cur["amount"].sum()
 print(f"Total faucet (sources): {faucet_total:,.0f}")
 print(f"Total sink  (drains)  : {sink_total:,.0f}")
 print(f"NET flow into economy : {net_total:,.0f}  "
-      f"({'INFLATION' if net_total>0 else 'DEFLATION'})")
+      f"({'SURPLUS' if net_total > 0 else 'DEFICIT' if net_total < 0 else 'BALANCED'})")
 print(f"Sinks recover {abs(sink_total)/faucet_total*100:.0f}% of every coin minted "
       f"(healthy target is ~90-100%).")""")
 
-code("""# Chart 3 — daily faucets vs sinks, plus the cumulative surplus (the inflation curve).
+code("""# Chart 3 — daily faucets vs sinks, plus the cumulative surplus.
 daily = cur.pivot_table(index="date", columns="flow", values="amount", aggfunc="sum").fillna(0)
 daily["net"] = daily.get("source",0) + daily.get("sink",0)
 daily["cum_net"] = daily["net"].cumsum()
@@ -232,7 +231,7 @@ a1.bar(daily.index, daily.get("sink",0),   color=CORAL, label="Sinks (out)")
 a1.set_title("Daily currency faucets vs sinks"); a1.set_ylabel("coins/day"); a1.legend()
 a2.plot(daily.index, daily["cum_net"], color=SLATE, lw=2)
 a2.fill_between(daily.index, daily["cum_net"], 0, color=AMBER, alpha=.3)
-a2.set_title("Cumulative surplus = un-drained coins building up (the inflation curve)")
+a2.set_title("Cumulative net coins")
 a2.set_ylabel("cumulative net coins")
 fig.savefig(CHARTS/"03_economy_flow.png"); plt.show()
 
@@ -352,25 +351,26 @@ fig.savefig(CHARTS/"06_retention_curve.png"); plt.show()""")
 md("""### 4d. Monetization — funnel, spenders vs non-spenders, and a payer model
 First a simple **funnel** (installed → played a match → returned on D1 → ever paid). Then we
 compare **spenders vs non-spenders**, and finally fit a **logistic regression** predicting whether a
-player *ever pays* from **early-behaviour** features only (first-3-days sessions/playtime/matches,
-platform, channel). Using only early signals makes the model useful for *live* targeting.
+player has a recorded purchase at any point, using days 0–3 activity and acquisition attributes.
+Purchases can occur in the feature window, so this is an illustrative classifier. A day-three
+intervention would require a purchase target measured after the feature window.
 
 > **Honest caveat on the AUC.** In this SYNTHETIC dataset, both early engagement and the decision to
 > pay are generated from the same hidden "engagement propensity", and early-session count is literally
 > a term in the payer formula. So the model's AUC (~0.8) partly reflects that built-in coupling — it
 > confirms the pipeline recovers a designed signal, **not** that this would predict payers in a real
-> game. On real telemetry the same approach is sound; here, read AUC as a sanity check, not a result.""")
+> game.""")
 
 code("""# Build one player-level feature table.
 payers = set(purchases["player_id"].unique())
 players["is_payer"] = players["player_id"].isin(payers).astype(int)
 
-# early (first 3 days) behaviour
+# early (days 0–3) behaviour
 early_sess = ses[ses["day_since_install"]<=3]
 feat = pd.DataFrame({"player_id": players["player_id"]}).set_index("player_id")
 feat["early_sessions"]  = early_sess.groupby("player_id").size()
 feat["early_playmin"]   = early_sess.groupby("player_id")["duration_min"].sum()
-# early_matches: matches played in the first 3 days. Derive days-since-install per
+# early_matches: matches played in the days 0–3. Derive days-since-install per
 # match from install_date (previously this used ALL-TIME matches, mislabeled "early").
 mt = matches.merge(players[["player_id","install_date"]], on="player_id", how="left")
 mt["match_day"] = (pd.to_datetime(mt["match_time"]) -
@@ -418,19 +418,23 @@ clf = LogisticRegression(max_iter=2000, class_weight="balanced")
 clf.fit(Xtr, ytr)
 pred = clf.predict(Xte); proba = clf.predict_proba(Xte)[:,1]
 acc = accuracy_score(yte, pred); auc = roc_auc_score(yte, proba)
-print(f"Payer model — accuracy: {acc*100:.1f}%   AUC: {auc:.3f}   "
-      f"(base payer rate {y.mean()*100:.1f}%)")
+ap = average_precision_score(yte, proba)
+payer_rate = yte.mean()
+print(f"ROC AUC: {auc:.3f} | Average precision: {ap:.3f} "
+      f"(payer prevalence baseline: {payer_rate:.3f})")
+print(f"Accuracy at the model threshold: {acc:.1%} | "
+      f"Always-nonpayer accuracy: {1 - payer_rate:.1%}")
 
 odds = pd.Series(np.exp(clf.coef_[0]), index=X.columns).sort_values(ascending=False)
 print("\\nMost predictive features (odds ratio; >1 raises pay-odds):")
 print(odds.head(6).round(2).to_string())""")
 
-code("""# Chart 8 — what drives paying? (odds ratios) + confusion matrix.
+code("""# Chart 8 — model associations and confusion matrix.
 fig, (a1,a2) = plt.subplots(1,2, figsize=(12,4.4))
 top = odds.head(6)[::-1]
 a1.barh(top.index, top.values, color=[GREEN if v>1 else CORAL for v in top.values])
 a1.axvline(1, color="black", lw=1)
-a1.set_title("Top drivers of becoming a payer (odds ratio)")
+a1.set_title("Largest model odds ratios")
 a1.set_xlabel("odds ratio (>1 = more likely to pay)")
 cm = confusion_matrix(yte, pred)
 sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=a2,
@@ -442,7 +446,7 @@ md("""## Step 5 — SQL on the same data (SQLite, with a window function)
 The brief asks for at least one SQL query using a **window function**. We load the cleaned currency
 ledger into an in-memory SQLite database and use `SUM(...) OVER (PARTITION BY player_id ORDER BY ...)`
 to compute a **running wallet balance** per player over time — exactly the kind of query a live-ops
-analyst runs to spot players whose balance never stops growing (an inflation symptom).
+analyst runs to spot players whose balance never stops growing (a coin-accumulation signal).
 
 *(A **window function** computes across a set of rows related to the current row — here, a running
 total within each player, ordered by time — without collapsing the rows like a GROUP BY would.)*""")
@@ -556,10 +560,9 @@ fact.tail(3)""")
 md("""## Step 7 — Key findings & recommendation
 
 ### Key findings
-1. **The economy is mildly INFLATIONARY.** Faucets out-mint sinks: across the window the economy
+1. **Coins accumulate over the observed window.** Faucets out-mint sinks: across the window the economy
    ran a large positive net surplus, with sinks recovering well under 100% of every coin created.
-   The cumulative-surplus curve only ever rises. Left alone, soft currency slowly loses value and
-   item prices feel "cheaper" over time — weakening the purchase incentive.
+   The cumulative-surplus curve rises. Purchasing power would require separate price data.
 2. **Two items are OVERPOWERED by a meaningful margin; one is a trap.** *Phoenix Blade* and *Aegis
    Shield* win well above 50% (95% CIs above the fair line **and** ≥5 points off 50%). Both are
    **premium** items, so the game reads as mildly **pay-to-win**. *Rusty Dagger* is **underpowered**
@@ -571,7 +574,7 @@ md("""## Step 7 — Key findings & recommendation
    the curve then flattens (the players who survive D1 are far stickier). D7 and D30 are healthy
    *given* the D1 loss — so the highest-leverage fix is the **first session**, not the late game.
 4. **Monetization is concentrated and tracks early engagement.** Only a small minority ever pay, and
-   they log far more first-3-day sessions, playtime and matches. A logistic model separates payers from
+   they log far more days 0–3 sessions, playtime and matches. A logistic model separates payers from
    early behaviour with solid AUC (~0.8). **Honest caveat:** in this synthetic data, paying and early
    engagement are generated from the same hidden propensity, so the AUC partly measures that designed
    coupling rather than a generalisable prediction — it shows the method works, not that these exact
@@ -580,13 +583,12 @@ md("""## Step 7 — Key findings & recommendation
 ### Recommendation (for the producer)
 - **Re-balance the economy:** add or deepen a **coin sink** (e.g. cosmetic upgrades, repair costs,
   a soft-currency battle pass) so sinks recover ~90-100% of faucets, and trim the late-game faucet
-  inflation creep. Target: net daily flow near zero.
+  surplus. Evaluate the change against progression and retention guardrails.
 - **Nerf the two overpowered premium items** (reduce their edge toward 50%) to remove the
   pay-to-win perception, and **buff Rusty Dagger** so the starter weapon isn't a trap.
 - **Attack the D1 cliff first:** invest in onboarding / first-session quality (tutorial, a guaranteed
   early win, a D1 login reward). A few points of D1 cascade into every later number.
-- **Target likely payers early:** use the early-behaviour model to surface a well-timed, *fair*
-  first offer to high-propensity players in their first few days — where the signal is strongest.
+- **Define an intervention outcome** after the feature window and test any offer with a holdout.
 
 ### What I'd do next
 - Add an **A/B test design** for the proposed sink + onboarding changes (define guardrail metrics).

@@ -45,11 +45,11 @@
         <div class="body">
           <div class="tag real">Featured · Real data</div>
           <h3><a href="project-3.html">US Stock Market: Trends, Risk and Valuation</a></h3>
-          <div class="hook">Where does the market stand, how risky has it been, and is it expensive today?</div>
+          <div class="hook">How did starting valuation relate to the next decade of real price returns?</div>
           <div class="result">Built on more than 150 years of real market data. Valuation has tracked
             future returns: a higher CAPE has been followed by lower 10-year returns — a real but
             <em>moderate</em> signal (the eye-catching p ≈ 1e-40 is inflated by overlapping windows;
-            corrected, it is suggestive, not conclusive). The latest valid reading (~2023) is near the
+            corrected, it is suggestive, not conclusive). The last valid reading in the extract (September 2023) is near the
             most expensive ~5% of history. Worst real drawdown on record: −80.6% (price-only); gold's
             average correlation with stocks is about 0.</div>
           <div class="tech"><b>Tech:</b> Python · pandas · statsmodels (OLS) · matplotlib/seaborn · SQLite window functions · real Shiller / CBOE / LBMA data</div>
@@ -70,11 +70,10 @@
         <div class="body">
           <div class="tag">Synthetic data</div>
           <h3><a href="project-1.html">Pharmaceutical CRM Sales Analytics</a></h3>
-          <div class="hook">Do sales calls drive prescriptions, and which doctors should the team prioritise?</div>
+          <div class="hook">How do recorded calls relate to prescriptions, and how can physicians be segmented?</div>
           <div class="result">Calls and prescriptions are associated (r = 0.49) — a link that survives
             controlling for doctor potential (~5.6 scripts per extra call), though it is association on
-            synthetic data, not proven causation. A KMeans segmentation (k chosen by silhouette) splits
-            600 doctors into four value tiers and isolates a 99-doctor high-potential list to focus on.</div>
+            synthetic data, not proven causation. KMeans divides 600 synthetic doctors into four interpretable value tiers. Three clusters had the highest silhouette score. The 99-doctor tier is a screening list for further testing.</div>
           <div class="tech"><b>Tech:</b> Python · pandas · scikit-learn (KMeans) · statsmodels · matplotlib/seaborn · SQLite <code>RANK() OVER</code></div>
           <div class="links">
             <a href="project-1.html">Project page</a>
@@ -94,8 +93,7 @@
           <div class="tag">Synthetic data</div>
           <h3><a href="project-2.html">Free-to-Play Game Economy and Balance</a></h3>
           <div class="hook">Is the economy balanced, are any items overpowered, and what keeps players spending?</div>
-          <div class="result">The economy runs a mild inflation (coin sinks recover only 63% of what is
-            minted), two premium items are overpowered by a meaningful margin (Phoenix Blade at a 61% win
+          <div class="result">Coin sinks recover 63% of issued coins, two premium items are overpowered by a meaningful margin (Phoenix Blade at a 61% win
             rate; items 1–2 points off 50% are flagged "skewed", not overpowered), retention drops from
             47% to 18% to 4% across D1/D7/D30, and a logistic model separates paying players with an
             AUC ≈0.79. Synthetic data with designed-in ground truth, so the numbers chiefly show the

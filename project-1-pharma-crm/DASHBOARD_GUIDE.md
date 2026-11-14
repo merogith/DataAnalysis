@@ -96,7 +96,7 @@ dimension table (a "many facts → one dimension" link).
    - **Scatter chart:** X = `dim_hcp[hcp_total_calls]`, Y = `dim_hcp[hcp_total_scripts]`,
      Details = `dim_hcp[hcp_id]`; turn on the **Trend line** under the **Analytics** pane.
    - **Clustered bar / treemap:** Axis/Category = `dim_hcp[segment_name]`, Values = `HCP Count`
-     (and add a second bar with `Scripts per Call` to show segment responsiveness).
+     (and add a second bar with `Scripts per Call` to compare the recorded scripts-to-calls ratio by segment).
 6. Add a slicer: drop a **Slicer** visual and put `dim_region[region]` (or `dim_product[product]`) in it
    so viewers can filter.
 7. Save the `.pbix`. (Public sharing needs a Power BI account; for a free public link, use Tableau
@@ -117,4 +117,4 @@ dimension table (a "many facts → one dimension" link).
 ```
 
 ## Headline insight for the dashboard title
-> More calls go with more scripts. Focus the next calls on the 99-doctor High-potential Growth segment.
+> Call counts and prescriptions are associated in the synthetic data. Treat the 99-doctor tier as a screening group for testing outreach.

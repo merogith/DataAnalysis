@@ -265,9 +265,7 @@ print("Most common channel:", chan.index[0], f"({chan.iloc[0]:,} calls)")""")
 md("""## Step 5 — Deeper analysis
 
 ### 5a. Performance: who/what is winning and losing?
-We rank **reps**, **regions** and **products**. For reps we look at total scripts driven by the
-doctors they cover and their call activity — so we can spot both high-output reps and efficient
-ones (scripts per call). **Why:** leadership needs a concrete leaderboard, not vibes.""")
+We summarize prescriptions by **rep**, **region**, and **product**. Prescriptions are attributed to the most frequent rep for each doctor as a reporting rule. The totals combine territory, physician mix, and rep activity.""")
 
 code("""# Rep performance: total scripts from the HCPs each rep called, plus efficiency.
 # Attribute each HCP's scripts to the rep who called them most (their "primary" rep).
@@ -282,9 +280,9 @@ rep_perf = rep_perf.merge(reps[["rep_id","rep_name","region_name","tenure_years"
 rep_perf["scripts_per_call"] = (rep_perf["scripts"]/rep_perf["calls"]).round(2)
 rep_perf = rep_perf.sort_values("scripts", ascending=False).reset_index(drop=True)
 
-print("TOP 5 reps by scripts driven:")
+print("TOP 5 reps by attributed scripts:")
 print(rep_perf.head(5)[["rep_name","region_name","scripts","calls","scripts_per_call"]].to_string(index=False))
-print("\\nBOTTOM 5 reps by scripts driven:")
+print("\\nBOTTOM 5 reps by attributed scripts:")
 print(rep_perf.tail(5)[["rep_name","region_name","scripts","calls","scripts_per_call"]].to_string(index=False))""")
 
 code("""# Chart 4 — rep leaderboard (top 15 by scripts), coloured by region.
@@ -293,17 +291,17 @@ reg_colors = {r:PALETTE[i % len(PALETTE)] for i,r in enumerate(sorted(rep_perf['
 fig, ax = plt.subplots(figsize=(9, 6))
 ax.barh(top15["rep_name"], top15["scripts"],
         color=[reg_colors[r] for r in top15["region_name"]])
-ax.set_title("Top 15 sales reps by prescriptions driven (colour = region)")
+ax.set_title("Top 15 sales reps by attributed prescriptions (colour = region)")
 ax.set_xlabel("Total scripts from covered doctors")
 handles = [plt.Rectangle((0,0),1,1,color=c) for c in reg_colors.values()]
 ax.legend(handles, reg_colors.keys(), title="Region", fontsize=8, loc="lower right")
 fig.savefig(CHARTS/"04_rep_leaderboard.png"); plt.show()""")
 
-md("""### 5b. Does calling more lead to more prescriptions?
-This is the question the whole sales model rests on. We line up, **for each doctor**, the number
+md("""### 5b. How does call frequency relate to prescriptions?
+We line up, **for each doctor**, the number
 of calls they received against the total scripts they wrote, then:
 1. measure the **correlation r** (do they move together?), and
-2. fit a simple **linear regression (OLS)** to get the **slope** (extra scripts per extra call),
+2. fit a simple **linear regression (OLS)** to get the **slope** (associated script difference per additional recorded call),
    the **R²** (how much of the variation calls explain) and the **p-value** (is it just luck?).""")
 
 code("""rel = hcp_tbl[["n_calls","total_scripts","potential_filled"]].copy()
@@ -320,7 +318,7 @@ print(f"  R-squared = {model.rsquared:.3f}   slope p-value = {model.pvalues['n_c
 # A doctor's prescribing also depends on their underlying POTENTIAL, and reps may
 # preferentially call high-potential doctors. If so, the simple slope above is
 # confounded (omitted-variable bias). We re-fit controlling for potential to see
-# how much of the call effect survives once potential is held constant.
+# how the association changes once potential is held constant.
 Xc = sm.add_constant(rel[["n_calls","potential_filled"]])
 model_c = sm.OLS(y, Xc).fit()
 slope_c = model_c.params["n_calls"]
@@ -339,7 +337,7 @@ ax.plot(xs, intercept + slope*xs, color=RED, lw=2,
         label=f"Best-fit line (slope={slope:.2f})")
 ax.set_xlabel("Calls received by the doctor (year)")
 ax.set_ylabel("Total prescriptions written (year)")
-ax.set_title(f"More calls -> more scripts  (r={r:.2f}, R²={model.rsquared:.2f})")
+ax.set_title(f"Calls and prescriptions: observed association  (r={r:.2f}, R²={model.rsquared:.2f})")
 ax.legend()
 fig.savefig(CHARTS/"05_calls_vs_scripts.png"); plt.show()
 print("Calls and scripts move together (and the link survives controlling for potential), but "
@@ -351,13 +349,12 @@ Not every doctor deserves the same attention. We use **KMeans** — an unsupervi
 method that groups doctors into clusters that are similar to each other — on three features:
 - **prescribing volume** (total scripts),
 - **potential** (how much they *could* prescribe), and
-- **call responsiveness** (scripts per call received — do calls actually move them?).
+- **prescriptions per recorded call** (an activity ratio, not a response measure).
 
 We standardise the features first (so no single feature dominates just because of its scale),
-choose the number of clusters with a **silhouette score** (cluster separation) rather than by eye,
-then **profile** each segment and turn it into a targeting rule. Note these features include current
-prescribing, so the segments are **current-value tiers** for prioritisation — not an independent
-re-discovery of the call effect tested above.""")
+compare **silhouette scores** across cluster counts, and use four groups for an interpretable
+screening example. Three groups had the highest score. Because current prescriptions are an input,
+the tiers summarize current value and are not a validated response model.""")
 
 code("""seg = hcp_tbl.copy()
 seg["scripts_per_call"] = seg["total_scripts"] / seg["n_calls"].replace(0, np.nan)
@@ -365,8 +362,7 @@ seg["scripts_per_call"] = seg["scripts_per_call"].fillna(0)
 features = ["total_scripts", "potential_filled", "scripts_per_call"]
 Xs = StandardScaler().fit_transform(seg[features])
 
-# Choose k properly: compare the silhouette score (cluster separation, higher = better)
-# across k = 2..6 and actually USE the result, instead of hard-coding a number.
+# Compare cluster separation across k = 2..6 before choosing a reporting segmentation.
 sil = {k: silhouette_score(Xs, KMeans(n_clusters=k, n_init=10, random_state=42).fit_predict(Xs))
        for k in range(2, 7)}
 best_k = max(sil, key=sil.get)
@@ -392,13 +388,11 @@ print("Segment profiles (sorted by current prescribing volume):")
 print(profile.to_string())""")
 
 code("""# Give each segment a plain-English label based on its profile.
-# Rank by a simple "opportunity" idea: high potential + high responsiveness, room to grow.
-labels = {}
-prof = profile.copy()
-prof["opportunity"] = prof["avg_potential"] * prof["avg_scripts_per_call"]
+# The screening tier reflects estimated potential and current prescription volume.
+prof = profile
 order = prof.sort_values("avg_scripts", ascending=False).index.tolist()
 # Highest current volume = "Champions"; lowest potential & volume = "Low priority";
-# high potential but lower current scripts & responsive = "Grow" (the target).
+# High potential and lower current prescription volume define the screening tier.
 names = {}
 names[prof["avg_scripts"].idxmax()] = "Champions (protect)"
 names[prof["avg_potential"].idxmax() if prof["avg_potential"].idxmax()!=prof["avg_scripts"].idxmax()
@@ -424,7 +418,7 @@ for i, nm in enumerate(seg_order):
                color=PALETTE[i % len(PALETTE)], label=nm)
 ax.set_xlabel("Doctor potential score (0-100)")
 ax.set_ylabel("Current total scripts (year)")
-ax.set_title("Doctor segments: where the growth opportunity sits")
+ax.set_title("Synthetic physician segments by potential and current volume")
 ax.legend(fontsize=8, title="Segment")
 fig.savefig(CHARTS/"06_hcp_segments.png"); plt.show()""")
 
@@ -516,7 +510,7 @@ md("""## Step 8 — Key findings & recommendation
 ### Key findings
 1. **Prescribing is concentrated.** A relatively small group of high-volume doctors writes a
    disproportionate share of scripts (the top 20% of prescribers account for roughly a third of all
-   prescriptions) — so *who* you call matters as much as *how often*.
+   prescriptions) — so coverage warrants a separate look from overall call volume.
 2. **Calling and prescribing move together — as an association, not proven causation.** Across all
    doctors, more calls go with more prescriptions (r ≈ 0.49), and the link survives controlling for
    each doctor's potential. But this is observational: reps also tend to call busier prescribers, so
@@ -524,18 +518,13 @@ md("""## Step 8 — Key findings & recommendation
    synthetic dataset the relationship is real because it was designed in; a real engagement would
    need an A/B call experiment to establish causation.)
 3. **Performance is uneven across reps and regions.** There is a wide gap between the top and bottom
-   reps, and one region leads on total volume — both create obvious coaching and resourcing actions.
+   reps, and one region leads on total volume. Investigate territory mix before assessing rep performance.
 4. **There is a clearly defined growth segment.** The doctor segmentation isolates a group with
-   **high potential** that responds well to calls but is **not yet** writing at capacity — the single
-   best place to add call effort.
+   **higher estimated potential** and lower current prescription volume than the leading tier. It is a screening group for a follow-up experiment.
 
 ### Recommendation (for the sales team)
-- **Reallocate calls toward the "High-potential growth" segment.** They have headroom and respond to
-  visits; shifting effort here should lift scripts more per call than visiting already-loyal doctors.
-- **Protect the "Champions"** with enough touch to retain them, but don't over-invest where there's no
-  upside left.
-- **Coach the bottom reps using the top reps' patterns** (call frequency and scripts-per-call), and
-  rebalance territory load toward the highest-potential regions.
+- **Test targeting in the "High-potential growth" segment.** Use a randomized outreach test before reallocating calls or claiming incremental prescriptions.
+- Compare activity and coverage within similar territories before interpreting rep differences.
 
 ### What I'd do next
 - Add a proper **call-to-script time lag** (does this month's call lift *next* month's scripts?).

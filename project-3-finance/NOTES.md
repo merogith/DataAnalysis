@@ -12,9 +12,9 @@ data exposed by yfinance and FRED and is openly downloadable:
 - `datasets/gold-prices` — LBMA gold prices.
 - `datasets/s-and-p-500-companies` — current constituents and sectors.
 
-Using these mirrors kept the project on real data. The downloader
-(`data/download_data.py`) also includes a labelled synthetic fallback so the pipeline still runs
-if a source is unreachable.
+The downloader (`data/download_data.py`) stages all four sources before replacing the data.
+A failed fetch leaves the existing inputs in place. The optional `--synthetic` mode marks its
+fixtures, and the analysis rejects that marker or an interrupted replacement.
 
 ### 2. Recent months stored `0.0` instead of missing
 The latest S&P 500 rows had `0.0` for dividends, earnings, CPI, the interest rate, and CAPE.
@@ -41,25 +41,13 @@ non-overlapping decades (every 120th month, n = 14), which gives p ≈ 0.27 — 
 own. The negative relationship is real and economically sensible, but I now describe it as a
 *moderate, suggestive* signal rather than something "statistically proven."
 
-### 5. "Today's" valuation is actually about 2023, and the fit ends in 2013
-Two date issues that I now flag explicitly. First, because Shiller's real-price/CAPE columns lag
-the raw price index by ~2-3 years, the most recent *valid* CAPE is dated September 2023 even though
-the price series runs to 2026 — so I label every "today" valuation figure with its real date rather
-than implying it is current. Second, the forward-return regression needs the *following* decade to
-compute its outcome, so the last usable start-point is ~2013; today's high-CAPE regime is outside
-the range the model was fit on, which makes the forward estimate an out-of-range extrapolation. I
-also treat the most recent mirrored gold and nominal-price values as indicative rather than
-authoritative, since the tail of a public mirror can run ahead of confirmed data.
+### 5. Data and evaluation dates
+The last valid CAPE in the saved extract is from September 2023. The nominal price series extends
+further. The last regression start point is in 2013 because each observation needs a full decade of
+subsequent price data. The case presents the historical relationship and leaves forecasting to a
+separate out-of-sample evaluation.
 
-### 6. The linear valuation model extrapolates poorly at record-high CAPE
-A simple straight-line (OLS) fit of CAPE against the next ten years' return implies a slightly
-negative real return when evaluated at today's near-record CAPE. A straight line keeps falling
-indefinitely, while real returns have a practical floor. I kept the simple, interpretable model
-because it answers the question, but I labelled the point estimate as "below average" rather than a
-precise figure and compared it with the historical average for context. A proper out-of-sample
-backtest with block-bootstrap bands is listed as the next step.
-
-### 5. Environment setup
+### 6. Environment setup
 I worked in a clean Python environment with pandas, numpy, matplotlib, seaborn,
 scikit-learn, statsmodels, jupyter, and nbconvert. The notebook is built
 programmatically (`build_notebook.py`) and then run with `jupyter nbconvert --execute`, which

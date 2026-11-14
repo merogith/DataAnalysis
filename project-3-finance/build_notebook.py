@@ -11,16 +11,16 @@ md("""# Project 3 — US Stock Market: Trends, Risk & Valuation (REAL data)
 **Analyst:** Meric Erler &nbsp;|&nbsp; **Stakeholder:** a long-term investor / investment committee
 
 ## The business questions
-1. **Trend** — What is the long-run trajectory of the US stock market once we strip out inflation? Where do we stand today?
-2. **Risk** — How risky is the market right now compared with history (volatility, the "fear index", and worst-case drawdowns)?
-3. **Valuation** — Is the market expensive, and *does valuation actually tell us anything* about the returns to expect over the next decade? (a real statistical test)
+1. **Trend** — What is the long-run trajectory of the US stock market once we strip out inflation?
+2. **Risk** — How has risk varied across the observed history (volatility, the "fear index", and worst-case drawdowns)?
+3. **Valuation** — How has starting valuation related to price returns over the following decade?
 4. **Diversification** — Do stocks, gold, and bonds move together or offset each other?
 
 ## How we'll know we succeeded (success metrics)
-- A quantified long-run **real** (inflation-adjusted) trend and the current drawdown vs the all-time peak.
-- A **risk read-out**: current volatility and VIX *percentile* vs history.
-- A **statistically tested** relationship between valuation (CAPE) and the next 10 years of returns, with an R², slope and p-value — plus an honest forward estimate.
-- A clear, caveated **recommendation** an investor could act on.
+- A quantified long-run **real** (inflation-adjusted) trend and the drawdown at the end of the data.
+- A **risk read-out**: volatility and the VIX percentile at the last observation.
+- A **statistically tested** relationship between valuation (CAPE) and the next 10 years of returns, with an R², slope and dependence-aware comparisons.
+- A concise interpretation of what the historical test supports.
 
 ## The data (all REAL, public)
 | Dataset | What it is | Frequency | Source (mirror) |
@@ -28,7 +28,7 @@ md("""# Project 3 — US Stock Market: Trends, Risk & Valuation (REAL data)
 | S&P 500 (Shiller) | Price, dividends, earnings, CPI, 10y rate, real values, **CAPE/PE10** | Monthly, 1871→ | github datasets/s-and-p-500 |
 | VIX | CBOE Volatility Index — the market's "fear gauge" | Daily, 1990→ | github datasets/finance-vix |
 | Gold | Gold price | Monthly | github datasets/gold-prices |
-| Constituents | Today's S&P 500 companies & sectors | Snapshot | github datasets/s-and-p-500-companies |
+| Constituents | S&P 500 companies and sectors in the downloaded snapshot | Snapshot | github datasets/s-and-p-500-companies |
 
 > **Data sources.** The data comes from GitHub's curated `datasets/` collection, which mirrors the *same* underlying real data (Shiller / CBOE / LBMA) used by `yfinance`/FRED and is openly downloadable. See `NOTES.md`. Run `python data/download_data.py` to refresh.""")
 
@@ -49,6 +49,10 @@ plt.rcParams.update({"figure.dpi": 110, "axes.titlesize": 13, "axes.titleweight"
 NAVY, GOLD, RED = "#1f3b6f", "#c59b30", "#b3322c"
 
 DATA = Path("data"); CHARTS = Path("charts"); DASH = Path("dashboard")
+invalid_markers = ("_SYNTHETIC_FALLBACK_USED", "_DOWNLOAD_INCOMPLETE")
+if any((DATA / marker).exists() for marker in invalid_markers):
+    raise RuntimeError("The market analysis requires a complete set of real inputs. "
+                       "Run python data/download_data.py to refresh the four sources.")
 CHARTS.mkdir(exist_ok=True); DASH.mkdir(exist_ok=True)
 print("Setup complete — pandas", pd.__version__)""")
 
@@ -133,7 +137,7 @@ code("""# Chart 1 — Nominal vs REAL (inflation-adjusted) S&P 500, log scale.
 # line = a constant % growth rate, which is what we care about.
 fig, ax = plt.subplots(figsize=(10,5))
 ax.plot(df.index, df["SP500"],   color=GOLD, lw=1.2, label="Nominal price")
-ax.plot(df.index, df["RealPrice"], color=NAVY, lw=1.6, label="Real price (today's $)")
+ax.plot(df.index, df["RealPrice"], color=NAVY, lw=1.6, label="Inflation-adjusted price")
 ax.set_yscale("log"); ax.set_title("S&P 500 since 1871 — nominal vs inflation-adjusted (log scale)")
 ax.set_ylabel("Index level (log)"); ax.legend()
 fig.savefig(CHARTS/"01_real_trend.png"); plt.show()
@@ -190,13 +194,12 @@ fig.savefig(CHARTS/"04_drawdowns.png"); plt.show()
 worst = dd.idxmin()
 print(f"Worst real drawdown: {dd.min()*100:.1f}% (trough {worst.date()}). Note this is a "
       f"price-only drawdown — reinvested dividends would have made the lived loss less severe.")
-print(f"Current drawdown: {dd.iloc[-1]*100:.1f}% below the all-time real peak.")""")
+print(f"Last observed real drawdown: {dd.iloc[-1]*100:.1f}% below the all-time real peak.")""")
 
 md("""### 4b. Valuation vs the future — a real statistical test
-**The question every investor wants answered:** does today's valuation tell us anything about
-the *next decade's* returns? We line up each month's **CAPE** against the **annualised real
+Did higher starting valuations precede lower real price returns over the following decade? We line up each month's **CAPE** against the **annualised real
 return over the following 10 years**, then fit a simple linear regression (OLS).
-- A negative, significant slope ⇒ *paying more today historically meant earning less later.*
+- A negative slope means higher starting CAPE coincided with lower subsequent price returns.
 - We report R² (how much it explains), the slope, and the p-value (could this be luck?).""")
 
 code("""work = df.dropna(subset=["CAPE","RealPrice"]).copy()
@@ -231,16 +234,12 @@ print("\\nReading: the NEGATIVE relationship is real and economically sensible, 
       "~13 independent decades it is a MODERATE, suggestive signal — not the near-certainty the "
       "naive 1e-40 p-value implies.")
 
-# --- Forward estimate (kept, but clearly caveated) --------------------------
-cur_cape = df["CAPE"].dropna().iloc[-1]
-cur_cape_date = df["CAPE"].dropna().index[-1].date()
-pred = intercept + slope*cur_cape
-hist_avg = reg["fwd_10y_annual"].mean()
-print(f"\\nAt the latest CAPE ({cur_cape:.1f}, as of {cur_cape_date}) the line implies "
-      f"~{pred*100:.1f}% real/yr over 10y vs a {hist_avg*100:.1f}% historical average.")
-print(f"Caveat: that CAPE is ABOVE the range the model was fit on (fit ends "
-      f"{reg.index.max().date()}), so this is an out-of-range extrapolation — read it as "
-      f"'below average', not a precise number.")""")
+# Date the annotated observation explicitly.
+cape_at_end = df["CAPE"].dropna()
+last_cape = cape_at_end.iloc[-1]
+last_cape_date = cape_at_end.index[-1]
+print(f"\\nLast valid CAPE in this extract: {last_cape:.1f} "
+      f"({last_cape_date:%b %Y}). No current return forecast is made.")""")
 
 code("""# Chart 5 — the headline relationship, colour-coded by era.
 fig, ax = plt.subplots(figsize=(9,5.5))
@@ -248,12 +247,12 @@ sc = ax.scatter(reg["CAPE"], reg["fwd_10y_annual"]*100, c=reg.index.year,
                 cmap="viridis", s=12, alpha=.7)
 xs = np.linspace(reg["CAPE"].min(), reg["CAPE"].max(), 100)
 ax.plot(xs, (intercept+slope*xs)*100, color=RED, lw=2, label="Best-fit line (OLS)")
-ax.axvline(cur_cape, color=GOLD, ls="--", lw=1.5, label=f"Today's CAPE ({cur_cape:.0f})")
+ax.axvline(last_cape, color=GOLD, ls="--", lw=1.5,
+           label=f"{last_cape_date:%b %Y} CAPE ({last_cape:.1f})")
 ax.axhline(0, color="grey", lw=.8)
 ax.set_xlabel("CAPE valuation at start of the 10 years")
-ax.set_ylabel("Actual real return over next 10y (%/yr)")
-ax.set_title(f"Higher valuation → lower future returns  (R²={naive.rsquared:.2f}; "
-             f"overlapping windows — see HAC / non-overlap tests above)")
+ax.set_ylabel("Real price return over next 10 years (%/yr)")
+ax.set_title(f"Historical CAPE and forward real price returns (R²={naive.rsquared:.2f})")
 ax.legend(); fig.colorbar(sc, label="Year")
 fig.savefig(CHARTS/"05_cape_vs_forward_return.png"); plt.show()""")
 
@@ -330,7 +329,7 @@ dim_year = (fact.groupby("year")
             .round(2).reset_index())
 dim_year.to_csv(DASH/"dim_year.csv", index=False)
 
-# dim_sector: today's index composition (for a treemap/bar)
+# dim_sector: index composition in the downloaded source snapshot (for a treemap/bar)
 sector = (cons["GICS Sector"].value_counts().rename_axis("sector")
           .reset_index(name="company_count"))
 sector["weight_pct"] = (sector["company_count"]/sector["company_count"].sum()*100).round(1)
@@ -344,15 +343,10 @@ md("""## Step 7 — Key findings & recommendation
 ### Key findings
 1. **The long climb is real, but slower than headlines suggest.** After stripping out inflation, the S&P 500's *price* has grown only ~2.5% per year for 150 years — the big headline numbers are mostly inflation plus reinvested dividends, neither of which this price series includes.
 2. **Risk is real and recurring.** The market has spent long stretches deep underwater (worst real *price* drawdown ≈ **−81%** in the 1930s; reinvested dividends would soften that somewhat). The VIX shows fear spikes at *every* crisis.
-3. **Valuation matters — but the evidence is moderate, not a slam-dunk.** Higher CAPE has been followed by **lower** 10-year real returns (negative slope, R² ≈ 0.10). The naive p-value looks astronomically small (≈1e-40), but that is an **artefact of overlapping 10-year windows**: with Newey-West (HAC) errors it is ≈0.003, and on **non-overlapping** decades — of which 150 years holds only ~13 — it is **not** statistically significant on its own. We therefore treat valuation as a *suggestive* signal pointing to below-average returns, **not** as proof.
+3. **Valuation matters — but the evidence is moderate, not a slam-dunk.** Higher CAPE has been followed by **lower** 10-year real returns (negative slope, R² ≈ 0.10). The naive p-value looks astronomically small (≈1e-40), but that is an **artefact of overlapping 10-year windows**: with Newey-West (HAC) errors it is ≈0.003, and on **non-overlapping** decades — of which 150 years holds only ~13 — it is **not** statistically significant on its own. This is historical evidence of a moderate association, with limited independent observations.
 4. **Gold has diversified on average.** Its *average* monthly correlation with stocks is ≈ 0 — historically useful, though an average near zero is not a guarantee of protection in any specific crash.
 
-> **A note on "today".** Shiller's CAPE and real-price columns lag the raw price index by ~2–3 years, so every "latest valuation" figure here is the most recent *valid* reading (around 2023), not literally this month. The regression can also only use start-points up to ~10 years before the data ends, so today's high-CAPE regime sits **outside** the fitted range — the forward estimate is an out-of-range extrapolation, not a calibrated forecast. Treat the most recent gold and nominal-price values (from the mirrored source) as indicative rather than authoritative.
-
-### Recommendation (for a long-term investor)
-- **Set realistic expectations:** today's high valuation *leans* toward below-average real returns over the next decade — plan conservatively, but recognise the signal is moderate, not a guarantee.
-- **Diversify deliberately:** pair equities with low-correlation assets (e.g. gold, bonds) to soften the deep drawdowns that recur throughout history.
-- **Automate discipline:** dollar-cost-average and pre-commit to a rebalancing rule, because the data shows the danger is behavioural — selling during the long underwater stretches.
+> Shiller's CAPE and real-price columns lag the nominal price series. The last valid CAPE in this extract is dated September 2023. The return series is price-only and excludes dividends.
 
 ### What I'd do next
 - Add a **total-return** series (price **+** reinvested dividends) for a truer long-run number and drawdown.

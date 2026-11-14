@@ -2,8 +2,8 @@
 SYNTHETIC pharma sales data · Python, statistics, machine learning, SQL
 
 ## Executive summary (for a non-technical reader)
-This project looks at the questions a pharma sales leader usually has: who is performing, what drives
-prescriptions, and which doctors to focus on next.
+This project looks at the questions a pharma sales leader usually has: where prescriptions are concentrated, how they relate to recorded calls,
+and how physician segments could inform a follow-up test.
 
 More rep visits are associated with more prescriptions (r = 0.49), and the link survives controlling
 for each doctor's underlying potential (~5.6 scripts per extra call, vs 5.5 uncontrolled). This is an
@@ -18,11 +18,9 @@ the top rep is linked to 6,007 scripts against 154 for the lowest — a coaching
 flag, though much of that gap reflects which high-potential doctors fell in a rep's territory rather
 than rep skill alone. Southeast leads on volume and Cardiplex is the top product.
 
-A KMeans segmentation split the 600 doctors into four groups and isolated a 99-doctor "High-potential
-growth" segment: doctors with headroom who respond to calls but aren't prescribing at capacity. That is
-where added call effort should pay off. The practical takeaway is to shift calls toward that segment,
-keep enough contact with the champions to retain them, and coach the weaker reps using the patterns the
-top reps already follow.
+KMeans grouped 600 synthetic doctors into four current-value tiers. Three clusters had the highest
+silhouette score. I chose four for interpretable business tiers. The 99-doctor high-potential group is
+a screening list based on estimated potential and current prescription volume.
 
 > Data label: SYNTHETIC. Real CRM data (rep calls, doctor prescribing) is proprietary and
 > privacy-sensitive, so every row is fabricated by a seeded generator (`data/generate_data.py`).
@@ -32,7 +30,7 @@ top reps already follow.
 
 ## Problem
 A pharmaceutical commercial team needs an evidence-based read on rep, region, and product performance,
-on what actually drives prescriptions, and on where to focus limited call capacity. Three business
+on the association between visits and prescriptions, and on where to focus limited call capacity. Three business
 questions:
 1. Which reps, regions, and products are performing best and worst?
 2. Does call frequency correlate with prescription volume (tested with correlation and regression)?
@@ -61,14 +59,13 @@ a doctor more often goes with more scripts (r = 0.49, R² = 0.24, p ≈ 1.5e-37)
 A small group of doctors drives a large share of scripts, which is why targeting matters.
 ![Prescribing concentration](charts/02_script_concentration.png)
 
-The segmentation points to a clear growth target. The "High-potential growth" group has headroom and
-responds to calls, so it's the best place to invest added effort.
+The four clusters provide a way to review current value and estimated potential.
 ![HCP segments](charts/06_hcp_segments.png)
 
 | Metric (SYNTHETIC) | Value |
 |---|---|
 | Calls ↔ scripts correlation | r = 0.49 (R² = 0.24); association, not proven causation |
-| Lift per additional call | ~5.5 scripts/yr (≈5.6 controlling for potential) |
+| Associated difference per additional recorded call | ~5.5 scripts/yr (≈5.6 controlling for potential) |
 | Top product / region | Cardiplex / Southeast |
 | Top vs bottom rep (scripts attributed) | 6,007 vs 154 (territory-driven, not pure skill) |
 | k chosen for segmentation | k=4 (silhouette ≈0.35, near the k=3 optimum); business-actionable tiers |
@@ -76,11 +73,8 @@ responds to calls, so it's the best place to invest added effort.
 | Prescribing concentration | top 20% of doctors ≈ 37% of all scripts |
 
 ## Recommendation
-- Reallocate calls toward the High-potential growth segment. These doctors have room to grow and
-  respond to visits, so each call should return more scripts than visiting an already-loyal doctor.
-- Keep enough contact with the Champions to retain them, without over-investing where there's no upside.
-- Coach the weaker reps using the top reps' patterns (call frequency and scripts-per-call) and rebalance
-  territory load toward the higher-potential regions.
+- Use the high-potential tier to recruit a randomized outreach experiment before reallocating calls.
+- Compare rep results within similar territories before making coaching or coverage decisions.
 
 ## Limitations and next steps
 Two honest caveats. First, this is **correlation, not proof of causation**: the call→script link is an
