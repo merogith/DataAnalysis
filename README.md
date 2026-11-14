@@ -1,4 +1,4 @@
-# Data Analyst Portfolio — Meric Erler
+# Applied Data Analysis Case Studies
 
 **[View the portfolio site →](https://merogith.github.io/DataAnalysis/)** &nbsp;·&nbsp; mericerler@gmail.com
 
