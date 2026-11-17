@@ -52,3 +52,6 @@ I worked in a clean Python environment with pandas, numpy, matplotlib, seaborn,
 scikit-learn, statsmodels, jupyter, and nbconvert. The notebook is built
 programmatically (`build_notebook.py`) and then run with `jupyter nbconvert --execute`, which
 confirms it runs top to bottom without errors before the project is considered done.
+
+## Reproducibility corrections
+Monthly percentage changes explicitly retain missing observations (`fill_method=None`), and real-price CAGR uses the real series' own start/end dates. The valid valuation date is shown independently of nominal price coverage. Calendar-year rankings exclude partial years. The BI guide selects the latest nonblank CAPE and formats fractional drawdowns as percentages exactly once. `dashboard/metrics.json` and `scripts/verify_metrics.py` make these conventions checkable.

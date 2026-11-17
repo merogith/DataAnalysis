@@ -1,3 +1,4 @@
+# For the exact regenerated environment, use requirements-tested.txt.
 # Python dependencies for all three projects.
 # Install with:  pip install -r requirements.txt
 pandas

@@ -32,13 +32,13 @@ md("""# Project 2 — Free-to-Play Game Economy & Balance Analytics (SYNTHETIC d
    (pick rate, win rate when used, price vs power) and **flag** items whose win rate deviates
    significantly from the 50% fair baseline, using a **proportion z-test**.
 3. **Retention & monetization** — What drives players to **stay** and to **pay**? We measure
-   **D1 / D7 / D30** cohort retention, a simple **funnel**, compare **spenders vs non-spenders**,
+   **D1 / D7 / D30** cohort retention, an independent **milestone overview**, compare **spenders vs non-spenders**,
    and fit a **logistic regression** that predicts who becomes a payer from *early* behaviour.
 
 ## How we'll know we succeeded (success metrics)
 - A quantified **net currency flow** (per day and per player) with an explicit surplus or deficit.
 - An **item-balance table** that statistically flags every item whose win rate is off 50% (with a z-test & 95% CI), naming the over/under-powered items.
-- **D1/D7/D30 retention** numbers, a payer **funnel**, and a payer-prediction model reported with **ROC AUC and average precision**, with a threshold baseline and interpretable **odds ratios**.
+- **D1/D7/D30 retention** numbers, player **milestones**, and a payer-prediction model reported with **ROC AUC and average precision**, with a threshold baseline and interpretable **odds ratios**.
 - A clear, concrete **balancing + monetization recommendation** a producer could action next sprint.
 
 ## The data (all SYNTHETIC)
@@ -56,7 +56,7 @@ mixed-case names, mixed timestamp formats, stray whitespace and a few impossible
 cleaning step has something genuine to fix.""")
 
 code("""# --- Setup -------------------------------------------------------------------
-import warnings; warnings.filterwarnings("ignore")
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -217,7 +217,7 @@ print(f"Total sink  (drains)  : {sink_total:,.0f}")
 print(f"NET flow into economy : {net_total:,.0f}  "
       f"({'SURPLUS' if net_total > 0 else 'DEFICIT' if net_total < 0 else 'BALANCED'})")
 print(f"Sinks recover {abs(sink_total)/faucet_total*100:.0f}% of every coin minted "
-      f"(healthy target is ~90-100%).")""")
+      f"(interpret against progression and new-player issuance).")""")
 
 code("""# Chart 3 — daily faucets vs sinks, plus the cumulative surplus.
 daily = cur.pivot_table(index="date", columns="flow", values="amount", aggfunc="sum").fillna(0)
@@ -318,7 +318,8 @@ print(f"Avg win rate — premium items: {prem_wr*100:.1f}%  vs free items: {free
       f"=> {'PAY-TO-WIN risk' if prem_wr-free_wr>0.03 else 'roughly fair'}")""")
 
 md("""### 4c. Retention — cohort curves & the D1 cliff
-**Retention** = the share of a cohort still active *N* days after install. **D1/D7/D30** are the
+**Exact-day retention** = the share of the install cohort active *on day N* after install.
++All synthetic players have a full 60-day observation window; real cohorts would need an eligibility cutoff. **D1/D7/D30** are the
 industry-standard checkpoints. We compute each player's set of active days-since-install, then the
 fraction of all players active on day *N*. A steep drop right after day 1 is the classic
 **retention cliff**.""")
@@ -348,16 +349,16 @@ ax.set_xlabel("Days since install"); ax.set_ylabel("% of players active")
 ax.yaxis.set_major_formatter(mtick.PercentFormatter())
 fig.savefig(CHARTS/"06_retention_curve.png"); plt.show()""")
 
-md("""### 4d. Monetization — funnel, spenders vs non-spenders, and a payer model
-First a simple **funnel** (installed → played a match → returned on D1 → ever paid). Then we
+md("""### 4d. Monetization — milestones, spenders vs non-spenders, and a payer model
+First a **milestone overview** (independent shares of installs, not a sequential conversion funnel). Then we
 compare **spenders vs non-spenders**, and finally fit a **logistic regression** predicting whether a
-player has a recorded purchase at any point, using days 0–3 activity and acquisition attributes.
-Purchases can occur in the feature window, so this is an illustrative classifier. A day-three
-intervention would require a purchase target measured after the feature window.
+player first purchases during days 4–30, using days 0–3 activity and acquisition attributes.
+The cutoff is the start of day 4. Players who purchased before the cutoff are excluded.
+Every synthetic player has a full outcome window; this does not establish treatment lift for an offer.
 
 > **Honest caveat on the AUC.** In this SYNTHETIC dataset, both early engagement and the decision to
 > pay are generated from the same hidden "engagement propensity", and early-session count is literally
-> a term in the payer formula. So the model's AUC (~0.8) partly reflects that built-in coupling — it
+> a term in the payer formula. So the model's AUC partly reflects that built-in coupling — it
 > confirms the pipeline recovers a designed signal, **not** that this would predict payers in a real
 > game.""")
 
@@ -365,8 +366,8 @@ code("""# Build one player-level feature table.
 payers = set(purchases["player_id"].unique())
 players["is_payer"] = players["player_id"].isin(payers).astype(int)
 
-# early (days 0–3) behaviour
-early_sess = ses[ses["day_since_install"]<=3]
+# early (days 0–3) behaviour; never include post-cutoff activity.
+early_sess = ses[ses["day_since_install"].between(0, 3)]
 feat = pd.DataFrame({"player_id": players["player_id"]}).set_index("player_id")
 feat["early_sessions"]  = early_sess.groupby("player_id").size()
 feat["early_playmin"]   = early_sess.groupby("player_id")["duration_min"].sum()
@@ -375,11 +376,20 @@ feat["early_playmin"]   = early_sess.groupby("player_id")["duration_min"].sum()
 mt = matches.merge(players[["player_id","install_date"]], on="player_id", how="left")
 mt["match_day"] = (pd.to_datetime(mt["match_time"]) -
                    pd.to_datetime(mt["install_date"])).dt.days
-feat["early_matches"]   = mt[mt["match_day"]<=3].groupby("player_id").size()
+feat["early_matches"] = mt[mt["match_day"].between(0, 3)].groupby("player_id").size()
 feat = feat.fillna(0)
 feat = feat.join(players.set_index("player_id")[["platform","acquisition_channel","is_payer"]])
 
-# ---- funnel ----
+# A temporal prediction target: no purchases in the feature window.
+pt = purchases.merge(players[["player_id", "install_date"]], on="player_id", how="left")
+pt["purchase_day"] = (pt["purchase_time"] - pt["install_date"]).dt.days
+early_payers = set(pt.loc[pt["purchase_day"].between(0, 3), "player_id"])
+later_payers = set(pt.loc[pt["purchase_day"].between(4, 30), "player_id"])
+feat["eligible_day4"] = ~feat.index.isin(early_payers)
+feat["pays_d4_d30"] = feat.index.isin(later_payers).astype(int)
+assert early_sess["day_since_install"].between(0, 3).all()
+
+# ---- independent milestone counts; these are not nested sets ----
 n_install = n_players
 n_match   = matches["player_id"].nunique()
 n_d1      = active_days.apply(lambda s: 1 in s).sum()
@@ -388,13 +398,13 @@ funnel = pd.Series({"Installed":n_install,"Played a match":n_match,
                     "Returned D1":n_d1,"Ever paid":n_pay})
 print((funnel.to_frame("players").assign(pct_of_installs=lambda d:(d['players']/n_install*100).round(1))))""")
 
-code("""# Chart 7 — monetization funnel.
+code("""# Chart 7 — independent milestone overview, not sequential conversions.
 fig, ax = plt.subplots(figsize=(9,4.2))
 ax.barh(funnel.index[::-1], funnel.values[::-1],
         color=[SLATE,AMBER,TEAL,GREEN][::-1])
 for i,(k,v) in enumerate(list(funnel.items())[::-1]):
     ax.text(v, i, f" {v:,} ({v/n_install*100:.1f}%)", va="center", fontsize=9)
-ax.set_title("Monetization funnel — install → match → D1 return → pay")
+ax.set_title("Player milestones — independent shares of installs")
 ax.set_xlabel("players")
 fig.savefig(CHARTS/"07_funnel.png"); plt.show()
 
@@ -407,11 +417,12 @@ print(f"\\nPayer rate: {players['is_payer'].mean()*100:.1f}% | "
       f"ARPU ${purchases['usd_amount'].sum()/n_install:.2f} | "
       f"ARPPU ${purchases['usd_amount'].sum()/n_pay:.2f}")""")
 
-code("""# ---- logistic regression: predict 'ever pays' from EARLY behaviour ----
-model_df = pd.get_dummies(feat.reset_index(),
+code("""# ---- predict a first purchase in days 4–30 among day-4 nonpayers ----
+model_df = pd.get_dummies(feat.loc[feat["eligible_day4"]].reset_index(),
                           columns=["platform","acquisition_channel"], drop_first=True)
-y = model_df["is_payer"]
-X = model_df.drop(columns=["player_id","is_payer"]).astype(float)
+y = model_df["pays_d4_d30"]
+X = model_df.drop(columns=["player_id", "is_payer", "eligible_day4", "pays_d4_d30"]).astype(float)
+print(f"Eligible nonpayers at day 4: {len(model_df):,}; later payers: {int(y.sum()):,}")
 Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
 
 clf = LogisticRegression(max_iter=2000, class_weight="balanced")
@@ -439,7 +450,7 @@ a1.set_xlabel("odds ratio (>1 = more likely to pay)")
 cm = confusion_matrix(yte, pred)
 sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=a2,
             xticklabels=["pred non","pred pay"], yticklabels=["true non","true pay"])
-a2.set_title(f"Payer model confusion matrix (AUC={auc:.2f})")
+a2.set_title(f"Days 4–30 first-purchase model (AUC={auc:.2f})")
 fig.savefig(CHARTS/"08_payer_model.png"); plt.show()""")
 
 md("""## Step 5 — SQL on the same data (SQLite, with a window function)
@@ -452,32 +463,31 @@ analyst runs to spot players whose balance never stops growing (a coin-accumulat
 total within each player, ordered by time — without collapsing the rows like a GROUP BY would.)*""")
 
 code("""con = sqlite3.connect(":memory:")
-led = cur[["player_id","txn_time","txn_type","flow","amount"]].copy()
+led = cur[["txn_id", "player_id", "txn_time", "txn_type", "flow", "amount"]].copy()
 led["txn_time"] = led["txn_time"].astype(str)
+assert led["txn_id"].is_unique
 led.to_sql("ledger", con, index=False)
 
 q = '''
 WITH running AS (
-  SELECT player_id, txn_time, amount,
-         SUM(amount) OVER (PARTITION BY player_id
-                           ORDER BY txn_time
-                           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS wallet_balance
+  SELECT player_id, txn_id, txn_time, amount,
+         SUM(amount) OVER (PARTITION BY player_id ORDER BY txn_time, txn_id
+                           ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS wallet_balance,
+         ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY txn_time DESC, txn_id DESC) AS last_row
   FROM ledger
 )
-SELECT player_id,
-       COUNT(*)                AS n_txns,
-       MAX(wallet_balance)     AS peak_wallet,
-       (SELECT wallet_balance FROM running r2
-        WHERE r2.player_id=running.player_id
-        ORDER BY txn_time DESC LIMIT 1) AS final_wallet
-FROM running
-GROUP BY player_id
-ORDER BY final_wallet DESC
-LIMIT 8;
+SELECT player_id, COUNT(*) AS n_txns, MAX(wallet_balance) AS peak_wallet,
+       MAX(CASE WHEN last_row = 1 THEN wallet_balance END) AS final_wallet
+FROM running GROUP BY player_id
+ORDER BY final_wallet DESC, player_id;
 '''
-top_wallets = pd.read_sql(q, con)
-print("Players with the largest end-of-window wallets (running-balance window fn):")
-print(top_wallets.to_string(index=False))
+wallets = pd.read_sql(q, con)
+expected = cur.groupby("player_id")["amount"].sum().sort_index()
+actual = wallets.set_index("player_id")["final_wallet"].sort_index()
+pd.testing.assert_series_equal(actual, expected, check_names=False, check_dtype=False)
+wallets.to_csv(DASH / "wallet_balances.csv", index=False)
+print("Reconciled all final wallets to transaction totals; top 8:")
+print(wallets.head(8).to_string(index=False))
 
 # a second window-function query: rank items by win rate
 matches.to_sql("matches", con, index=False)
@@ -511,6 +521,7 @@ day_rev    = (purchases.dropna(subset=["purchase_time","usd_amount"])
 fact = pd.concat([day_faucet, day_sink, day_dau, day_matches, day_rev], axis=1).fillna(0)
 fact = fact.reset_index().rename(columns={"index":"date"})
 fact["date"] = pd.to_datetime(fact["date"])
+fact = fact.sort_values("date").reset_index(drop=True)
 fact["net_coins"] = fact["faucet_coins"] + fact["sink_coins"]
 fact["cum_net_coins"] = fact["net_coins"].cumsum()
 fact["sink_recovery_pct"] = (-fact["sink_coins"]/fact["faucet_coins"].replace(0,np.nan)*100).round(1)
@@ -545,7 +556,20 @@ dim_player["lifetime_usd"] = dim_player["lifetime_usd"].fillna(0).round(2)
 maxday = ses.groupby("player_id")["day_since_install"].max().rename("last_active_day")
 dim_player = dim_player.merge(maxday, on="player_id", how="left")
 dim_player["last_active_day"] = dim_player["last_active_day"].fillna(0).astype(int)
+for day in (1, 7, 30):
+    active_ids = set(ses.loc[ses["day_since_install"] == day, "player_id"])
+    dim_player[f"active_d{day}"] = dim_player["player_id"].isin(active_ids).astype(int)
+    assert np.isclose(dim_player[f"active_d{day}"].mean(), ret[day])
+dim_player = dim_player.merge(feat[["eligible_day4", "pays_d4_d30"]], left_on="player_id", right_index=True)
 dim_player.to_csv(DASH/"dim_player.csv", index=False)
+metrics = {"retention": {f"d{d}": float(ret[d]) for d in (1, 7, 30)},
+           "sink_recovery": float(-cur.loc[cur.flow == "sink", "amount"].sum() / cur.loc[cur.flow == "source", "amount"].sum()),
+           "milestones": {str(k): int(v) for k, v in funnel.items()},
+           "payer_model": {"feature_days": [0, 3], "outcome_days": [4, 30],
+                           "eligible_players": int(len(model_df)), "positive_players": int(y.sum()),
+                           "roc_auc": float(auc), "average_precision": float(ap),
+                           "prevalence": float(payer_rate), "accuracy": float(acc)}}
+(DASH / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\\n")
 
 # ---- dim_date: calendar dimension ----
 dim_date = pd.DataFrame({"date": fact["date"]})
@@ -570,20 +594,20 @@ md("""## Step 7 — Key findings & recommendation
    a point or two; we label these "skewed (sig., small)" rather than overpowered, because with
    thousands of matches even a trivial 51% edge is "significant" yet irrelevant for balance. Reporting
    effect size, not just the p-value, is what separates a real balance problem from statistical noise.
-3. **There is a textbook Day-1 retention cliff.** Roughly half of installs never come back on day 1;
-   the curve then flattens (the players who survive D1 are far stickier). D7 and D30 are healthy
-   *given* the D1 loss — so the highest-leverage fix is the **first session**, not the late game.
-4. **Monetization is concentrated and tracks early engagement.** Only a small minority ever pay, and
-   they log far more days 0–3 sessions, playtime and matches. A logistic model separates payers from
-   early behaviour with solid AUC (~0.8). **Honest caveat:** in this synthetic data, paying and early
+3. **Exact-day retention declines from D1 to D30.** Roughly half of installs are inactive on D1.
+   These independent day-specific counts do not establish that the same players remain sticky.
+   Test onboarding improvements and measure D1, D7 and D30 together.
+4. **Monetization is concentrated and tracks early engagement.** Only a small minority ever pay.
+   The logistic model uses days 0–3 to classify first purchases in days 4–30 among players who
+   have not paid by the cutoff. The metrics above report its actual holdout performance. **Honest caveat:** in this synthetic data, paying and early
    engagement are generated from the same hidden propensity, so the AUC partly measures that designed
    coupling rather than a generalisable prediction — it shows the method works, not that these exact
    numbers would hold on a real game.
 
 ### Recommendation (for the producer)
 - **Re-balance the economy:** add or deepen a **coin sink** (e.g. cosmetic upgrades, repair costs,
-  a soft-currency battle pass) so sinks recover ~90-100% of faucets, and trim the late-game faucet
-  surplus. Evaluate the change against progression and retention guardrails.
+  a soft-currency battle pass) and tune it against progression needs rather than assuming a universal recovery target.
+  Measure net flow per active player and account for new-player issuance. Evaluate the change against progression and retention guardrails.
 - **Nerf the two overpowered premium items** (reduce their edge toward 50%) to remove the
   pay-to-win perception, and **buff Rusty Dagger** so the starter weapon isn't a trap.
 - **Attack the D1 cliff first:** invest in onboarding / first-session quality (tutorial, a guaranteed
@@ -592,7 +616,7 @@ md("""## Step 7 — Key findings & recommendation
 
 ### What I'd do next
 - Add an **A/B test design** for the proposed sink + onboarding changes (define guardrail metrics).
-- Move from "ever pays" to **predicted LTV** and a **survival model** for churn timing.
+- Extend the future-purchase model to **predicted LTV** and a **survival model** for churn timing.
 - Track item balance **over time** (a win-rate control chart) so future content can't silently break it.""")
 
 nb["cells"] = cells

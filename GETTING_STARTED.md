@@ -35,16 +35,17 @@ three:
 
 ## Software you need
 
-You need Python 3.9 or newer and a few libraries. Check Python first:
+The tested setup uses Python 3.12 and the libraries in `requirements-tested.txt`. Check Python first:
 
 ```bash
-python3 --version       # expect Python 3.9 or higher
+python3 --version       # tested with Python 3.12
 ```
 
 Then install the libraries:
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn statsmodels jupyter
+pip install -r requirements-tested.txt
+pip install jupyter  # optional, for the interactive notebook UI
 ```
 
 Confirm it worked:
@@ -54,6 +55,22 @@ python3 -c "import pandas, numpy, matplotlib, seaborn, sklearn, statsmodels; pri
 ```
 
 If it prints `ready`, you are set. If `pip` is not found, try `pip3`.
+
+## Rebuild and check the finished outputs
+
+From the repository root, in the environment above:
+
+```bash
+python scripts/rebuild.py
+python scripts/verify_metrics.py
+```
+
+This executes each notebook against the checked-in data and regenerates its HTML, charts
+and CSVs. It does not refresh data. The checks reconcile retention, wallet totals,
+missing returns and dated market metrics against the source snapshots. A compatible
+Python 3 kernel must be installed in the same environment (`python -m ipykernel install
+--sys-prefix`). Python 3.12 and the versions in `requirements-tested.txt` were used for
+the committed outputs.
 
 ## A suggested reading order
 

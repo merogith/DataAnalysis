@@ -7,9 +7,8 @@ whether starting valuation was associated with the following decade's real price
 
 A few things stood out:
 
-- Once you remove inflation, the index's price has grown about 2.5% a year. Most of the large
-  headline numbers come from inflation and reinvested dividends rather than real price growth, so
-  return expectations should be set with that in mind.
+- Once you remove inflation, the index's price has grown about 2.5% a year. Nominal price growth includes inflation; these real-price results exclude inflation and
+  reinvested dividends. Total-return performance is outside this analysis.
 - Large losses are a normal part of the record, not an exception. In real terms the market has
   fallen as much as 81% from a previous peak (−80.6% in the early 1930s, price-only), and the VIX
   "fear gauge" jumps during every crisis.
@@ -19,9 +18,9 @@ A few things stood out:
   Newey-West errors it is ≈0.003, and across the ~13 genuinely independent decades in the record it
   is not significant on its own. The last valid CAPE in this extract, September 2023, is around
   the 95th percentile of readings since 1881.
-- Gold has had close to zero *average* correlation with stocks, so it has historically helped
-  cushion the deep drawdowns that show up repeatedly in the data — though a low average is not a
-  guarantee of protection in any single crash.
+- Gold has had close to zero *average* correlation with stocks. That indicates low average
+  co-movement, but does not establish protection in a particular crash; a crisis-period
+  portfolio analysis would be needed for that claim.
 
 The comparison shows why dependence between overlapping return windows matters when testing
 long-horizon relationships.

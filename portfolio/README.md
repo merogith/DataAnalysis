@@ -3,7 +3,7 @@
 This folder holds a simple, fast, framework-free web version of the portfolio.
 
 ## Files
-- **`index.html`** — a self-contained landing page (all CSS is inline; no build step, no
+- **`index.html`** — a static landing page (shared CSS; no build step, no
   dependencies, no JavaScript). It introduces the analyst, summarises all three projects with a
   one-line hook + key result + tech stack, lists the skills demonstrated, and links to each
   project's notebook, write-up, and dashboard guide.
