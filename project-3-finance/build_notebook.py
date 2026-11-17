@@ -33,7 +33,7 @@ md("""# Project 3 — US Stock Market: Trends, Risk & Valuation (REAL data)
 > **Data sources.** The data comes from GitHub's curated `datasets/` collection, which mirrors the *same* underlying real data (Shiller / CBOE / LBMA) used by `yfinance`/FRED and is openly downloadable. See `NOTES.md`. Run `python data/download_data.py` to refresh.""")
 
 code("""# --- Setup -------------------------------------------------------------------
-import warnings; warnings.filterwarnings("ignore")
+import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -112,9 +112,9 @@ print("Missing values that remain (expected — VIX pre-1990, lagged fundamental
 print(df[["RealPrice","CAPE","VIX","Gold"]].isna().sum())""")
 
 code("""# --- Derived features (the quantities the analysis actually uses) ---
-df["sp_ret"]   = df["SP500"].pct_change()         # nominal monthly return
-df["real_ret"] = df["RealPrice"].pct_change()     # inflation-adjusted monthly return
-df["gold_ret"] = df["Gold"].pct_change()
+df["sp_ret"]   = df["SP500"].pct_change(fill_method=None)         # nominal monthly return
+df["real_ret"] = df["RealPrice"].pct_change(fill_method=None)     # inflation-adjusted monthly return
+df["gold_ret"] = df["Gold"].pct_change(fill_method=None)
 df["vol_12m"]  = df["sp_ret"].rolling(12).std() * np.sqrt(12)   # annualised rolling volatility
 df["drawdown"] = df["RealPrice"]/df["RealPrice"].cummax() - 1   # % below the prior real peak
 
@@ -125,7 +125,7 @@ snapshot = {
     "Latest VALID valuation dated": df["RealPrice"].dropna().index[-1].date(),
     "Latest real price (index)": round(df["RealPrice"].dropna().iloc[-1], 0),
     "Current annualised volatility": f'{df["vol_12m"].dropna().iloc[-1]*100:.1f}%',
-    "Current drawdown vs real peak": f'{df["drawdown"].dropna().iloc[-1]*100:.1f}%',
+    "Last valid real drawdown vs peak (dated above)": f'{df["drawdown"].dropna().iloc[-1]*100:.1f}%',
 }
 snapshot""")
 
@@ -142,7 +142,9 @@ ax.set_yscale("log"); ax.set_title("S&P 500 since 1871 — nominal vs inflation-
 ax.set_ylabel("Index level (log)"); ax.legend()
 fig.savefig(CHARTS/"01_real_trend.png"); plt.show()
 
-cagr_real = (df["RealPrice"].dropna().iloc[-1]/df["RealPrice"].dropna().iloc[0])**(1/((df.index.max()-df.index.min()).days/365.25))-1
+real_series = df["RealPrice"].dropna()
+real_years = (real_series.index[-1] - real_series.index[0]).days / 365.25
+cagr_real = (real_series.iloc[-1] / real_series.iloc[0]) ** (1 / real_years) - 1
 print(f"Long-run REAL price growth (excl. dividends): {cagr_real*100:.1f}% per year")""")
 
 code("""# Chart 2 — CAPE (cyclically-adjusted P/E). High = expensive vs long-run earnings.
@@ -281,7 +283,9 @@ then rank the best and worst years. (A *window function* looks at a row *relativ
 — here, this year's December vs last year's.)""")
 
 code("""yr = df.copy(); yr["year"] = yr.index.year
-annual = (yr.groupby("year")["SP500"].last().rename("dec_close").reset_index())
+annual = (yr.loc[yr.index.month == 12].groupby("year")["SP500"]
+          .last().rename("dec_close").reset_index())
+print("Calendar-year ranking excludes the final partial year.")
 con = sqlite3.connect(":memory:")
 annual.to_sql("yearly", con, index=False)
 
@@ -299,6 +303,7 @@ WHERE prev_close IS NOT NULL AND year >= 1928
 ORDER BY pct_return DESC
 '''
 ranked = pd.read_sql(query, con)
+ranked.to_csv(DASH / "calendar_returns.csv", index=False)
 print("Best 5 calendar years:"); print(ranked.head(5).to_string(index=False))
 print("\\nWorst 5 calendar years:"); print(ranked.tail(5).to_string(index=False))
 con.close()""")
@@ -327,7 +332,14 @@ dim_year = (fact.groupby("year")
             .agg(avg_cape=("cape","mean"), avg_vix=("vix","mean"),
                  year_end_real=("sp500_real","last"), avg_vol=("volatility_12m","mean"))
             .round(2).reset_index())
+dim_year["complete_nominal_year"] = dim_year["year"].isin(annual["year"])
+dim_year["real_observed_months"] = fact.groupby("year")["sp500_real"].count().reindex(dim_year["year"]).to_numpy()
 dim_year.to_csv(DASH/"dim_year.csv", index=False)
+metrics = {"price_as_of": str(df.index.max().date()),
+           "valuation_as_of": str(cape.index[-1].date()), "latest_cape": float(cape.iloc[-1]),
+           "real_price_as_of": str(real_series.index[-1].date()), "real_price_cagr": float(cagr_real),
+           "worst_real_drawdown": float(dd.min()), "price_only": True}
+(DASH / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\\n")
 
 # dim_sector: index composition in the downloaded source snapshot (for a treemap/bar)
 sector = (cons["GICS Sector"].value_counts().rename_axis("sector")
@@ -341,7 +353,7 @@ fact.tail(3)""")
 md("""## Step 7 — Key findings & recommendation
 
 ### Key findings
-1. **The long climb is real, but slower than headlines suggest.** After stripping out inflation, the S&P 500's *price* has grown only ~2.5% per year for 150 years — the big headline numbers are mostly inflation plus reinvested dividends, neither of which this price series includes.
+1. **The long climb is real, but slower than headlines suggest.** After stripping out inflation, the S&P 500's *price* has grown only ~2.5% per year for 150 years — nominal price growth includes inflation, while this real-price series excludes inflation and reinvested dividends.
 2. **Risk is real and recurring.** The market has spent long stretches deep underwater (worst real *price* drawdown ≈ **−81%** in the 1930s; reinvested dividends would soften that somewhat). The VIX shows fear spikes at *every* crisis.
 3. **Valuation matters — but the evidence is moderate, not a slam-dunk.** Higher CAPE has been followed by **lower** 10-year real returns (negative slope, R² ≈ 0.10). The naive p-value looks astronomically small (≈1e-40), but that is an **artefact of overlapping 10-year windows**: with Newey-West (HAC) errors it is ≈0.003, and on **non-overlapping** decades — of which 150 years holds only ~13 — it is **not** statistically significant on its own. This is historical evidence of a moderate association, with limited independent observations.
 4. **Gold has diversified on average.** Its *average* monthly correlation with stocks is ≈ 0 — historically useful, though an average near zero is not a guarantee of protection in any specific crash.

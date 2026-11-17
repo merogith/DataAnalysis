@@ -9,10 +9,10 @@ reasonable default for this project.
 |---|---|---|
 | `fact_market_monthly.csv` | one month of market data | the time-series charts (the core) |
 | `dim_year.csv` | one calendar year (summary) | KPI cards and year-level bars |
-| `dim_sector.csv` | one GICS sector of today's index | the "what's in the index" treemap |
+| `dim_sector.csv` | one GICS sector in the source snapshot | the "what's in the index" treemap |
 
 How they relate: `fact_market_monthly.year` links to `dim_year.year` (many months to one year).
-`dim_sector` stands alone as a snapshot of today's index. In both tools you create the
+`dim_sector` stands alone as a dated source snapshot of index composition. In both tools you create the
 relationship by dragging `year` onto `year`.
 
 ### Column dictionary (`fact_market_monthly.csv`)
@@ -21,9 +21,9 @@ relationship by dragging `year` onto `year`.
 `volatility_12m`, `drawdown` (% below peak), `year`, `decade`.
 
 ## The headline the dashboard should make obvious
-> The market is near its most expensive level in history (top 5% of CAPE readings), and
-> historically that has been followed by below-average returns. Every chart should support that
-> story.
+> In this historical extract, the last valid CAPE is September 2023 (30.8, near the top 5%
+> of historical readings). Show that date beside the KPI. This is a historical association,
+> not a current-market reading or a forecast.
 
 ## Build it in Tableau Public
 1. Install Tableau Public (free) from tableau.com/products/public and create a free account.
@@ -34,8 +34,9 @@ relationship by dragging `year` onto `year`.
 3. Check types: Tableau should read `month` as a Date and the rest as numbers (a `#` icon). If
    `month` shows as text, click its icon and choose **Date**.
 4. Build these five charts, each on a new sheet (the tab with the small chart icon at the bottom):
-   - Current CAPE (KPI). The simplest route is to drag `month` to Filters and keep only the most
-     recent month, then drop `cape` onto **Text**.
+   - Latest valid CAPE (KPI). Filter out null `cape` values first, then keep the most recent
+     remaining month. Drop `cape` onto **Text** and place that `month` beside it as the
+     “Valuation as of” date. The nominal series extends beyond the last valid valuation.
    - Real market over time (line). Drag `month` to **Columns** and `sp500_real` to **Rows**, then
      right-click the vertical axis and choose **Logarithmic**, since the index grows exponentially.
    - Valuation over time (line) with an average line. Drag `month` to **Columns** and `cape` to
@@ -49,7 +50,7 @@ relationship by dragging `year` onto `year`.
 6. Add a filter: drag `decade` onto the dashboard as a filter, or click a chart and use the funnel
    icon to **Use as Filter**, so a viewer can focus on a single era.
 7. Add a calculated field for Drawdown %: choose **Analysis → Create Calculated Field**, name it
-   `Drawdown %`, and enter `[drawdown] * 100`. Format it as a percentage.
+   `Drawdown`, and enter `[drawdown]`. Format the fractional value as a percentage exactly once.
 8. Publish: choose **File → Save to Tableau Public As…** and sign in. Tableau returns a public link
    you can share.
 
@@ -60,11 +61,13 @@ relationship by dragging `year` onto `year`.
 3. Model relationships: in the **Model** view, drag `fact_market_monthly[year]` onto
    `dim_year[year]`. Leave `dim_sector` unrelated, since it is a snapshot.
 4. Create measures (right-click the fact table, then **New measure**):
-   - `Current CAPE = CALCULATE( MAX(fact_market_monthly[cape]), fact_market_monthly[month] = MAX(fact_market_monthly[month]) )`
-   - `Worst Drawdown % = MIN(fact_market_monthly[drawdown]) * 100`
-   - `Avg Volatility % = AVERAGE(fact_market_monthly[volatility_12m]) * 100`
+   - `Valuation As Of = MAXX(FILTER(fact_market_monthly, NOT ISBLANK(fact_market_monthly[cape])), fact_market_monthly[month])`
+   - `Latest Valid CAPE = VAR d = [Valuation As Of] RETURN CALCULATE(MAX(fact_market_monthly[cape]), KEEPFILTERS(fact_market_monthly[month] = d))`
+   - `Worst Drawdown = MIN(fact_market_monthly[drawdown])`
+   - `Avg Volatility = AVERAGE(fact_market_monthly[volatility_12m])`
+   Format Valuation As Of as a date, CAPE as a decimal, and Drawdown/Volatility as Percentage. Do not scale percentages twice. These measures respect the selected time context; keep the as-of date visible.
 5. Build six visuals (click a visual icon in the **Visualizations** pane, then tick fields):
-   - Card: `Current CAPE`. Card: `Worst Drawdown %`.
+   - Card: `Latest Valid CAPE` with `Valuation As Of`. Card: `Worst Drawdown`.
    - Line chart: Axis = `month`, Values = `sp500_real` (set the axis to Logarithmic if offered).
    - Line chart: Axis = `month`, Values = `cape`.
    - Scatter chart: X = `vix`, Y = `sp_return_m`, Details = `month`, then turn on the **Trend line**
@@ -73,6 +76,15 @@ relationship by dragging `year` onto `year`.
 6. Add a slicer: drop a **Slicer** visual and put `decade` in it so viewers can filter by era.
 7. Save the `.pbix`. Public sharing needs a Power BI account; for a free public link, use Tableau
    Public as above.
+
+## Snapshot checks
+
+The complete nominal series ends in May 2026; valid real-price/CAPE observations end in
+September 2023. Missing returns remain missing. `dashboard/metrics.json` records both dates
+and the real-price CAGR, using the valid real-price date interval. `calendar_returns.csv`
+contains December-to-December observations only; a partial current year is not a calendar return.
+`dim_year.csv` records nominal-year completeness and the number of real-price observations,
+so a last-observed value is not mistaken for a complete real year.
 
 ## Suggested layout (both tools)
 ```

@@ -41,7 +41,6 @@ md("""# Project 1 — Pharmaceutical CRM Sales Analytics (SYNTHETIC data)
 | `prescriptions.csv` | one doctor's monthly script count for one product | script_id, hcp_id, product_id, month, script_count |""")
 
 code("""# --- Setup -------------------------------------------------------------------
-import warnings; warnings.filterwarnings("ignore")
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -116,7 +115,7 @@ and we say why.
 | 5 | `call_date` in 3 different formats + one future date | Parse all formats; drop dates after the data period | A 2025 date in a 2024 dataset is a data-entry error |
 | 6 | Negative / absurd call durations (−5, 999 min) | Set out-of-range (<0 or >120) to missing (NaN) | A negative visit length is impossible; don't trust it |
 | 7 | Missing call durations (~4%) | Keep as NaN; impute with the channel median only where needed | Durations are a minor feature; we don't drop whole visits over it |
-| 8 | Potential scores >100 (145, 220) and some missing | Cap the scale at 100; leave true missings as NaN then median-fill for clustering | The score is defined 0-100; >100 is an error |
+| 8 | Potential scores >100 (145, 220) and some missing | Set invalid scores to missing; median-fill for clustering | The score is defined 0-100; >100 is an error |
 | 9 | Script counts of 300 and −4 (impossible) | Drop rows with count <0 or >150 | One doctor writing 300 scripts in a month is not credible |
 | 10 | Missing rep emails (~8%) | Keep blank, flag as `email_missing` | Doesn't affect sales analysis; just note the data-quality gap |
 """)
@@ -158,9 +157,9 @@ calls["duration_min"] = calls.groupby("call_type")["duration_min"].transform(
 print("Durations now range:", round(calls['duration_min'].min(),1),
       "to", round(calls['duration_min'].max(),1), "min; missing:", calls['duration_min'].isna().sum())""")
 
-code("""# --- Decision 8: cap impossible potential scores, flag-fill missings ---
+code("""# --- Decision 8: mark impossible potential scores missing, then median-impute ---
 bad_pot = hcps["potential_score"] > 100
-print(f"Capping {int(bad_pot.sum())} potential scores that exceeded 100.")
+print(f"Marking {int(bad_pot.sum())} potential scores above 100 as missing.")
 hcps.loc[bad_pot, "potential_score"] = np.nan      # treat the impossible ones as missing
 pot_median = hcps["potential_score"].median()
 hcps["potential_filled"] = hcps["potential_score"].fillna(pot_median)
@@ -474,7 +473,7 @@ dim_product = products.rename(columns={"product_name":"product","list_price_usd"
     ["product_id","product","therapy_area","list_price"]]
 dim_rep = reps.rename(columns={"region_name":"region"})[
     ["rep_id","rep_name","region_id","region","tenure_years","email_missing"]]
-dim_hcp = (seg.reset_index()[["hcp_id","specialty","region_name","potential_filled","decile",
+dim_hcp = (seg.reset_index()[["hcp_id","region_id","specialty","region_name","potential_filled","decile",
                               "segment","segment_name","total_scripts","n_calls"]]
            .rename(columns={"region_name":"region","potential_filled":"potential_score",
                             "total_scripts":"hcp_total_scripts","n_calls":"hcp_total_calls"}))

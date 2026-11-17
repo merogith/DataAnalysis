@@ -6,7 +6,7 @@ the project does, how the analysis fits together, and what the technical terms m
 ## What this project does
 It studies the US stock market using more than 150 years of real historical data. It looks at
 four questions: how much the market has actually grown, how risky it has been, whether it is
-expensive today, and whether stocks and gold protect each other. The central result is that how
+expensive at the last valid snapshot date, and whether stocks and gold co-move on average. The central result is that how
 expensive the market is at a given point has historically been linked to the returns over the
 following ten years.
 
@@ -30,9 +30,9 @@ Fourth, testing and conclusions. I measured the worst losses the market has put 
 — higher valuation, lower future return — but the evidence is moderate rather than decisive: the
 10-year windows overlap, so the naive significance is overstated, and the genuinely independent test
 (non-overlapping decades) is not conclusive on its own. I also checked whether gold and stocks move
-together; on average they mostly do not, which is what has made gold useful in a portfolio. The
-findings then turn into three measured actions: lean toward lower return expectations, diversify, and
-automate discipline.
+together; low average co-movement does not establish protection in any particular crash.
+The analysis is historical, uses price-only returns and does not make a current forecast.
+The last valid real-price/CAPE observation is September 2023, although nominal prices run to May 2026.
 
 ## Glossary
 - Real (inflation-adjusted): a value after removing the effect of rising prices, expressed in

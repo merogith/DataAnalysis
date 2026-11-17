@@ -40,7 +40,7 @@ A look at whether a game's economy is balanced, whether any items are overpowere
 players engaged and spending. Coin sinks recover about 63% of issued coins, two premium items are overpowered by a meaningful margin (Phoenix Blade at a 61% win
 rate — while items sitting 1–2 points off 50% are flagged as "skewed, small" rather than overpowered),
 retention drops sharply after the first day (47% to 18% to 4% at D1/D7/D30), and a logistic model
-separates paying players with an AUC ≈0.79. Because the data is synthetic with designed-in ground
+classifies days 4–30 first purchases from days 0–3 activity with an AUC ≈0.73. Because the data is synthetic with designed-in ground
 truth, these numbers chiefly demonstrate that the pipeline recovers what was built in.
 Tech: Python, pandas, scikit-learn (logistic regression), proportion z-tests, matplotlib/seaborn, SQLite window functions.
 Links: [folder](project-2-game-economy/) · [notebook](project-2-game-economy/analysis.ipynb) · [write-up](project-2-game-economy/README.md) · [dashboard guide](project-2-game-economy/DASHBOARD_GUIDE.md)
@@ -59,7 +59,11 @@ Links: [folder](project-2-game-economy/) · [notebook](project-2-game-economy/an
 
 ## Running any project
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn statsmodels jupyter
+pip install -r requirements-tested.txt
+python -m ipykernel install --sys-prefix
+python scripts/rebuild.py
+python scripts/verify_metrics.py
+# Optional UI: pip install jupyter
 
 cd project-3-finance
 python -m jupyter notebook analysis.ipynb   # then Restart & Run All
@@ -68,6 +72,10 @@ The notebooks are saved with their outputs, so they can also be read on GitHub w
 anything. `GETTING_STARTED.md` has a fuller walkthrough.
 
 A simple web version of this overview is in [portfolio/index.html](portfolio/index.html).
+
+The tested Python 3.12 package versions are recorded in `requirements-tested.txt`.
+The rebuild keeps the checked-in data snapshots; optional source refreshes are separate.
+`dashboard/metrics.json` in the game and finance folders records dated machine-readable metrics.
 
 ## A note on the data
 Project 3 uses real, public market data from Shiller, CBOE, and LBMA. I pulled it from GitHub-hosted

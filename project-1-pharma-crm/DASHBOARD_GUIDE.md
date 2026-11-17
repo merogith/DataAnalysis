@@ -19,7 +19,11 @@ How they relate (the keys):
 - `fact_scripts.rep_id` → `dim_rep.rep_id`
 - `fact_scripts.hcp_id` → `dim_hcp.hcp_id`
 - `fact_scripts.product_id` → `dim_product.product_id`
-- `fact_scripts.region_id` → `dim_region.region_id`
+- `dim_hcp.region_id` → `dim_region.region_id`
+
+Use the single active region path `dim_region → dim_hcp → fact_scripts`. The fact also
+contains `region_id` for validation/export convenience; do not add a second active region
+relationship. In Power BI use one-way dimension-to-fact filtering throughout.
 
 You create a relationship by dragging the key from the fact table onto the matching key in each
 dimension table (a "many facts → one dimension" link).
@@ -29,16 +33,16 @@ dimension table (a "many facts → one dimension" link).
 `script_count` (the number to sum).
 
 ### Column dictionary (`dim_hcp.csv`)
-`hcp_id` · `specialty` · `region` · `potential_score` (0–100) · `decile` (1–10) · `segment` (0–3) ·
+`hcp_id` · `region_id` · `specialty` · `region` · `potential_score` (0–100) · `decile` (1–10) · `segment` (0–3) ·
 `segment_name` (Champions / Steady mid-tier / High-potential growth / Low priority) ·
 `hcp_total_scripts` · `hcp_total_calls`.
 
 ---
 
 ## The dashboard's headline insight
-> Calling doctors is associated with more prescriptions, and a specific 99-doctor "High-potential
-> growth" segment is where extra calls should return the most prescriptions. Every chart supports that
-> story.
+> Recorded calls and prescriptions are associated in the synthetic data. The 99-doctor
+> “High-potential growth” tier is a screening list for a randomized outreach experiment,
+> not an estimate of incremental response to extra calls.
 
 ---
 
@@ -46,7 +50,7 @@ dimension table (a "many facts → one dimension" link).
 1. Install Tableau Public (free) from tableau.com/products/public and create a free account.
 2. Connect: open Tableau Public → **Connect → Text file** → choose `fact_scripts.csv`. On the
    **Data Source** tab, drag in `dim_rep.csv`, `dim_hcp.csv`, `dim_product.csv`, `dim_region.csv` one
-   at a time; in each relationship pop-up, match the key (e.g. `rep_id` = `rep_id`).
+   at a time; relate fact to rep/HCP/product by key, then HCP to region by `region_id`. Keep a single region path through HCP rather than relating region directly to the fact as well.
 3. Check types: Tableau should read `script_month` as a Date and `script_count` as a number (`#`).
    If `script_month` shows as text, click its icon → **Date**.
 4. Build these 5 sheets (each on a new sheet, the tab with the small chart icon at the bottom):
@@ -72,8 +76,7 @@ dimension table (a "many facts → one dimension" link).
    ```
    SUM([Hcp Total Scripts]) / SUM([Hcp Total Calls])
    ```
-   (Use the `dim_hcp` fields.) Drop it on a bar by `segment_name` to show which segment is most
-   responsive.
+   (Use the `dim_hcp` fields.) Drop it on a bar by `segment_name` to compare the recorded activity ratio, not incremental responsiveness.
 8. Publish: **File → Save to Tableau Public As…**, sign in, and you get a public link for your
    portfolio.
 
@@ -82,8 +85,9 @@ dimension table (a "many facts → one dimension" link).
 2. Get data: **Home → Get data → Text/CSV** → load all six CSVs (one at a time). In **Transform data**,
    confirm `script_month` is a *Date* type and `script_count` is a *Whole number*.
 3. Model relationships: go to the **Model** view (left rail). Drag `fact_scripts[rep_id]` onto
-   `dim_rep[rep_id]`; repeat for `hcp_id`, `product_id`, `region_id` onto their dimension tables. Each
-   should create a **many-to-one** relationship (many facts, one dimension).
+   `dim_rep[rep_id]`; repeat for `hcp_id` and `product_id` onto their dimension tables. Relate `dim_hcp[region_id]`
+   many-to-one to `dim_region[region_id]`. Leave the direct fact-region relationship absent/inactive.
+   Each active relationship filters in one direction from dimension to fact.
 4. Create measures (right-click `fact_scripts` → **New measure**):
    - `Total Scripts = SUM(fact_scripts[script_count])`
    - `Total Calls = SUM(dim_hcp[hcp_total_calls])`
@@ -97,8 +101,12 @@ dimension table (a "many facts → one dimension" link).
      Details = `dim_hcp[hcp_id]`; turn on the **Trend line** under the **Analytics** pane.
    - **Clustered bar / treemap:** Axis/Category = `dim_hcp[segment_name]`, Values = `HCP Count`
      (and add a second bar with `Scripts per Call` to compare the recorded scripts-to-calls ratio by segment).
-6. Add a slicer: drop a **Slicer** visual and put `dim_region[region]` (or `dim_product[product]`) in it
-   so viewers can filter.
+6. Add a region slicer using `dim_region[region]`. It filters both physician metrics and
+   prescriptions through the single region→HCP→fact path. A product slicer filters only
+   prescription visuals: annual all-product physician calls/segments do not have product grain.
+   Label that scope and disable product-slicer interactions for HCP/call visuals. Validate by
+   selecting one region: HCP Count must equal that region's rows in `dim_hcp`, and Total Scripts
+   must equal its `fact_scripts` sum. Product selection must not imply product-specific calls.
 7. Save the `.pbix`. (Public sharing needs a Power BI account; for a free public link, use Tableau
    Public above.)
 

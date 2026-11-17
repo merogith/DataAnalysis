@@ -1,0 +1,9 @@
+{
+  "price_as_of": "2026-05-01",
+  "valuation_as_of": "2023-09-01",
+  "latest_cape": 30.81,
+  "real_price_as_of": "2023-09-01",
+  "real_price_cagr": 0.02469043730787268,
+  "worst_real_drawdown": -0.806142346441339,
+  "price_only": true
+}

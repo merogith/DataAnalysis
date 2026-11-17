@@ -95,8 +95,8 @@
           <div class="hook">Is the economy balanced, are any items overpowered, and what keeps players spending?</div>
           <div class="result">Coin sinks recover 63% of issued coins, two premium items are overpowered by a meaningful margin (Phoenix Blade at a 61% win
             rate; items 1–2 points off 50% are flagged "skewed", not overpowered), retention drops from
-            47% to 18% to 4% across D1/D7/D30, and a logistic model separates paying players with an
-            AUC ≈0.79. Synthetic data with designed-in ground truth, so the numbers chiefly show the
+            47% to 18% to 4% across D1/D7/D30, and a logistic model classifies first purchases in days 4–30 from days 0–3 with an
+            AUC ≈0.73. Synthetic data with designed-in ground truth, so the numbers chiefly show the
             pipeline recovers what was built in.</div>
           <div class="tech"><b>Tech:</b> Python · pandas · scikit-learn (logistic regression) · proportion z-tests · matplotlib/seaborn · SQLite window functions</div>
           <div class="links">
@@ -115,30 +115,27 @@
 <!-- ===================== DASHBOARDS ===================== -->
 <section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
-    <h2>Interactive dashboards</h2>
-    <p style="color:var(--muted);margin-top:-8px">Each project ships clean, BI-ready data and a
-       step-by-step build guide for Tableau Public and Power BI. Publishing to Tableau Public is free;
-       paste the resulting link below to make a dashboard live.</p>
+    <h2>Dashboard data and build guides</h2>
+    <p style="color:var(--muted);margin-top:-8px">Each project includes clean CSV exports and a tested metric definition for building
+       a Tableau or Power BI dashboard. The finished, readable outputs are the project pages
+       and executed notebooks above; these links provide the data and build instructions.</p>
     <div class="dash">
       <div class="item">
         <h4>Market Risk and Valuation</h4>
-        <span class="badge todo">Add Tableau link</span>
-        <p>Real S&amp;P 500, CAPE, VIX, and drawdowns. Headline: valuation is near record highs.</p>
-        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">Open live dashboard</a></p> -->
+        <span class="badge">CSV exports + guide</span>
+        <p>Real S&amp;P 500, CAPE, VIX, and drawdowns. Historical valuation snapshot: September 2023.</p>
         <p><a href="../project-3-finance/DASHBOARD_GUIDE.md">Build guide</a></p>
       </div>
       <div class="item">
         <h4>Pharma Sales Performance</h4>
-        <span class="badge todo">Add Tableau link</span>
+        <span class="badge">CSV exports + guide</span>
         <p>Scripts by region and product, rep leaderboard, calls vs scripts, doctor segments.</p>
-        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">Open live dashboard</a></p> -->
         <p><a href="../project-1-pharma-crm/DASHBOARD_GUIDE.md">Build guide</a></p>
       </div>
       <div class="item">
         <h4>Game Economy and Retention</h4>
-        <span class="badge todo">Add Tableau link</span>
-        <p>Daily currency flow, item win rates, D1/D7/D30 retention, and the funnel.</p>
-        <!-- When published, replace the line below with: <p><a href="YOUR_TABLEAU_LINK">Open live dashboard</a></p> -->
+        <span class="badge">CSV exports + guide</span>
+        <p>Daily currency flow, item win rates, D1/D7/D30 retention, and independent player milestones.</p>
         <p><a href="../project-2-game-economy/DASHBOARD_GUIDE.md">Build guide</a></p>
       </div>
     </div>

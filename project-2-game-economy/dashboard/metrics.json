@@ -1,0 +1,30 @@
+{
+  "retention": {
+    "d1": 0.4723333333333333,
+    "d7": 0.18433333333333332,
+    "d30": 0.041666666666666664
+  },
+  "sink_recovery": 0.6279023339582586,
+  "milestones": {
+    "Installed": 6000,
+    "Played a match": 4770,
+    "Returned D1": 2834,
+    "Ever paid": 350
+  },
+  "payer_model": {
+    "feature_days": [
+      0,
+      3
+    ],
+    "outcome_days": [
+      4,
+      30
+    ],
+    "eligible_players": 5982,
+    "positive_players": 167,
+    "roc_auc": 0.7295186246418339,
+    "average_precision": 0.09152797797493437,
+    "prevalence": 0.027855153203342618,
+    "accuracy": 0.7465181058495822
+  }
+}

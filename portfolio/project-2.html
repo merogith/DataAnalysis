@@ -29,12 +29,13 @@
 
 <section>
   <div class="wrap">
+    <p><b>Two-minute route:</b> read the KPIs and key findings, open a chart for detail, then follow the executed notebook for the method.</p>
     <h2>At a glance</h2>
     <div class="kpis">
       <div class="kpi"><div class="n">47 / 18 / 4%</div><div class="l">D1 / D7 / D30 retention</div></div>
       <div class="kpi"><div class="n">61%</div><div class="l">Phoenix Blade win rate</div></div>
       <div class="kpi"><div class="n">+6.8M</div><div class="l">Net increase in coin supply</div></div>
-      <div class="kpi"><div class="n">AUC ≈0.79</div><div class="l">Payer model (designed-in signal)</div></div>
+      <div class="kpi"><div class="n">AUC ≈0.73</div><div class="l">Payer model (designed-in signal)</div></div>
       <div class="kpi"><div class="n">5.8%</div><div class="l">Payer rate</div></div>
     </div>
   </div>
@@ -47,7 +48,7 @@
       <li>Coin sinks recover about 63% of the coins minted. Prices were not measured.</li>
       <li>Two premium items, Phoenix Blade (61% win rate) and Aegis Shield (59%), are overpowered by a meaningful margin (CIs above 50% and ≥5 points off it). Items sitting 1–2 points above 50% test "significant" only because of large sample sizes, so they are flagged "skewed, small" rather than overpowered — effect size, not just the p-value.</li>
       <li>Retention falls sharply after the first day: 47% return on day 1, 18% by day 7, and 4% by day 30.</li>
-      <li>A classifier using days 0–3 activity reaches ROC AUC 0.789 and average precision 0.217 on synthetic data, versus a 0.058 prevalence baseline. The generator partly determines the relationship. Purchases can occur within the feature window, so a day-three intervention would need a later outcome window.</li>
+      <li>A classifier using days 0–3 activity reaches ROC AUC 0.730 and average precision 0.092 for first purchases during days 4–30, versus a 0.028 prevalence baseline. Features use only days 0–3; the 5,982 eligible players have not paid before day 4. The synthetic generator partly determines the relationship; an offer still needs an experiment.</li>
     </ul>
     <div class="note"><b>Recommendation:</b> Test coin sinks to reduce the supply surplus, rebalance the two overpowered premium items, and invest in the first-day experience to slow the early drop in retention. (Synthetic data with designed-in ground truth — the value is the method.)</div>
   </div>
@@ -57,14 +58,14 @@
   <div class="wrap">
     <h2>Charts from the analysis</h2>
     <div class="gallery">
-      <figure class="figure"><a href="../project-2-game-economy/charts/03_economy_flow.png"><img src="../project-2-game-economy/charts/03_economy_flow.png" alt=""></a><figcaption>Currency sources and sinks, with a growing coin surplus.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/04_item_balance.png"><img src="../project-2-game-economy/charts/04_item_balance.png" alt=""></a><figcaption>Item win rates with confidence intervals, flagging the overpowered items.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/06_retention_curve.png"><img src="../project-2-game-economy/charts/06_retention_curve.png" alt=""></a><figcaption>Cohort retention falling from 47% to 18% to 4%.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/05_price_power_winrate.png"><img src="../project-2-game-economy/charts/05_price_power_winrate.png" alt=""></a><figcaption>Price against power and win rate, the pay-to-win check.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/08_payer_model.png"><img src="../project-2-game-economy/charts/08_payer_model.png" alt=""></a><figcaption>Performance of the logistic payer model (AUC ≈0.79).</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/07_funnel.png"><img src="../project-2-game-economy/charts/07_funnel.png" alt=""></a><figcaption>The player progression funnel.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/02_dau.png"><img src="../project-2-game-economy/charts/02_dau.png" alt=""></a><figcaption>Daily active users over time.</figcaption></figure>
-      <figure class="figure"><a href="../project-2-game-economy/charts/01_player_mix.png"><img src="../project-2-game-economy/charts/01_player_mix.png" alt=""></a><figcaption>Player mix by platform and segment.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/03_economy_flow.png"><img src="../project-2-game-economy/charts/03_economy_flow.png" alt="Currency sources and sinks, with a growing coin surplus."></a><figcaption>Currency sources and sinks, with a growing coin surplus.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/04_item_balance.png"><img src="../project-2-game-economy/charts/04_item_balance.png" alt="Item win rates with confidence intervals, flagging the overpowered items."></a><figcaption>Item win rates with confidence intervals, flagging the overpowered items.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/06_retention_curve.png"><img src="../project-2-game-economy/charts/06_retention_curve.png" alt="Cohort retention falling from 47% to 18% to 4%."></a><figcaption>Cohort retention falling from 47% to 18% to 4%.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/05_price_power_winrate.png"><img src="../project-2-game-economy/charts/05_price_power_winrate.png" alt="Price against power and win rate, the pay-to-win check."></a><figcaption>Price against power and win rate, the pay-to-win check.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/08_payer_model.png"><img src="../project-2-game-economy/charts/08_payer_model.png" alt="Performance of the logistic payer model (AUC ≈0.73)."></a><figcaption>Performance of the logistic payer model (AUC ≈0.73).</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/07_funnel.png"><img src="../project-2-game-economy/charts/07_funnel.png" alt="Independent player milestones; the groups are not a sequential conversion funnel."></a><figcaption>Independent player milestones; the groups are not a sequential conversion funnel.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/02_dau.png"><img src="../project-2-game-economy/charts/02_dau.png" alt="Daily active users over time."></a><figcaption>Daily active users over time.</figcaption></figure>
+      <figure class="figure"><a href="../project-2-game-economy/charts/01_player_mix.png"><img src="../project-2-game-economy/charts/01_player_mix.png" alt="Player mix by platform and segment."></a><figcaption>Player mix by platform and segment.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -84,7 +85,7 @@
 </section>
 
 <footer>
-  <div class="wrap"><a href="index.html">Back to all projects</a> · © 2026 Meric Erler</div>
+  <div class="wrap"><a href="index.html">Back to all data projects</a> · <a href="https://merogith.github.io/Portfolio/">Full portfolio</a> · © 2026 Meric Erler</div>
 </footer>
 
 </body>
